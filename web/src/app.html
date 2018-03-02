@@ -1,0 +1,17 @@
+<template>
+  <h1>${message}</h1>
+
+  <form submit.trigger="addIngredient()">
+      <input type="text" value.bind="ingredientDescription">
+      <button type="submit">Add</button>
+  </form>
+  <ul>
+    <li repeat.for="ingredient of ingredients">
+      <input type="checkbox" checked.bind="ingredients.done">
+      <span css="text-decoration: ${ingredients.done ? 'line-through' : 'none'}">
+        ${ingredient.description}
+      </span>
+      <button click.trigger="removeIngredient(ingredient)">Remove</button>
+    </li>    
+  </ul>
+</template>
