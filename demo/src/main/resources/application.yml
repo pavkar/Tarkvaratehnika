@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    password: w0Jia0Maria
+    url: jdbc:mariadb://localhost:127.0.0.1/myapp
+    username: root
