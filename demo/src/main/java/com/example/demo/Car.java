@@ -5,12 +5,9 @@ import javax.persistence.*;
 @Entity
 
 public class Car {
-
+	@Id
+	@GeneratedValue
 	long id;
 	String name;
-	
-	public static void main(String[] args) {
-		Car car = new Car();
-	}
 
 }
