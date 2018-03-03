@@ -6,7 +6,7 @@ import {Dependency} from './dependecy';
 export class App {
 
   constructor() {
-    this.header = 'Cool Page Name.';
+    this.header = 'Navigation';
     this.content = 'Page info';
     console.log(Dependency);
   }
@@ -22,7 +22,8 @@ export class App {
     config.map([
       { route: ['', 'home'],       name: 'home',       moduleId: 'home/index' },
       { route: 'fridge', name: 'fridge', moduleId: 'fridge', nav: true },
-      
+      { route: 'login', name: 'login', moduleId: 'login', nav: true },
+      { route: 'registration', name: 'registration', moduleId: 'registration', nav: true },
 
     ]);
   }

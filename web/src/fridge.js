@@ -10,7 +10,7 @@ export class Fridge {
 
     addIngredient() {
         if (this.ingredientsDescription) {
-            this.recipesCount += 1;
+            this.counterUp();
             this.ingredients.push(new Ingredients(this.ingredientsDescription));
             this.ingredientsDescription = '';
         }
@@ -19,8 +19,26 @@ export class Fridge {
     removeIngredient(ingredient) {
         let index = this.ingredients.indexOf(ingredient);
         if (index !== 1) {
-            this.recipesCount -= 1;
+            this.counterDown();
             this.ingredients.splice(index, 1);
+        }
+    }
+
+    counterUp() {
+        this.recipesCount += 1;
+    }
+
+    counterDown() {
+        this.recipesCount -= 1;
+    }
+
+    checkRecipes() {
+        console.log(this.ingredients);
+        for (let ingr in this.ingredients) {
+            console.log();
+            if (ingr.done) {
+                console.log("done");
+            }
         }
     }
 }
