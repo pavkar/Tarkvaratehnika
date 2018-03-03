@@ -1,17 +1,7 @@
 <template>
-  <h1>${message}</h1>
+  <router-view></router-view>
+  <h1>${header}</h1>
+  <p>${content}</p>
+  <button click.delegate = "updateContent()">Update Content</button>
 
-  <form submit.trigger="addIngredient()">
-      <input type="text" value.bind="ingredientDescription">
-      <button type="submit">Add</button>
-  </form>
-  <ul>
-    <li repeat.for="ingredient of ingredients">
-      <input type="checkbox" checked.bind="ingredients.done">
-      <span css="text-decoration: ${ingredients.done ? 'line-through' : 'none'}">
-        ${ingredient.description}
-      </span>
-      <button click.trigger="removeIngredient(ingredient)">Remove</button>
-    </li>    
-  </ul>
 </template>

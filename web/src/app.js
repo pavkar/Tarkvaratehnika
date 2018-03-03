@@ -1,22 +1,41 @@
-import {Ingridients} from './ingredients'
-
 export class App {
   constructor() {
-    this.message = 'Cool Page Name.';
-    this.ingredients = [];
-    this.ingredientsDescription = '';
-  }
-  addIngredient() {
-    if (this.ingredientsDescription) {
-      this.ingredients.push(new ingredient(this.ingredientsDescription));
-      this.ingredientsDescription = '';
-    }
+    this.header = 'Cool Page Name.';
+    this.content = 'Page info'
   }
 
-  removeIngredient(ingredient) {
-    let index = this.ingredients.indexOf(ingredient);
-    if (index !== -1) {
-      this.ingredients.splice(index, 1);
-    }
+  updateContent() {
+    this.header = 'New Cool Name'
+    this.content = 'New Content'
+  }
+
+  configureRouter(config, router) {
+    this.router = router;
+    config.title = 'Aurelia Recipe App';
+    config.map([
+      { route: ['', 'home'],       name: 'home',       moduleId: 'home/index' },
+      { route: 'fridge', name: 'fridge', moduleId: 'fridge', nav: true },
+      
+    ]);
+  }
+
+  created(owningView, myView) {
+    // Invoked once the component is created...
+  }
+
+  bind(bindingContext, overrideContext) {
+      // Invoked once the databinding is activated...
+  }
+
+  attached(argument) {
+      // Invoked once the component is attached to the DOM...
+  }
+
+  detached(argument) {
+      // Invoked when component is detached from the dom
+  }
+
+  unbind(argument) {
+      // Invoked when component is unbound...
   }
 }
