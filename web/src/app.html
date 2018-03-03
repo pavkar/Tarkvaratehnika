@@ -1,7 +1,17 @@
+
 <template>
+  <require from = "./components/custom-component.html"></require>
+  <require from = "./bootstrap/css/bootstrap.css"></require>
   <router-view></router-view>
+
   <h1>${header}</h1>
   <p>${content}</p>
   <button click.delegate = "updateContent()">Update Content</button>
+  <custom-component></custom-component>
+  <div class=row> 
+    <div class=span2> <a route-href="route: fridge">Fridge</a> </div>
+    <div class=span3> <a route-href="route: home">Main Page</a> </div>
+    <div class=span4> <a route-href="route: fridge">Fridge</a> </div>
+  </div>
 
 </template>

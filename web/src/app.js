@@ -1,7 +1,14 @@
+import {inject} from 'aurelia-framework';
+import {Dependency} from './dependecy';
+
+@inject(Dependency)
+
 export class App {
+
   constructor() {
     this.header = 'Cool Page Name.';
-    this.content = 'Page info'
+    this.content = 'Page info';
+    console.log(Dependency);
   }
 
   updateContent() {
@@ -16,6 +23,7 @@ export class App {
       { route: ['', 'home'],       name: 'home',       moduleId: 'home/index' },
       { route: 'fridge', name: 'fridge', moduleId: 'fridge', nav: true },
       
+
     ]);
   }
 
