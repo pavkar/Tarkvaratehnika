@@ -1,5 +1,6 @@
 export class Login {
     constructor() {
+        this.header = 'Login';
         this.email = '';
         this.password = '';
     }

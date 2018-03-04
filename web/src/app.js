@@ -24,6 +24,7 @@ export class App {
       { route: 'fridge', name: 'fridge', moduleId: 'fridge', nav: true },
       { route: 'login', name: 'login', moduleId: 'login', nav: true },
       { route: 'registration', name: 'registration', moduleId: 'registration', nav: true },
+      { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', nav: true },
 
     ]);
   }

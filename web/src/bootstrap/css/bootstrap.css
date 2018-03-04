@@ -7,7 +7,22 @@
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
-
+.alignleft {
+  text-align: left;
+}
+.alignright {
+  text-align: right;
+}
+.alignmid {
+  text-align: center;
+}
+.mainpage {
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 17.5px;
+  font-weight: 300;
+  line-height: 1.25;
+}
 .clearfix {
   *zoom: 1;
 }

@@ -1,21 +1,25 @@
 <template>
     <h1>${header}</h1>
     <p>Current ingredients count ${recipesCount}</p>
+    <button click.trigger="checkRecipes()">Search Recipes</button>
     <form submit.trigger="addIngredient()">
+        <br>
         <input type="text" value.bind="ingredientsDescription">
         <button type="submit">Add Ingredient</button>
     </form>
+    <!-- Add Multiple selection option pre made ingredients -->
     <ul>
         <li repeat.for="ingredient of ingredients">
-            <div class="row-fluid">
+            <div>
+                <button click.trigger="removeIngredient(ingredient)">-</button>
                 <input type="checkbox" checked.bind="ingredient.done">
                 <span css="text-decoration: ${ingredient.done ? 'line-through' : 'none'}">
                     ${ingredient.description}
                 </span>
-                <div class=span0><button click.trigger="removeIngredient(ingredient)">Remove</button></div>
+                
             </div>
         </li>
     </ul>
     
-    <button click.trigger="checkRecipes()">Search Recipes</button>
+    
 </template>
