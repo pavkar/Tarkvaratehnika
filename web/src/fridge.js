@@ -8,20 +8,31 @@ export class Fridge {
         this.ingredientsDescription = '';
     }
 
+    checkActiveIngredients() {
+        this.recipesCount = this.ingredients.length;
+        for (let ingrIndx = 0; ingrIndx < this.ingredients.length; ingrIndx++) {
+            if (this.ingredients[ingrIndx].done) {
+                --this.recipesCount;
+            }
+        }
+    }
+
     addIngredient() {
         if (this.ingredientsDescription) {
-            this.counterUp();
             this.ingredients.push(new Ingredients(this.ingredientsDescription));
             this.ingredientsDescription = '';
+            this.counterUp();
         }
+        
     }
 
     removeIngredient(ingredient) {
         let index = this.ingredients.indexOf(ingredient);
         if (index !== 1) {
-            this.counterDown();
             this.ingredients.splice(index, 1);
+            this.counterDown();
         }
+        
     }
 
     counterUp() {
@@ -33,11 +44,9 @@ export class Fridge {
     }
 
     checkRecipes() {
-        console.log(this.ingredients);
-        for (let ingr in this.ingredients) {
-            console.log();
-            if (ingr.done) {
-                console.log("done");
+        for (let ingrIndx = 0; ingrIndx < this.ingredients.length; ingrIndx++) {
+            if (!this.ingredients[ingrIndx].done) {
+                console.log(this.ingredients[ingrIndx].description); 
             }
         }
     }

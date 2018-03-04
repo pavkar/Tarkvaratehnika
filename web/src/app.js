@@ -1,5 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {Dependency} from './dependecy';
+import {Redirect} from 'aurelia-router';
 
 @inject(Dependency)
 
@@ -21,13 +22,14 @@ export class App {
     config.title = 'Aurelia Recipe App';
     config.map([
       { route: ['', 'home'],       name: 'home',       moduleId: 'home/index' },
-      { route: 'fridge', name: 'fridge', moduleId: 'fridge', nav: true },
+      { route: 'fridge', name: 'fridge', moduleId: 'fridge', nav: true, settings: { roles: ['admin']} },
       { route: 'login', name: 'login', moduleId: 'login', nav: true },
       { route: 'registration', name: 'registration', moduleId: 'registration', nav: true },
       { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', nav: true },
 
     ]);
   }
+  
 
   created(owningView, myView) {
     // Invoked once the component is created...
@@ -47,5 +49,17 @@ export class App {
 
   unbind(argument) {
       // Invoked when component is unbound...
+  }
+}
+class AuthorizeStep {
+  run(navigationInstruction, next) {
+    if (navigationInstruction.getAllInstructions().some(i => i.config.settings.roles.indexOf('admin') !== -1)) {
+      var isAdmin = /* insert magic here */false;
+      if (!isAdmin) {
+        return next.cancel(new Redirect('home'));
+      }
+    }
+
+    return next();
   }
 }
