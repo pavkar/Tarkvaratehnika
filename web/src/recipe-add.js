@@ -2,13 +2,14 @@ export class RecipeAdd {
     constructor() {
         this.header = "Add Recipes";
         this.name = "";
-        this.ingredientsList = [];
-        this.recipeDescription = [];
+        this.ingredientsList = ['Ingr1', 'Ingr2', 'Ingr3'];
+        this.selectedIngredients = [];
+        this.recipeDescription = "";
     }
 
     recipeInfo() {
-        console.log(name);
-        console.log(this.ingredientsList);
+        console.log(this.name);
+        console.log(this.selectedIngredients);
         console.log(this.recipeDescription);
     }
     
