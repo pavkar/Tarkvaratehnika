@@ -1,5 +1,29 @@
 <template>
     <h1>${header}</h1>
+<<<<<<< HEAD
+    <div class=row>
+      <div class=span6>
+        <h2>Ingredients</h2>
+        <p>Current ingredients count ${recipesCount}</p>
+        <button click.trigger="checkRecipes()">Search Recipes</button>
+        <p></p>
+      </div>
+      <div class=span6>
+        <h2>Manage Fridge</h2>
+        <form submit.trigger="addIngredient()">
+            <input type="text" value.bind="ingredientsDescription" >
+            <button type="submit">Add Ingredient</button>
+            <p></p>
+            <button click.trigger="removeAll()">Remove All</button>
+            <button click.trigger="removeSelected()">Remove Selected</button>
+        </form>
+
+      </div>
+    </div>
+    
+
+    
+=======
     <p>Current ingredients count ${recipesCount}</p>
     <button click.trigger="checkRecipes()">Search Recipes</button>
     <form submit.trigger="addIngredient()">
@@ -7,19 +31,31 @@
         <input type="text" value.bind="ingredientsDescription">
         <button type="submit">Add Ingredient</button>
     </form>
+>>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66
     <!-- Add Multiple selection option pre made ingredients -->
     <ul>
         <li repeat.for="ingredient of ingredients">
             <div>
                 <button click.trigger="removeIngredient(ingredient)">-</button>
+<<<<<<< HEAD
+                <input type="checkbox" checked.bind="ingredient.done" change.trigger = "checkActiveIngredients(ingredient)">
+                <span css="text-decoration: ${ingredient.done ? 'line-through' : 'none'}">
+                    ${ingredient.description}
+                </span>
+=======
                 <input type="checkbox" checked.bind="ingredient.done" change.trigger = "checkActiveIngredients()">
                 <span css="text-decoration: ${ingredient.done ? 'line-through' : 'none'}">
                     ${ingredient.description}
                 </span>
                 
+>>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66
             </div>
         </li>
     </ul>
     
     
+<<<<<<< HEAD
 </template>
+=======
+</template>
+>>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66

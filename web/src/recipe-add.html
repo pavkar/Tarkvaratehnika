@@ -1,9 +1,41 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66
 <template>
     <h1>${header}</h1>
     <!-- TODO Must be value in the field -->
     <div class = alignleft>
         <form submit.trigger="recipeInfo()">
             <label><h4>Input Recipe Name</h4></label>
+<<<<<<< HEAD
+            <input type="text" style="min-width: 40%" required="required" value.bind="recipeName"> <br>
+            <div class="row-fluid">
+              <div class="span6">
+                <label><h4>Select Ingredients</h4></label>
+                <select multiple class="form-control" id="ingredientOptions" required="required" value.bind="selectedIngredients">
+                    <option repeat.for="ingredient of ingredientsList"
+                            value.bind="ingredient">
+                        ${ingredient}
+                    </option>
+                </select>
+              </div>
+              <div class="span6">
+                  <label><h4>Input people number</h4></label>
+                  <input type="number" style="min-width: 10%" required="required" value.bind="peopleNumber"> <br>
+                  <label><h4>Input people number</h4></label>
+                  <input type="time" style="min-width: 10%" required="required" value.bind="neededTime"> <br>
+              </div>
+            </div>
+            
+            
+            <label><h4>Input Description</h4></label>
+            <textarea class="form-control" rows="5" id="recipeDescription" style="min-width: 80%" required="required" value.bind="recipeDescription"></textarea> <br>
+            <button type="submit">Add Recipe</button>
+        </form>
+    </div>
+</template>
+=======
             <input type="text" style="min-width: 40%" value.bind="name"> <br>
             <label><h4>Select Ingredients</h4></label>
             <select multiple class="form-control" id="ingredientOptions" style="min-width: 40%" value.bind="selectedIngredients">
@@ -18,3 +50,4 @@
         </form>
     </div>
 </template>
+>>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66

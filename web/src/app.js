@@ -62,4 +62,8 @@ class AuthorizeStep {
 
     return next();
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66
