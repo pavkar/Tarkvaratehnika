@@ -23,11 +23,8 @@ repositories {
 }
 
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-social-facebook')
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -39,9 +36,5 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compileOnly('org.projectlombok:lombok')
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66
 }

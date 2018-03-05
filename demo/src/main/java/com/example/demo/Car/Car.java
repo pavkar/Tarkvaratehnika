@@ -1,4 +1,5 @@
-package com.example.demo;
+package com.example.demo.Car;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,4 +17,5 @@ public class Car {
 	long id;
 	String name;
 	long serialnr;
+	long meh;
 }
