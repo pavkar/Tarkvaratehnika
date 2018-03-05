@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {HttpClient, json} from 'aurelia-fetch-client';
 
 let httpClient = new HttpClient();
@@ -25,11 +24,11 @@ export class RecipeAdd {
     }
 
     myPostData = { 
-      name:this.recipeName,
-      ingredients:this.selectedIngredients,
-      instructions:this.recipeDescription,
-      time:this.neededTime,
-      size:this.peopleNumber
+      "name":this.recipeName,
+      "ingredients":this.selectedIngredients,
+      "instructions":this.recipeDescription,
+      "time":this.neededTime,
+      "size":this.peopleNumber
    }
 	
    postData(myPostData) {
@@ -63,21 +62,3 @@ export class RecipeAdd {
     
     
 }
-=======
-export class RecipeAdd {
-    constructor() {
-        this.header = "Add Recipes";
-        this.name = "";
-        this.ingredientsList = ['Ingr1', 'Ingr2', 'Ingr3', 'Ingr4', 'Ingr5'];
-        this.selectedIngredients = [];
-        this.recipeDescription = "";
-    }
-
-    recipeInfo() {
-        console.log(this.name);
-        console.log(this.selectedIngredients);
-        console.log(this.recipeDescription);
-    }
-    
-}
->>>>>>> f46c6a3ee1d8fec4127f446fb3cb479e74ca7d66
