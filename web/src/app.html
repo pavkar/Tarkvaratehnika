@@ -1,0 +1,26 @@
+
+<template>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <require from = "./components/custom-component.html"></require>
+  <require from = "./bootstrap/css/bootstrap.css"></require>
+  <require from = "./bootstrap/css/bootstrap.min.css"></require>
+  
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+          <h3>Navigation</h3>
+          <h4>Main Navigation</h4>
+          <a route-href="route: home">Main Page</a> <br>
+          <a route-href="route: login">Login</a> <br>
+          <a route-href="route: registration">Registration</a> <br>
+          <h4>For Users</h4>
+          <a route-href="route: fridge">Fridge</a> <br>
+          <a route-href="route: recipe-add">Add Recipe</a> <br>
+      </div>
+      <div class="span10">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
+
+</template>
