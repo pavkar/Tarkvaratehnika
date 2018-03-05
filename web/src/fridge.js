@@ -5,6 +5,7 @@ export class Fridge {
         this.recipesCount = 0;
         this.header = 'Fridge';
         this.ingredients = [];
+        this.ingredientsDescrpList = [];
         this.ingredientsDescription = '';
     }
 
@@ -17,7 +18,8 @@ export class Fridge {
     }
 
     addIngredient() {
-        if (this.ingredientsDescription) {
+        if (this.ingredientsDescrpList.indexOf(this.ingredientsDescription) <= -1) {
+            this.ingredientsDescrpList.push(this.ingredientsDescription);
             this.ingredients.push(new Ingredients(this.ingredientsDescription));
             this.ingredientsDescription = '';
             this.counterUp();
