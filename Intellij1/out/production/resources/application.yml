@@ -1,0 +1,10 @@
+spring:
+   datasource:
+      url: jdbc:mariadb://localhost/MariaDB@localhost/janesetoit
+      username: root
+      password: cheesert7
+   jpa:
+      hibernate:
+         ddl-auto: update
+            ddl-auto: update
+
