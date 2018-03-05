@@ -5,8 +5,10 @@ export class Login {
         this.password = '';
     }
     signup() {
-        var myUser = { email: this.email, password: this.password }
+        let myUser = { email: this.email, password: this.password }
         console.log(myUser);
     };
-    
+
+
 }
+

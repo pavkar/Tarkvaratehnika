@@ -8,7 +8,7 @@ export class Registration {
 
     registrate() {
         if (this.password == this.passwordRepeate && this.password.length > 0) {
-            var myUser = { email: this.email, password: this.password }
+            let myUser = { email: this.email, password: this.password }
             console.log(myUser);
         }
         

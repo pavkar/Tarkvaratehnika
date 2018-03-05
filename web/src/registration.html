@@ -3,13 +3,13 @@
         <form role = "form" submit.delegate = "registrate()">
      
            <label for = "email">Email</label>
-           <input type = "text" value.bind = "email" placeholder = "Email">
+           <input type = "email" required="required" value.bind = "email" placeholder = "Email">
      
            <label for = "password">Password</label>
-           <input type = "password" value.bind = "password" placeholder = "Password">
+           <input type = "password" required="required" value.bind = "password" placeholder = "Password">
 
            <label for = "passwordRepeate">Password Repeate</label>
-           <input type = "password" value.bind = "passwordRepeate" placeholder = "Password Repeate">
+           <input type = "password" required="required" value.bind = "passwordRepeate" placeholder = "Password Repeate">
             <br>
            <button type = "submit">Registrate</button>
         </form>
