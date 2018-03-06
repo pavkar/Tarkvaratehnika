@@ -1,0 +1,47 @@
+<!-- The part below has to be after body tag or whatever Aurelia has-->
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : 'your-app-id', // Make an account and an app to developers.fabecook/apps and paste the app ID here. My ID is 1555636977846703
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.12' // Minimum 
+    });
+  };
+
+  // You have to specify a webpage on developers.facebook/apps on your app
+
+  FB.getLoginStatus(function(response)) {
+    if (response.status === 'connected') {
+      document.getElementById('status').innerHTML = "We are connected";
+    } else if (response.status === 'not connected') {
+      document.getElementById('status').innerHTML = "We are not logged in";
+    } else {
+      document.getElementById('status').innerHTML = "We are not logged in to FB";
+    }
+  }
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function login() {
+    FB.login(function(response)) {
+      if (response.status === 'connected') {
+        document.getElementById('status').innerHTML = "We are connected";
+      } else if (response.status === 'not connected') {
+        document.getElementById('status').innerHTML = "We are not logged in";
+      } else {
+        document.getElementById('status').innerHTML = "We are not logged in to FB";
+      }
+    }
+  }
+</script>
+
+<div id="status"></div>
+<button onclick="login()">Login</button>
