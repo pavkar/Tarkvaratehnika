@@ -39,12 +39,12 @@ export class Fridge {
       for (let ingrIndx = 0; ingrIndx < this.ingredients.length; ingrIndx++) {
         if (!this.ingredients[ingrIndx].done) {
           toStay.push(this.ingredients[ingrIndx]);
-        } else {
           toDescrStay.push(this.ingredients[ingrIndx].description); // Check this
         }
       }
+      console.log(toDescrStay);
       this.ingredients = toStay;
-      let ingredientsDescrpList = toDescrStay; 
+      this.ingredientsDescrpList = toDescrStay; 
     }
 
     removeIngredient(ingredient) {

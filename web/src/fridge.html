@@ -26,7 +26,7 @@
     <ul>
         <li repeat.for="ingredient of ingredients">
             <div>
-                <button click.trigger="removeIngredient(ingredient)">-</button>
+                <button click.trigger="removeIngredient(ingredient)">X</button>
                 <input type="checkbox" checked.bind="ingredient.done" change.trigger = "checkActiveIngredients(ingredient)">
                 <span css="text-decoration: ${ingredient.done ? 'line-through' : 'none'}">
                     ${ingredient.description}

@@ -31,7 +31,7 @@ export class RecipeAdd {
           "time":this.time
         }
         console.log(this.myPostData)
-        postRecipe(this.myPostData)
+        this.postRecipe(this.myPostData)
     }
 	
    postRecipe(myPostData) {
