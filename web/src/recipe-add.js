@@ -4,21 +4,40 @@ let httpClient = new HttpClient();
 export class RecipeAdd {
     constructor() {
         this.header = "Add Recipes";
+        this.name = "";
+        this.time = "";
+        this.instructions = "";
+        this.size = 0;
+        
         this.ingredientsList = ['Ingr1', 'Ingr2', 'Ingr3', 'Ingr4', 'Ingr5'];
+        this.ingredientsSelected = [];
     }
 
     myPostData = {
 
     }
    
-    recipeInfo() {
+    recipeInfoCheck() {
+        var ingrString = "";
+        for (let ingr of this.ingredientsSelected) {
+          ingrString += ingr + ","
+        }
+        ingrString = ingrString.slice(0, ingrString.length-1);
+        this.myPostData = {
+          "ingredients":ingrString,
+          "name":this.name,
+          "instructions":this.instructions,
+          "size":parseInt(this.size),
+          "time":this.time
+        }
         console.log(this.myPostData)
+        postRecipe(this.myPostData)
     }
 	
-   postRecipe() {
+   postRecipe(myPostData) {
       httpClient.fetch('http://localhost:9000/', {
          method: "POST",
-         body: JSON.stringify(this.myPostData)
+         body: JSON.stringify(myPostData)
       })
 		
       .then(response => response.json())

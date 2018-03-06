@@ -3,30 +3,30 @@
     <h1>${header}</h1>
     <!-- TODO Must be value in the field -->
     <div class = alignleft>
-        <form submit.trigger="recipeInfo()">    
+        <form submit.trigger="recipeInfoCheck()">    
             <div class="row-fluid">
               <div class="span4">
                 <label><h4>Input Recipe Name</h4></label>
-                <input type="text" style="min-width: 20%" required="required" maxlength="20" value.bind="myPostData.name"> <br>
+                <input type="text" style="min-width: 20%" required="required" maxlength="20" value.bind="name"> <br>
                 <label><h4>Select Ingredients</h4></label>
-                <select multiple class="form-control" id="ingredientOptions" style="height: 100%" required="required" value.bind="myPostData.ingredients">
+                <select multiple class="form-control" id="ingredientOptions" style="height: 100%" required="required" value.bind="ingredientsSelected">
                     <option repeat.for="ingredient of ingredientsList"
                             value.bind="ingredient">
                         ${ingredient}
                     </option>
                 </select>
                 <label><h4>Input people number</h4></label>
-                <input type="number" style="min-width: 10%" required="required" max="99999999" value.bind="myPostData.size"> <br>
+                <input type="number" style="min-width: 10%" required="required" max="99999999" value.bind="size"> <br>
 
                 <label><h4>Input preparation time</h4></label>
-                <input type="time" style="min-width: 10%" required="required" value.bind="myPostData.time"> <br>
+                <input type="time" style="min-width: 10%" required="required" value.bind="time"> <br>
                 
 
               </div>
               <div class="span1"></div>
               <div class="span7">
                   <label><h4>Input Description</h4></label>
-                  <textarea class="form-control" rows="15" id="recipeDescription" style="min-width: 80%" required="required" maxlength="254" value.bind="myPostData.instructions"></textarea> <br>
+                  <textarea class="form-control" rows="15" id="recipeDescription" style="min-width: 80%" required="required" maxlength="254" value.bind="instructions"></textarea> <br>
                   <button type="submit">Add Recipe</button>
               </div>
             </div>
