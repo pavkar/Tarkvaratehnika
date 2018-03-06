@@ -1,7 +1,5 @@
 package com.example.demo.Recipe;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,7 +15,7 @@ public class Recipe {
 	@GeneratedValue
 	long id;
 	String name;
-	//List<String> ingredients;
+	String ingredients;
 	String instructions;
 	String time;
 	int size;
