@@ -49,11 +49,12 @@ export class Fridge {
 
     removeIngredient(ingredient) {
         let index = this.ingredients.indexOf(ingredient);
-        if (index !== 1) {
-            this.ingredients.splice(index, 1);
-            this.ingredientsDescrpList.splice(this.ingredientsDescrpList.indexOf(ingredient.description), 1);
-            this.counterDown();
+        this.ingredients.splice(index, 1);
+        this.ingredientsDescrpList.splice(this.ingredientsDescrpList.indexOf(ingredient.description), 1);
+        if(!ingredient.done) {
+          this.counterDown();
         }
+            
         
     }
 
