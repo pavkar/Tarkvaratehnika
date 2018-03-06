@@ -1,4 +1,4 @@
-import { HttpClient } from 'aurelia-fetch-client'
+import {HttpClient, json} from 'aurelia-fetch-client'
 
 
 export class App {
@@ -11,15 +11,18 @@ export class App {
     let client = new HttpClient();
 
     let userData = {
-      "firstName": "MyFirstName",
-      "lastName": "lastNAME"
+      "name": "Name",
+      "serialnr": 12
     }
 
-    client.fetch('http://localhost:8080/', {
-      'method': "POST",
-      'body': {}
-    }).then(response => response.json())
-      .then(data => {console.log("Server saatis: " + data.firstName)});
+    client.fetch('http://localhost:8080/cars/add', {
+			'method': "POST",
+			'body': json(userData)
+		})
+			.then(response => response.json())
+			.then(data => {
+				console.log("Server saatis " + data.name);
+		});
 
 
     console.log("Yasss")
