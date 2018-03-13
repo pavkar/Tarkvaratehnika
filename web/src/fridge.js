@@ -54,7 +54,6 @@ export class Fridge {
         if(!ingredient.done) {
           this.counterDown();
         }
-            
         
     }
 

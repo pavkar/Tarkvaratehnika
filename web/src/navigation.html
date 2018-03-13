@@ -1,0 +1,8 @@
+
+<template bindable="router">
+    <h3>Navigation</h3>
+    <h4>Main Navigation</h4>
+    <a repeat.for="link of router.navigation" href.bind="link.href">
+      ${link.title}<br></a>
+    <h4>For Users</h4>
+</template>

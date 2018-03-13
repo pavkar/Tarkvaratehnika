@@ -21,11 +21,11 @@ export class App {
     this.router = router;
     config.title = 'Aurelia Recipe App';
     config.map([
-      { route: ['', 'home'],       name: 'home',       moduleId: 'home/index' },
-      { route: 'fridge', name: 'fridge', moduleId: 'fridge', nav: true, settings: { roles: ['admin']} },
-      { route: 'login', name: 'login', moduleId: 'login', nav: true },
-      { route: 'registration', name: 'registration', moduleId: 'registration', nav: true },
-      { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', nav: true },
+      { route: ['', 'home'],       name: 'home',       moduleId: 'home/index', title: 'Main Page', nav: true },
+      { route: 'login', name: 'login', moduleId: 'login', title: 'Log In', nav: true },
+      { route: 'registration', name: 'registration', moduleId: 'registration', title: 'Registration', nav: true },
+      { route: 'fridge', name: 'fridge', moduleId: 'fridge', title: 'Fridge', nav: true, settings: { roles: ['admin']} },
+      { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', title: 'Add Recipe', nav: true },
 
     ]);
   }
@@ -51,15 +51,16 @@ export class App {
       // Invoked when component is unbound...
   }
 }
-class AuthorizeStep {
-  run(navigationInstruction, next) {
-    if (navigationInstruction.getAllInstructions().some(i => i.config.settings.roles.indexOf('admin') !== -1)) {
-      var isAdmin = /* insert magic here */false;
-      if (!isAdmin) {
-        return next.cancel(new Redirect('home'));
-      }
-    }
 
-    return next();
-  }
+  class AuthorizeStep {
+    run(navigationInstruction, next) {
+      if (navigationInstruction.getAllInstructions().some(i => i.config.settings.auth)) {
+        var isLoggedIn = false; // insert magic here;
+        if (!isLoggedIn) {
+          return next.cancel(new Redirect('login'));
+        }
+      }
+
+      return next();
+    }
 }

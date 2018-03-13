@@ -5,7 +5,8 @@ export class RecipeAdd {
     constructor() {
         this.header = "Add Recipes";
         this.name = "";
-        this.time = "";
+        this.timeHour = "";
+        this.timeMin = "";
         this.instructions = "";
         this.size = 0;
         
@@ -28,7 +29,7 @@ export class RecipeAdd {
           "name":this.name,
           "instructions":this.instructions,
           "size":parseInt(this.size),
-          "time":this.time
+          "time":this.timeHour + ":" + this.timeMin
         }
         console.log(this.myPostData)
         this.postRecipe(this.myPostData)
