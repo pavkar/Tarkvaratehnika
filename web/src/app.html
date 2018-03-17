@@ -4,6 +4,7 @@
   <require from = "./components/custom-component.html"></require>
   <require from = "./bootstrap/css/bootstrap.css"></require>
   <require from = "./bootstrap/css/bootstrap.min.css"></require>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <require from = "navigation.html"></require> <!--My .html file -->
 
   <!--Top page -->
@@ -12,20 +13,27 @@
       
     </div>
   </div>
-
   <!--Page Info -->
-  <div class="container-fluid">
-    <div class="row-fluid" >
-      <div class="span2 well">
-          <div class="btn btn-lg" click.trigger="manage_sideBar()">☰</div>
-          <navigation router.bind="router" id="navigation" style="display:none;z-index:2;width:40%;min-width:300px"></navigation>
+  <div class="container-fluid" id="page-content-wrapper">
+    <div class="row-fluid page-content inset" >
+      <div id="wrapper" class="active">  
+          <!-- Sidebar -->
+              <div id="sidebar-wrapper">
+                  <ul id="sidebar_menu" class="sidebar-nav">
+                      <p></p>
+                      <button class="btn btn-block" style="background: #252525" click.trigger="manageSideBar()"><font color="#999">☰</font></button>
+                    </ul>
+                  <ul class="sidebar-nav" id="sidebar">
+                      <navigation router.bind="router" id="navigation" ></navigation>
+                  </ul>
+              </div>
       </div>
-      <div class="span1">
+      <div class="span2">
+          <button class="btn btn-lg" id="sideBarButton" style="display: none" click.trigger="manageSideBar()">☰</button>
       </div>
-      <div class="span9 well">
+      <div class="span9 well well-lg">
         <router-view></router-view>
       </div>
     </div>
   </div>
-
 </template>

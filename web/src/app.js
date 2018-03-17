@@ -9,6 +9,7 @@ export class App {
   constructor() {
     this.header = 'Navigation';
     this.content = 'Page info';
+    this.clicked = false;
     console.log(Dependency);
   }
 
@@ -24,28 +25,44 @@ export class App {
       { route: ['', 'home'],       name: 'home',       moduleId: 'home/index', title: 'Main Page', nav: true },
       { route: 'login', name: 'login', moduleId: 'login', title: 'Log In', nav: true },
       { route: 'registration', name: 'registration', moduleId: 'registration', title: 'Registration', nav: true },
-      { route: 'fridge', name: 'fridge', moduleId: 'fridge', title: 'Fridge', nav: true, settings: { roles: ['admin']} },
-      { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', title: 'Add Recipe', nav: true },
+      { route: 'fridge', name: 'fridge', moduleId: 'fridge', title: 'Fridge', nav: false, settings: { roles: ['admin']} },
+      { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', title: 'Add Recipe', nav: false, },
 
     ]);
   }
-  manage_sideBar() {
-    if (document.getElementById("navigation").style.display == "block") {
-      this.close_sideBar();
+
+  changeClicked() {
+    if (this.clicked) {
+      this.clicked = false;
     } else {
-      this.open_sideBar();
+      this.clicked = true;
     }
   }
 
-  open_sideBar() {
-    document.getElementById("navigation").style.display = "block";
+  manageSideBar() {
+    this.changeClicked();
+    if (this.clicked) {
+      this.show_sideBarButton();
+    } else {
+      this.hide_sideBarButton();
+    }
+    document.getElementById("wrapper").classList.toggle("active");
   }
-  
-  close_sideBar() {
-      document.getElementById("navigation").style.display = "none";
-  }
-  
 
+  
+  // $("#menu-toggle").click(function(e) {
+  //   e.preventDefault();
+  //   $("#wrapper").toggleClass("active");
+  // });
+
+  show_sideBarButton() {
+    document.getElementById("sideBarButton").style.display = "block";
+  }
+  
+  hide_sideBarButton() {
+    document.getElementById("sideBarButton").style.display = "none";
+  }
+  
   created(owningView, myView) {
     // Invoked once the component is created...
   }
@@ -79,3 +96,4 @@ export class App {
       return next();
     }
 }
+
