@@ -13,6 +13,8 @@ export class App {
     console.log(Dependency);
   }
 
+  
+
   updateContent() {
     this.header = 'New Cool Name'
     this.content = 'New Content'
@@ -49,12 +51,6 @@ export class App {
     document.getElementById("wrapper").classList.toggle("active");
   }
 
-  
-  // $("#menu-toggle").click(function(e) {
-  //   e.preventDefault();
-  //   $("#wrapper").toggleClass("active");
-  // });
-
   show_sideBarButton() {
     document.getElementById("sideBarButton").style.display = "block";
   }
@@ -82,7 +78,10 @@ export class App {
   unbind(argument) {
       // Invoked when component is unbound...
   }
+
 }
+
+
 
   class AuthorizeStep {
     run(navigationInstruction, next) {

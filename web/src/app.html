@@ -6,7 +6,7 @@
   <require from = "./bootstrap/css/bootstrap.min.css"></require>
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <require from = "navigation.html"></require> <!--My .html file -->
-
+  
   <!--Top page -->
   <div class="fixed-top row-fluid">
     <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
@@ -21,7 +21,7 @@
               <div id="sidebar-wrapper">
                   <ul id="sidebar_menu" class="sidebar-nav">
                       <p></p>
-                      <button class="btn btn-block" style="background: #252525" click.trigger="manageSideBar()"><font color="#999">☰</font></button>
+                      <button class="sidebar-button" click.trigger="manageSideBar()">☰</button>
                     </ul>
                   <ul class="sidebar-nav" id="sidebar">
                       <navigation router.bind="router" id="navigation" ></navigation>

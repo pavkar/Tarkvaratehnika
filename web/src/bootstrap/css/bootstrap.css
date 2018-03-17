@@ -8,6 +8,18 @@
  * Designed and built with all the love in the world by @mdo and @fat.
  */
 
+ .sidebar-button {
+  background-color: #252525; /* Green */
+  border: none;
+  color: #999;
+  padding: 15px 100px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 .row{
   margin-left:0px;
   margin-right:0px;
