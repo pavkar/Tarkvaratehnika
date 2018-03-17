@@ -29,6 +29,21 @@ export class App {
 
     ]);
   }
+  manage_sideBar() {
+    if (document.getElementById("navigation").style.display == "block") {
+      this.close_sideBar();
+    } else {
+      this.open_sideBar();
+    }
+  }
+
+  open_sideBar() {
+    document.getElementById("navigation").style.display = "block";
+  }
+  
+  close_sideBar() {
+      document.getElementById("navigation").style.display = "none";
+  }
   
 
   created(owningView, myView) {

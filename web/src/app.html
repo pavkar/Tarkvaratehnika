@@ -5,14 +5,26 @@
   <require from = "./bootstrap/css/bootstrap.css"></require>
   <require from = "./bootstrap/css/bootstrap.min.css"></require>
   <require from = "navigation.html"></require> <!--My .html file -->
+
+  <!--Top page -->
+  <div class="fixed-top row-fluid">
+    <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+      
+    </div>
+  </div>
+
+  <!--Page Info -->
   <div class="container-fluid">
     <div class="row-fluid" >
-      <div class="span2">
-          <navigation router.bind="router"></navigation>
+      <div class="well">
+        <div class="span2">
+            <div class="btn btn-lg" click.trigger="manage_sideBar()">☰</div>
+            <navigation router.bind="router" id="navigation" style="display:none;z-index:2;width:40%;min-width:300px"></navigation>
+        </div>
       </div>
       <div class="span1">
       </div>
-      <div class="span9">
+      <div class="span9 well">
         <router-view></router-view>
       </div>
     </div>
