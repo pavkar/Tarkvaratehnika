@@ -1,11 +1,12 @@
 export class Login {
     constructor() {
         this.header = 'Login';
-        this.email = '';
+        this.username = '';
         this.password = '';
+        this.remember = false;
     }
     signup() {
-        let myUser = { email: this.email, password: this.password }
+        let myUser = { password: this.password, username: this.username }
         console.log(myUser);
     };
 

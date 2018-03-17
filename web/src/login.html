@@ -1,14 +1,66 @@
 <template> 
-    <h1>${header}</h1>
-        <form role = "form" submit.delegate = "signup()">
-     
-           <label for = "email">Email</label>
-           <input type = "email" required="required" value.bind = "email" placeholder = "Email">
-     
-           <label for = "password">Password</label>
-           <input type = "password" required="required" value.bind = "password" placeholder = "Password">
-            <br>
-           <button type = "submit">Login</button>
+  <div class="text-center" style="padding:50px 0">
+      <div class="logo"><h1>${header}</h1></div>
+
+      <!-- Main Form -->
+      <!-- Login for social media users -->
+      <div class="row-fluid">
+    	    <div class="span4">
+		        <a href="#" class="btn btn-md btn-block disabled" >
+			        <i class=""></i>
+			        <span class="">Facebook</span>
+		        </a>
+	        </div>
+        	<div class="span4">
+		        <a href="#" class="btn btn-md btn-block disabled">
+			        <i class=""></i>
+			        <span class="">Twitter</span>
+		        </a>
+	        </div>	
+        	<div class="span4">
+		        <a href="#" class="btn btn-lg btn-block disabled">
+			        <i class=""></i>
+			        <span class="">Google+</span>
+		        </a>
+	        </div>	
+      </div>
+
+      <!-- Space between choices -->
+      <div class="row omb_row-sm-offset-3 omb_loginOr">
+          <div class="col-xs-12 col-sm-6">
+            <hr class="omb_hrOr">
+            <span class="omb_spanOr">or</span>
+          </div>
+      </div>
+
+      <!-- Login for page users -->
+      <div class="login-form-1">
+        <form id="login-form" class="text-left" submit.delegate="signup()">
+          <div class="login-form-main-message"></div>
+          <div class="main-login-form">
+            <div class="login-group">
+              <div class="form-group">
+                <label for="lg_username" class="sr-only">Username</label>
+                <input type="text" required="required" class="form-control" id="lg_username" name="lg_username" placeholder="username" value.bind="username">
+              </div>
+              <div class="form-group">
+                <label for="lg_password" class="sr-only">Password</label>
+                <input type="password" required="required" class="form-control" id="lg_password" name="lg_password" placeholder="password" value.bind="password">
+              </div>
+              <div class="form-group login-group-checkbox">
+                <input type="checkbox" id="lg_remember" name="lg_remember" value.bind="remember">
+                <label for="lg_remember">remember</label>
+              </div>
+            </div>
+            <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+          </div>
+          <div class="etc-login-form">
+            <p>forgot your password? <a href="#" class="disabled">click here</a></p>
+            <p>new user? <a href="#/registration">create new account</a></p>
+          </div>
         </form>
+      </div>
+      <!-- End of Main Form -->
+    </div>
      
 </template>
