@@ -3,16 +3,7 @@ import environment from './environment';
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-    .basicConfiguration()
-    .feature('resources')
-    .defaultBindingLanguage()
-    .defaultResources()
-    .developmentLogging()
-    .router()
-    .history()
-    .eventAggregator()
-
-
+    .feature('resources');
 
   if (environment.debug) {
     aurelia.use.developmentLogging();
@@ -23,6 +14,4 @@ export function configure(aurelia) {
   }
 
   aurelia.start().then(() => aurelia.setRoot());
-
-  
 }

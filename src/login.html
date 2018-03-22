@@ -1,14 +1,7 @@
-<template> 
-    <h1>${header}</h1>
-        <form role = "form" submit.delegate = "signup()">
-     
-           <label for = "email">Email</label>
-           <input type = "email" required="required" value.bind = "email" placeholder = "Email">
-     
-           <label for = "password">Password</label>
-           <input type = "password" required="required" value.bind = "password" placeholder = "Password">
-            <br>
-           <button type = "submit">Login</button>
-        </form>
-     
+<template>
+    Hei! ${appName} kasutajaid on praegu ${count}
+
+    <button click.trigger="login()">Log in</button>
+    <button click.trigger="logout()">Log out</button>
+    <button click.trigger="getStatus()">Get login status</button>
 </template>
