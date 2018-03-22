@@ -9,7 +9,7 @@
  */
 
  .sidebar-button {
-  background-color: #252525; /* Green */
+  background-color: #252525;
   border: none;
   color: #999;
   padding: 15px 100px;
@@ -439,6 +439,7 @@ label:hover:before {
 
 .numberInput {
   width: 15%;
+  height: 40%;
 }
 .alignleft {
   text-align: left;
@@ -6613,4 +6614,8 @@ a.badge:focus {
 
 .affix {
   position: fixed;
+}
+
+btnColor {
+  background-color: #468847;
 }

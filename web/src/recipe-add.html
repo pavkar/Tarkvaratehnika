@@ -10,31 +10,40 @@
         <form submit.trigger="recipeInfoCheck()">    
             <div class="row-fluid">
               <div class="span4">
-                <label><h4>Input Recipe Name</h4></label>
-                <input type="text" style="min-width: 20%" required="required" maxlength="25" value.bind="name"> <br>
-                <label><h4>Select Ingredients</h4></label>
-                <select multiple class="form-control" id="ingredientOptions" style="height: 100%" required="required" value.bind="ingredientsSelected">
-                    <option repeat.for="ingredient of ingredientsList"
-                            value.bind="ingredient">
-                        ${ingredient}
-                    </option>
-                </select>
-                <label><h4>Input people number</h4></label>
-                <!-- ^[1-9][0-9]* Cannot start with 0. Numbers only-->
-                <input type="text" style="width: 45%" required="required" min="1" maxlength="20" pattern="^[1-9][0-9]*" value.bind="size"> <br>
-
-                <label><h4>Input preparation time</h4></label>
-                <!-- [0-9]{1,2} Numbers only 1 or 2 numbers in field-->
-                <h5>Hours: <input type="text" pattern="[0-9]{1,2}" maxlength="2" class="numberInput"  required="required" value.bind="timeHour"> 
-                Minutes: <input type="text" pattern="[0-9]{1,2}" maxlength="2"class="numberInput" required="required" value.bind="timeMin"> </h5> <br>
                 
+                <label><h4>Dish size</h4></label>
+                <!-- ^[1-9][0-9]* Cannot start with 0. Numbers only-->
+                <p><input type="text" style="width: 45%; height: 20%;" required="required" min="1" maxlength="20" pattern="^[1-9][0-9]*" value.bind="size"></p>
 
+                <label><h4>Preparation time</h4></label>
+                <!-- [0-9]{1,2} Numbers only 1 or 2 numbers in field-->
+                <h5>Hours: <input type="text" pattern="[0-9]{1,2}" maxlength="2" style="height: 20%; width: 20%" required="required" value.bind="timeHourPrep"> 
+                Minutes: <input type="text" pattern="[0-9]{1,2}" maxlength="2" style="height: 20%; width: 20%" required="required" value.bind="timeMinPrep"> </h5> <br>
+                
+                <label><h4>Cooking time</h4></label>
+                <!-- [0-9]{1,2} Numbers only 1 or 2 numbers in field-->
+                <h5>Hours: <input type="text" pattern="[0-9]{1,2}" maxlength="2" style="height: 20%; width: 20%" required="required" value.bind="timeHourCook"> 
+                Minutes: <input type="text" pattern="[0-9]{1,2}" maxlength="2" style="height: 20%; width: 20%" required="required" value.bind="timeMinCook"> </h5> <br>
               </div>
               <div class="span1"></div>
               <div class="span7">
-                  <label><h4>Input Description</h4></label>
-                  <textarea class="form-control" rows="15" id="recipeDescription" style="min-width: 80%" required="required" maxlength="254" value.bind="instructions"></textarea> <br>
-                  <button type="submit">Add Recipe</button>
+                  <label><h4>Recipe Name</h4></label>
+                  <p><input type="text" style="height: 20%; width: 80%" required="required" maxlength="25" value.bind="name"></p>
+                  
+                  <label><h4>Description</h4></label>
+                  <textarea class="form-control" rows="3" id="recipeDescr" style="min-width: 80%" placeholder="recipe description..." required="required" maxlength="254" value.bind="description"></textarea> <br>
+                  
+                  <label><h4>Ingredients</h4></label>
+                  <textarea class="form-control" rows="5" id="recipeIngr" style="min-width: 80%" placeholder="place ingredients on new line" required="required" maxlength="554" value.bind="ingredientsSelected"></textarea> <br>
+                  
+                  <label><h4>Preparation Description</h4></label>
+                  <textarea class="form-control" rows="5" id="recipeInstr" style="min-width: 80%" placeholder="preparation description..." required="required" maxlength="554" value.bind="instructions"></textarea> <br>
+                  <div class="raw-fluid">
+                      <div class="span4">
+                          <button class="btn btn-lg btn-success btn-block" type="submit">Add Recipe</button>
+                      </div>
+                  </div>
+                  
               </div>
             </div>
         </form>

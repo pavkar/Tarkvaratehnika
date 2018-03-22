@@ -13,8 +13,6 @@ export class App {
     console.log(Dependency);
   }
 
-  
-
   updateContent() {
     this.header = 'New Cool Name'
     this.content = 'New Content'

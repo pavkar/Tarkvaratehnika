@@ -4,18 +4,19 @@
   <require from = "./components/custom-component.html"></require>
   <require from = "./bootstrap/css/bootstrap.css"></require>
   <require from = "./bootstrap/css/bootstrap.min.css"></require>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <require from = "navigation.html"></require> <!--My .html file -->
   
   <!--Top page -->
   <div class="fixed-top row-fluid">
-    <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-      
+    <div class="panel" style="">
+      <div class="panel-heading"><button class="btn btn-md">Manage Profile</button></div>
     </div>
   </div>
   <!--Page Info -->
   <div class="container-fluid" id="page-content-wrapper">
-    <div class="row-fluid page-content inset" >
+    <div class="row-fluid page-content inset">
       <div id="wrapper" class="active">  
           <!-- Sidebar -->
               <div id="sidebar-wrapper">
@@ -27,13 +28,14 @@
                       <navigation router.bind="router" id="navigation" ></navigation>
                   </ul>
               </div>
-      </div>
-      <div class="span2">
+      
+      <div class="span1">
           <button class="btn btn-lg" id="sideBarButton" style="display: none" click.trigger="manageSideBar()">☰</button>
       </div>
-      <div class="span9 well well-lg">
+      <div class="span10 well">
         <router-view></router-view>
       </div>
+    </div>
     </div>
   </div>
 </template>
