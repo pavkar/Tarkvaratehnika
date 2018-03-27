@@ -4,14 +4,20 @@ let httpClient = new HttpClient();
 export class RecipeAdd {
     constructor() {
         this.header = "Add Recipes";
-        this.name = "";
-        this.timeHour = "";
-        this.timeMin = "";
-        this.instructions = "";
+
+        this.timeHourPrep = "";
+        this.timeMinPrep = "";
+        this.timeHourCook = "";
+        this.timeMinCook = "";
         this.size = 0;
-        
+
+        this.name = "";
+        this.description = "";
+        this.ingredients = "";
+        this.ingredientsAmount = "";
+        this.instructions = "";
+
         this.ingredientsList = ['Ingr1', 'Ingr2', 'Ingr3', 'Ingr4', 'Ingr5'];
-        this.ingredientsSelected = [];
     }
 
     myPostData = {
