@@ -1,23 +1,28 @@
 package allrecipes;
 
+import parsers.GeneralIngredientsParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import parsers.RecipeTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class AllRecipesParser implements allrecipes.RecipeTemplate {
+public class AllRecipesParser implements RecipeTemplate {
 
-    private static String url;
+    private String url;
+    private GeneralIngredientsParser ingredientParser;
+
 
     public AllRecipesParser(String url) {
         this.url = url;
+        ingredientParser = new GeneralIngredientsParser();
     }
 
-    private Document getDocument() throws Exception {
+    @Override
+    public Document getDocument() throws Exception {
         return Jsoup.connect(url).get();
     }
 
@@ -51,7 +56,17 @@ public class AllRecipesParser implements allrecipes.RecipeTemplate {
     }
 
     @Override
-    public String getServings() throws Exception {
+    public String getOriginalSource() {
+        return "allrecipes.com";
+    }
+
+    @Override
+    public String getOriginalAuthor() throws Exception {
+        return getDocument().select("span.submitter__name").text();
+    }
+
+    @Override
+    public int getServings() throws Exception {
         String servings = "1";
         Elements metaTags = getDocument().getElementsByTag("meta");
         for (Element metaTag : metaTags) {
@@ -59,32 +74,11 @@ public class AllRecipesParser implements allrecipes.RecipeTemplate {
                 servings = metaTag.attr("content");
             }
         }
-        return servings;
+        return Integer.parseInt(servings);
     }
 
     @Override
     public String getIngredients() throws Exception {
-        getUnParsedIngreds();
-        StringBuilder allIngredients = new StringBuilder();
-
-        for (String ingredient : getUnParsedIngreds()) {
-            List<String> words = Arrays.asList(ingredient.split(" ", 3));
-            allIngredients.append(words.get(2)).append(":").append(words.get(0)).append(":").append(words.get(1));
-            if (getUnParsedIngreds().indexOf(ingredient) != getUnParsedIngreds().size() - 1) {
-                allIngredients.append("; ");
-            }
-        }
-        return allIngredients.toString();
-    }
-
-    public static void main(String[] args) throws Exception {
-        AllRecipesParser parser = new AllRecipesParser("https://www.allrecipes.com/recipe/201849/mongolian-" +
-                "beef-and-spring-onions/?internalSource=popular&referringContentType=home%20page&clickId=cardslot%205%2F");
-        parser.getUnParsedIngreds();
-        System.out.println(parser.getTitle());
-        System.out.println(parser.getPrepTime());
-        System.out.println(parser.getServings());
-        System.out.println(parser.getIngredients());
-        System.out.println(parser.getInstructions());
+        return ingredientParser.getIngredients(getUnParsedIngreds());
     }
 }
