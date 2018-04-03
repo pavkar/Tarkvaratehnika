@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.json.JSONObject;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +21,13 @@ public class Recipe {
 	String instructions;
 	String time;
 	int size;
+	
+	@Override
+	public String toString() {
+		String recipeJSON = new JSONObject().put("name", name).put("ingredients", ingredients)
+				.put("instructions", instructions).put("time", time).put("size", size)
+				.toString();
+		return recipeJSON;
+	}
 	
 }

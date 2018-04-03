@@ -18,8 +18,7 @@ public class RecipeController {
 	@CrossOrigin
 	@RequestMapping(value = "/recipes/add", method = RequestMethod.POST, consumes = "application/json")
 	public Recipe addRecipe(@RequestBody Recipe recipe) {
-		return recipeService.addRecipe(recipe);
-		
+		return recipeService.addRecipe(recipe);	
 	}
 	
 	@RequestMapping(value = "/recipes/ingredients/{id}", method=RequestMethod.GET)
@@ -45,5 +44,19 @@ public class RecipeController {
 	@RequestMapping(value = "/recipes/size/{id}", method=RequestMethod.GET)
 	public int getSize(@PathVariable("id") long id) {
 		return recipeService.getRecipeSize(id);
+	}
+	
+	@RequestMapping(value = "/recipes/search/{name}", method=RequestMethod.GET)
+	public String getRecipeIdsByName(@PathVariable("name") String name) {
+		return recipeService.getRecipesByName(name);	
+	}
+	
+	/*
+	 * Tagastab kujul {id number:{instructions:*juhised*, size:*suurus*, name:*nimi*, ingredients:*koostisosad*,
+	 * time:*aeg*}, id number:{jne}}
+	 */
+	@RequestMapping(value = "/recipes/object/{id}", method=RequestMethod.GET)
+	public String getRecipe(@PathVariable("id") long id) {
+		return recipeService.getRecipe(id).toString();
 	}
 }

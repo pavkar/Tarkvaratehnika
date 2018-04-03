@@ -1,5 +1,9 @@
 package com.example.demo.Recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,5 +41,30 @@ public class RecipeService {
 	int getRecipeSize(long id) {
 		return getRecipe(id).size;
 	}
+	
+	List<Long> getRecipeIdsByName(String name) {
+		List<Long> ids = new ArrayList<Long>();
+		
+		recipeRepository.findAll().forEach(r -> {
+			if (r.name.contains(name)) ids.add(r.id);	
+		});
+		
+		return ids;
+	}
+	
+	String getRecipesByName(String name) {
+		List<Long> ids = getRecipeIdsByName(name);
+		JSONObject infoJSON = new JSONObject();
+		
+		for (long l : ids) {
+			infoJSON.put(String.valueOf(l), getRecipe(l).toString());	
+		}
+		return infoJSON.toString();
+	}
+	
+	
+	
+	
+	
 
 }
