@@ -1,11 +1,15 @@
 package com.example.demo.Recipe;
 
+import java.io.IOException;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.foodnetwork.FoodNetworkParser;
 
 @RestController
 public class RecipeController {
@@ -58,5 +62,11 @@ public class RecipeController {
 	@RequestMapping(value = "/recipes/object/{id}", method=RequestMethod.GET)
 	public String getRecipe(@PathVariable("id") long id) {
 		return recipeService.getRecipe(id).toString();
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/external/add", method = RequestMethod.POST, consumes = "text/plain")
+	public Recipe addRecipe(@RequestBody String url) throws IOException {
+		return recipeService.addRecipe(new ExternalRecipe(url));
 	}
 }
