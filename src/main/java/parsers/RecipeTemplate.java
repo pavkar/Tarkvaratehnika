@@ -2,16 +2,17 @@ package parsers;
 
 import org.jsoup.nodes.Document;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface RecipeTemplate {
 
-    Document getDocument() throws Exception;
-    String getTitle() throws Exception;
-    int getServings() throws Exception;
-    String getPrepTime() throws Exception;
-    String getIngredients() throws Exception;
-    String getInstructions() throws Exception;
+    Document getDocument() throws IOException;
+    String getTitle() throws IOException;
+    int getServings() throws IOException;
+    String getPrepTime() throws IOException;
+    String getIngredients() throws IOException;
+    String getInstructions() throws IOException;
     String getOriginalSource();
-    String getOriginalAuthor() throws Exception;
+    String getOriginalAuthor() throws IOException;
 }

@@ -24,5 +24,8 @@ public class Main {
         System.out.println(allRecipesParser.getIngredients());
         System.out.println(allRecipesParser.getInstructions());
 
+        RecipeTemplate food = new FoodNetworkParser("FRGERG");
+
+
     }
 }
