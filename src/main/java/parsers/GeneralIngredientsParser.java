@@ -53,7 +53,7 @@ public class GeneralIngredientsParser {
         }
     }
 
-    public String getIngredients(List<String> getUnParsedIngreds) throws Exception {
+    public String getIngredients(List<String> getUnParsedIngreds) {
 
         StringBuilder allIngredients = new StringBuilder();
 

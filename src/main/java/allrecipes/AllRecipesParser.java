@@ -7,6 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import parsers.RecipeTemplate;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +23,12 @@ public class AllRecipesParser implements RecipeTemplate {
     }
 
     @Override
-    public Document getDocument() throws Exception {
+    public Document getDocument() throws IOException {
         return Jsoup.connect(url).get();
     }
 
 
-    private List<String> getUnParsedIngreds() throws Exception {
+    private List<String> getUnParsedIngreds() throws IOException {
         List<String> ingredients = new ArrayList<>();
         for (Element ingredient : getDocument().select("ul.checklist.dropdownwrapper.list-ingredients-1 li")) {
             ingredients.add(ingredient.text().replace(" ADVERTISEMENT", ""));
@@ -36,17 +37,17 @@ public class AllRecipesParser implements RecipeTemplate {
     }
 
     @Override
-    public String getTitle() throws Exception {
+    public String getTitle() throws IOException {
         return getDocument().select("h1.recipe-summary__h1").text();
     }
 
     @Override
-    public String getPrepTime() throws Exception {
+    public String getPrepTime() throws IOException {
         return getDocument().select("span.ready-in-time").text();
     }
 
     @Override
-    public String getInstructions() throws Exception {
+    public String getInstructions() throws IOException {
         StringBuilder instructions = new StringBuilder();
        for (Element el : getDocument().select("ol.list-numbers.recipe-directions__list li")) {
             instructions.append(el.text());
@@ -61,12 +62,12 @@ public class AllRecipesParser implements RecipeTemplate {
     }
 
     @Override
-    public String getOriginalAuthor() throws Exception {
+    public String getOriginalAuthor() throws IOException {
         return getDocument().select("span.submitter__name").text();
     }
 
     @Override
-    public int getServings() throws Exception {
+    public int getServings() throws IOException {
         String servings = "1";
         Elements metaTags = getDocument().getElementsByTag("meta");
         for (Element metaTag : metaTags) {
@@ -78,7 +79,7 @@ public class AllRecipesParser implements RecipeTemplate {
     }
 
     @Override
-    public String getIngredients() throws Exception {
+    public String getIngredients() throws IOException {
         return ingredientParser.getIngredients(getUnParsedIngreds());
     }
 }

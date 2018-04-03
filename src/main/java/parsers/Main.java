@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         FoodNetworkParser foodParser = new FoodNetworkParser("https://www.foodnetwork.com/recipes/ina-garten/coq-au-vin-recipe4-2011654");
-        AllRecipesParser allRecipesParser = new AllRecipesParser("https://www.allrecipes.com/recipe/201849/mongolian-beef-and-spring-onions/?internalSource=hub%20recipe&referringContentType=search%20results&clickId=cardslot%203");
+        AllRecipesParser allRecipesParser = new AllRecipesParser("https://www.allrecipes.com/recipe/88123/apple-cider-sauce-and-pork-loin-chops/?internalSource=staff%20pick&referringId=80&referringContentType=recipe%20hub");
 //        System.out.println(foodParser.getTitle());
 //        System.out.println(foodParser.getOriginalSource());
 //        System.out.println(foodParser.getOriginalAuthor());
