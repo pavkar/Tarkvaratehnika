@@ -1,2 +1,0 @@
-# Tarkvaratehnika
-Tarkvaratehnika projekt
