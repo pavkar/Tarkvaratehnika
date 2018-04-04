@@ -3,6 +3,8 @@ package parsers;
 import allrecipes.AllRecipesParser;
 import foodnetwork.FoodNetworkParser;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) throws Exception {
@@ -24,7 +26,8 @@ public class Main {
 //        System.out.println(allRecipesParser.getIngredients());
 //        System.out.println(allRecipesParser.getInstructions());
 
-        RecipeTemplate food = new FoodNetworkParser("FRGERG");
+        GeneralIngredientsParser parser = new GeneralIngredientsParser();
+        parser.getIngredients(Arrays.asList("1 1/4 cups of milk"));
 
 
     }

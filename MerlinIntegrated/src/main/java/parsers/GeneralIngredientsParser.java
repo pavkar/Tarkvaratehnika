@@ -2,6 +2,7 @@ package parsers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class GeneralIngredientsParser {
@@ -29,28 +30,32 @@ public class GeneralIngredientsParser {
         }
     }
 
-    void secondElementIsToOr(List<String> words) {
+    List<String> secondElementIsToOr(List<String> words) {
         if (words.get(1).equals("to") | words.get(1).equals("or")) {
             List<String> newWords = new ArrayList<>();
             newWords.add(words.get(0));
             newWords.add(words.get(1));
-            newWords.addAll(Arrays.asList(words.get(2).split(" ")));
+            newWords.addAll(Arrays.asList(words.get(2).split(" ", 3)));
+            //System.out.println(newWords);
             String quantity = newWords.get(0) + " " + newWords.get(1) + " " + newWords.get(2);
-            words.clear();
-            words.add(quantity);
-            words.add(newWords.get(3));
-            words.add(newWords.get(4));
+            List<String> newList = Arrays.asList(quantity, newWords.get(3), newWords.get(4));
+            //System.out.println(newList);
+            words = newList;
+            //System.out.println(words);
         }
+        return words;
     }
 
-    void secondElementDigit(List<String> words) {
+    List<String> secondElementDigit(List<String> words) {
         if (Character.isDigit(words.get(1).substring(0, 1).toCharArray()[0])) {
             String quantity = words.get(0) + " " + words.get(1);
             List<String> unitAndName = Arrays.asList(words.get(2).split(" ", 2));
-            words.clear();
-            words.add(quantity);
-            words.addAll(unitAndName);
+            List<String> newWords = new ArrayList<>();
+            newWords.add(quantity);
+            newWords.addAll(unitAndName);
+            words = newWords;
         }
+        return words;
     }
 
     public String getIngredients(List<String> getUnParsedIngreds) {
@@ -64,10 +69,10 @@ public class GeneralIngredientsParser {
                 List<String> words = new ArrayList<>(Arrays.asList(ingredient.split(" ", 3)));
 
                 // If the second elements starts with a digit
-                secondElementDigit(words);
+                words = secondElementDigit(words);
 
                 // If the second element is "to"
-                secondElementIsToOr(words);
+                words = secondElementIsToOr(words);
 //
                 // If the second element is in the list of measurement units
                 secondElementMeasureUnit(allIngredients, words);
@@ -80,7 +85,7 @@ public class GeneralIngredientsParser {
                 allIngredients.append(ingredient).append("; ");
             }
         }
-        return allIngredients.toString();
+        return allIngredients.toString().trim();
     }
 
 }
