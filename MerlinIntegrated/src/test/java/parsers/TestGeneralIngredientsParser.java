@@ -2,11 +2,9 @@ package parsers;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -93,5 +91,12 @@ public class TestGeneralIngredientsParser {
     public void testAddSemicolonEndOfIngredNoExtraction() {
         assertEquals("Kosher salt; cinnamon to taste;",
                 parser.getIngredients(Arrays.asList("Kosher salt", "cinnamon to taste")));
+    }
+
+    @Test
+    public void testAddingMeasurementUnit() {
+        MeasurementUnits units = new MeasurementUnits();
+        units.addUnit("pinch");
+        assertEquals("pinch", units.getMeasurementUnits().get(units.getMeasurementUnits().size() - 1));
     }
 }

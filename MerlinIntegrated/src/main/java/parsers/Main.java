@@ -26,9 +26,13 @@ public class Main {
 //        System.out.println(allRecipesParser.getIngredients());
 //        System.out.println(allRecipesParser.getInstructions());
 
-        GeneralIngredientsParser parser = new GeneralIngredientsParser();
-        parser.getIngredients(Arrays.asList("1 1/4 cups of milk"));
-
+//        GeneralIngredientsParser parser = new GeneralIngredientsParser();
+//        parser.getIngredients(Arrays.asList("1 1/4 cups of milk"));
+//        System.out.println(allRecipesParser.getDocument());
+        allRecipesParser.setDocument("C:\\Users\\korph\\Documents\\Tarkvaratehnika\\Grupitöö\\Projekt\\FridgeTest2\\src\\test\\java\\allrecipes\\AllRecipesResultExample.html");
+        System.out.println(allRecipesParser.getServings());
+        AllRecipesParser parser2 = new AllRecipesParser("");
+        System.out.println(parser2.getServings());
 
     }
 }
