@@ -1,4 +1,4 @@
-package allrecipes;
+package com.example.demo;
 
 import java.util.List;
 

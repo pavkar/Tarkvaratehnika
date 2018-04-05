@@ -9,6 +9,10 @@ public class MeasurementUnits {
     public List<String> measurementUnits = new ArrayList<>();
 
     public MeasurementUnits() {
+        setMeasurementUnits();
+        }
+
+    void setMeasurementUnits() {
         this.measurementUnits.addAll(Arrays.asList("cups", "pints", "tablespoons", "ears", "teaspoons", "pounds", "ounces", "sticks", "tube"));
     }
 

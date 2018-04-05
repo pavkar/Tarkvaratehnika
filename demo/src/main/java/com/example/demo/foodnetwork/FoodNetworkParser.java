@@ -25,6 +25,7 @@ public class FoodNetworkParser implements RecipeTemplate {
     @Override
     public Document getDocument() throws IOException {
         return Jsoup.connect(url).get();
+
     }
 
     @Override
