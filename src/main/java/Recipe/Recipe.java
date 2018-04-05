@@ -1,4 +1,4 @@
-package Recipe;
+package main.java.Recipe;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

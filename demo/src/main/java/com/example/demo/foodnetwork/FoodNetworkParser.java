@@ -1,4 +1,4 @@
-package com.example.demo.foodnetwork;
+package main.java.com.example.demo.foodnetwork;
 
 import com.example.demo.parsers.GeneralIngredientsParser;
 import com.example.demo.parsers.RecipeTemplate;

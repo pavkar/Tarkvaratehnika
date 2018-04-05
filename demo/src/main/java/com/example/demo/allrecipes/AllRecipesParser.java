@@ -1,4 +1,4 @@
-package com.example.demo.allrecipes;
+package main.java.com.example.demo.allrecipes;
 
 import com.example.demo.parsers.GeneralIngredientsParser;
 import org.jsoup.Jsoup;
@@ -7,9 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import com.example.demo.parsers.RecipeTemplate;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +21,7 @@ public class AllRecipesParser implements RecipeTemplate {
     public AllRecipesParser(String url) {
         this.url = url;
         ingredientParser = new GeneralIngredientsParser();
+        getDocument();
     }
 
     @Override
@@ -32,7 +31,7 @@ public class AllRecipesParser implements RecipeTemplate {
             if (url.isEmpty()) {
                 System.out.println("Please provide an URL");
             } else {
-                document = Jsoup.connect(url).get();
+                this.document = Jsoup.connect(url).get();
             }
         } catch (IOException e) {
             System.out.println("Please provide correct URL");
@@ -41,19 +40,34 @@ public class AllRecipesParser implements RecipeTemplate {
     }
 
     public void setDocument(String path) {
-        try {
-            this.document = Jsoup.parse(new FileInputStream(path).toString());
-        } catch (FileNotFoundException e) {
-            System.out.println("Could not find a file to read!");
+        if (path != null && !path.isEmpty()) {
+            try {
+                StringBuilder sb = new StringBuilder();
+                BufferedReader br = new BufferedReader(new FileReader(path));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                this.document = Jsoup.parse(sb.toString());
+            } catch (FileNotFoundException e) {
+                System.out.println("Could not find a file to read!");
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
 
-    private List<String> getUnParsedIngreds() {
+    List<String> getUnParsedIngreds() {
         List<String> ingredients = new ArrayList<>();
         for (Element ingredient : document.select("ul.checklist.dropdownwrapper.list-ingredients-1 li")) {
             ingredients.add(ingredient.text().replace(" ADVERTISEMENT", ""));
         }
+        for (Element ingredient : document.select("ul.checklist.dropdownwrapper.list-ingredients-2 li")) {
+            ingredients.add(ingredient.text().replace(" ADVERTISEMENT", ""));
+        }
+        ingredients.remove(ingredients.size() - 1);
         return ingredients;
     }
 
@@ -79,7 +93,7 @@ public class AllRecipesParser implements RecipeTemplate {
 
     @Override
     public String getOriginalSource() {
-        return "com.example.demo.allrecipes.com";
+        return "allrecipes.com";
     }
 
     @Override
