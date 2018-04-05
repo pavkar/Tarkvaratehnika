@@ -12,6 +12,8 @@ export function configure(aurelia) {
     .history()
     .eventAggregator()
 
+
+
   if (environment.debug) {
     aurelia.use.developmentLogging();
   }

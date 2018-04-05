@@ -3,7 +3,4 @@ export class Ingredients {
         this.description = description;
         this.done = false;
     }
-    testFunc() {
-      
-    }
 }

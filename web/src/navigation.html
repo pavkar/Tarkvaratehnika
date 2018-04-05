@@ -1,0 +1,12 @@
+
+<template bindable="router">
+    <h4>Main Navigation</h4>
+    <li><a repeat.for="link of router.navigation" href.bind="link.href">
+      ${link.title}</a></li>
+    <div class="visible">
+        <h4>For Users</h4>
+        <li><a href="#/fridge">Fridge</span></a></li>
+        <li><a href="#/recipe-add">Add Recipe</span></a></li>
+    </div>
+
+</template>
