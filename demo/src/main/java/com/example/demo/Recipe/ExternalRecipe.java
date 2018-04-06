@@ -1,10 +1,10 @@
 package com.example.demo.Recipe;
 
+import java.io.IOException;
+
 import com.example.demo.allrecipes.AllRecipesParser;
 import com.example.demo.foodnetwork.FoodNetworkParser;
 import com.example.demo.parsers.RecipeTemplate;
-
-import java.io.IOException;
 
 public class ExternalRecipe extends Recipe {
 	private RecipeTemplate parser;
@@ -12,7 +12,7 @@ public class ExternalRecipe extends Recipe {
 	public ExternalRecipe(String url) throws IOException {
 		if (url.contains("foodnetwork.com")) {
 			this.parser = new FoodNetworkParser(url);
-		} else if (url.contains("com.example.demo.allrecipes.com")) {
+		} else if (url.contains("allrecipes.com")) {
 			this.parser = new AllRecipesParser(url);
 		}
 		super.name = parser.getTitle();
