@@ -1,4 +1,4 @@
-package main.java.com.example.demo.parsers;
+package com.example.demo.parsers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,10 +9,6 @@ public class MeasurementUnits {
     public List<String> measurementUnits = new ArrayList<>();
 
     public MeasurementUnits() {
-        setMeasurementUnits();
-        }
-
-    void setMeasurementUnits() {
         this.measurementUnits.addAll(Arrays.asList("cups", "pints", "tablespoons", "ears", "teaspoons", "pounds", "ounces", "sticks", "tube"));
     }
 
