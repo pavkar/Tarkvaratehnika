@@ -1,4 +1,4 @@
-package main.java.com.example.demo.parsers;
+package com.example.demo.parsers;
 
 import org.jsoup.nodes.Document;
 
