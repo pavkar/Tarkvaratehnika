@@ -1,4 +1,4 @@
-package main.java.com.example.demo.allrecipes;
+package com.example.demo.allrecipes;
 
 import com.example.demo.parsers.GeneralIngredientsParser;
 import org.jsoup.Jsoup;
