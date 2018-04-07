@@ -27,7 +27,6 @@ export class App {
       { route: 'registration', name: 'registration', moduleId: 'registration', title: 'Registration', nav: true },
       { route: 'fridge', name: 'fridge', moduleId: 'fridge', title: 'Fridge', nav: false, settings: { roles: ['admin']} },
       { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', title: 'Add Recipe', nav: false, },
-
     ]);
   }
 
@@ -92,5 +91,7 @@ export class App {
 
       return next();
     }
+
+    
 }
 

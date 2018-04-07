@@ -5,8 +5,6 @@ export class RecipeAdd {
     constructor() {
         this.header = "Add Recipes";
 
-        this.timeHourPrep = "";
-        this.timeMinPrep = "";
         this.timeHourCook = "";
         this.timeMinCook = "";
         this.size = 0;
@@ -17,7 +15,6 @@ export class RecipeAdd {
         this.ingredientsAmount = "";
         this.instructions = "";
 
-        this.ingredientsList = ['Ingr1', 'Ingr2', 'Ingr3', 'Ingr4', 'Ingr5'];
     }
 
     myPostData = {
@@ -25,20 +22,24 @@ export class RecipeAdd {
     }
    
     recipeInfoCheck() {
-        var ingrString = "";
-        for (let ingr of this.ingredientsSelected) {
-          ingrString += ingr + ","
-        }
-        ingrString = ingrString.slice(0, ingrString.length-1);
+        var ingrString = this.ingredients.replace("\n", ",");
+        var ingrAmountString = this.ingredientsAmount.replace("\n", ",");
+
+        var inputElement = document.getElementById("recipe-pic").files[0];;
+
+        console.log(inputElement);
+
         this.myPostData = {
           "ingredients":ingrString,
+          "amount":ingrAmountString,
           "name":this.name,
+          "description":this.description,
           "instructions":this.instructions,
           "size":parseInt(this.size),
-          "time":this.timeHour + ":" + this.timeMin
+          "time":this.timeHourCook + ":" + this.timeMinCook
         }
         console.log(this.myPostData)
-        this.postRecipe(this.myPostData)
+        //this.postRecipe(this.myPostData)
     }
 	
    postRecipe(myPostData) {
@@ -46,7 +47,6 @@ export class RecipeAdd {
          method: "POST",
          body: JSON.stringify(myPostData)
       })
-		
       .then(response => response.json())
       .then(data => {
          console.log(data);
@@ -69,6 +69,6 @@ export class RecipeAdd {
       });
    }
 
-    
+   
     
 }

@@ -11,14 +11,18 @@
             <div class="row-fluid">
               <div class="span4">
                 
+                <!--Picture adding later added preview -->
+                <label><h4>Picture (Optional)</h4></label>
+                <div class="input-group image-preview">
+                        <div class="btn btn-default image-preview-input"> 
+                            <input type="file" accept="image/png, image/jpeg" name="input-file-preview" id="recipe-pic">
+                        </div>
+                    </span>
+                </div>
+
                 <label><h4>Dish size</h4></label>
                 <!-- ^[1-9][0-9]* Cannot start with 0. Numbers only-->
                 <p><input type="text" style="width: 45%; height: 20%;" required="required" min="1" maxlength="20" pattern="^[1-9][0-9]*" value.bind="size"></p>
-
-                <label><h4>Preparation time</h4></label>
-                <!-- [0-9]{1,2} Numbers only 1 or 2 numbers in field-->
-                <h5>Hours: <input type="text" pattern="[0-9]{1,2}" maxlength="2" style="height: 20%; width: 20%" required="required" value.bind="timeHourPrep"> 
-                Minutes: <input type="text" pattern="[0-9]{1,2}" maxlength="2" style="height: 20%; width: 20%" required="required" value.bind="timeMinPrep"> </h5> <br>
                 
                 <label><h4>Cooking time</h4></label>
                 <!-- [0-9]{1,2} Numbers only 1 or 2 numbers in field-->
