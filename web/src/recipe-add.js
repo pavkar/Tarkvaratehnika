@@ -20,6 +20,7 @@ export class RecipeAdd {
     myPostData = {
 
     }
+    
    
     recipeInfoCheck() {
         var ingrString = this.ingredients.replace("\n", ",");

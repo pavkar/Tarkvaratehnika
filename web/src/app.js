@@ -27,6 +27,7 @@ export class App {
       { route: 'registration', name: 'registration', moduleId: 'registration', title: 'Registration', nav: true },
       { route: 'fridge', name: 'fridge', moduleId: 'fridge', title: 'Fridge', nav: false, settings: { roles: ['admin']} },
       { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', title: 'Add Recipe', nav: false, },
+      { route: 'recipe-view/:id', name: 'recipe-view', moduleId: 'recipe-view', title: 'recipe view', nav: false, },
     ]);
   }
 
@@ -75,6 +76,7 @@ export class App {
   unbind(argument) {
       // Invoked when component is unbound...
   }
+  
 
 }
 
