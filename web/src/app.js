@@ -56,7 +56,12 @@ export class App {
   hide_sideBarButton() {
     document.getElementById("sideBarButton").style.display = "none";
   }
-  
+
+  // When the user clicks on the button, scroll to the top of the document
+  topFunction() {
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
   created(owningView, myView) {
     // Invoked once the component is created...
   }
@@ -67,6 +72,11 @@ export class App {
 
   attached() {
       this.manageSideBar();
+      window.onscroll = function() {if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+        document.getElementById("scrollBtn").style.display = "block";
+    } else {
+        document.getElementById("scrollBtn").style.display = "none";
+    }};
   }
 
   detached(argument) {
