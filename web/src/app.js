@@ -65,8 +65,8 @@ export class App {
       // Invoked once the databinding is activated...
   }
 
-  attached(argument) {
-      // Invoked once the component is attached to the DOM...
+  attached() {
+      this.manageSideBar();
   }
 
   detached(argument) {

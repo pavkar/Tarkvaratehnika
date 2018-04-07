@@ -1,8 +1,33 @@
 
 export class Home {
     constructor() {
+      this.author = "";
+      this.date = "";
       this.ingredients = "";
-      
+      this.commentText = "";
+      this.comments = [];
+      //setInterval(() => this.update(), 1000);
+    }
+
+    searchRecipies() {
+      console.log(this.ingredients);
+    }
+
+    addComment() {
+      this.authorNoName = "Anon";
+      //this.setDate();
+      this.comments.push(this.commentText);
+    }
+
+    //Configure date to not update everytime (Make new class).
+    setDate() {
+      var newDate = new Date();
+      var year = newDate.getFullYear();
+      var mounth = newDate.getMonth();
+      var day = newDate.getDate();
+      var hours = newDate.getHours();
+      var min = newDate.getMinutes();
+      this.date =  hours + ":" + min + " " + day + "/" + mounth + "/" + year
     }
 
     attached() {
