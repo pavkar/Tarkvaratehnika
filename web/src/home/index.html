@@ -8,17 +8,19 @@
     <!-- Search, Highest rating, recipes, filter by rating-->
     <p class = mainpage>Welcome to main page. Here you can...</p>
     <form submit.trigger="searchRecipes()">
-        <p><input type="text" style="height: 20%; width: 100%" required="required" value.bind="ingredients" type="search"></p>
+        <textarea style="height: 40%; width: 94%" required="required" value.bind="ingredients" type="search" placeholder="separate ingredients with space put ammount in ()..."></textarea>
+        <button class="btn btn-success" type="submit" disabled="true">Search</button>
     </form>
 
       <!-- The Modal -->
-      <!-- Background color changes what you see behind modal style="background-color: #aaaaaa" -->
+      <!-- Background color changes what you see behind modal style="background-color: #252525" -->
     <div id="myModal" class="modals-custom">     
             <div class="modal-content">
                 <div class="modal-header">
                     <a href="#" class="close"><span class="glyphicon glyphicon-remove"></span></a>
                     <h3 class="modal-title">Recipe Name</h3>
                 </div>
+                <!-- Can use style="background-color: #252525; color:white" -->
                 <div class="modal-content">
                     <div class="row">
                         <div class="col-md-6 product_img">

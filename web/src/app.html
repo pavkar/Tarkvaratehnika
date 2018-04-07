@@ -9,8 +9,21 @@
   
   <!--Top page -->
   <div class="fixed-top row-fluid">
-    <div class="panel" style="background-color: white">
-      <div class="panel-heading"><button class="btn btn-md" style="margin-left: 90%">Manage Profile</button></div>
+    <div class="panel" style="background-color: white;">
+      <div class="panel-heading">
+        <button class="btn btn-danger btn-circle">Googel+</button>
+        <button class="btn btn-primary btn-circle">Facebook</button>
+        <button class="btn btn-info btn-circle">Twitter</button>
+          <div class="dropdown" style="margin-left: 90%;">
+              <button class="btn btn-success">Manage Profile</button>
+                <div class="dropdown-content">
+                  <button class="btn" click.trigger="logOut()">Log Out</button>
+                  <button class="btn" click.trigger="profileInfo()">Profile Info</button>
+                  <button class="btn" click.trigger="managePreferences()">Manage Preferences</button>
+                </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!--Page Info -->
