@@ -6,7 +6,7 @@ export class Home {
       this.ingredients = "";
       this.commentText = "";
       this.comments = [];
-      //setInterval(() => this.update(), 1000);
+      //setInterval(() => this.setUpModal(), 1000);
     }
 
     searchRecipies() {
@@ -31,12 +31,16 @@ export class Home {
     }
 
     attached() {
+      this.setUpModal();
+    }
+
+    setUpModal() {
       console.log("created");
       // Get the modal
       var modal = document.getElementById('myModal');
 
       // Get the button that opens the modal
-      var btn = document.getElementById("myBtn");
+      var btn = document.getElementById("openRecipeModal");
 
       // Get the <span> element that closes the modal
       var span = document.getElementsByClassName("close")[0];
@@ -57,6 +61,11 @@ export class Home {
               modal.style.display = "none";
           }
       }
+    }
+
+    openModal() {
+      var modal = document.getElementById('myModal');
+      modal.style.display = "block";
     }
     
 }

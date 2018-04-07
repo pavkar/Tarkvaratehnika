@@ -72,8 +72,10 @@ export class App {
 
   attached() {
       this.manageSideBar();
-      window.onscroll = function() {if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+      window.onscroll = function() {
+        if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
         document.getElementById("scrollBtn").style.display = "block";
+        
     } else {
         document.getElementById("scrollBtn").style.display = "none";
     }};

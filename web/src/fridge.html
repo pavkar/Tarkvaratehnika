@@ -4,27 +4,60 @@
         <hr class="omb_hrOr">
         <span class="omb_spanOr"></span>
     </div>
+
+    <div id="myModal" class="modals-custom">     
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#/fridge" class="close"><span class="glyphicon glyphicon-remove"></span></a>
+                <h3 class="modal-title"><input type="text" style="width: 80%; height: 100%;"></input>&nbsp;&nbsp;<button type="button" class="btn btn-success"> Add Template</button></h3>
+            </div>
+            <div class="modal-content">
+                <div class="row">
+                    <div class="">
+                      <!-- Adds ingredients into list -->
+                        <div class="span6">
+                          <!-- Add same system as below -->
+                          <form submit.trigger="addIngredient()">
+                            <h3>Add Ingredient:</h3>
+                            <input type="text" required="required" maxlength="30" value.bind="ingredientsDescription">
+                            <button class="btn btn-success" type="submit" disabled="true">Add Ingredient</button>
+                          </form>
+                          
+                        </div>
+                        <div class="span6">
+                            <h3>Description:</h3>
+                            <textarea rows="5" style="width: 100%"></textarea>
+                        </div>
+                        <div class="space-ten"></div>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+    
     <div class=row>
       <div class=span6>
-        <div class="logo"><h2>Ingredients</h2></div>
-        <p>Current ingredients count ${recipesCount}</p>
-        <button click.trigger="checkRecipes()">Search Recipes</button>
+        <div class="logo"><h2>Templates</h2></div>
+        <p>Current templates count ${recipesCount}</p>
+        <button class="btn btn-success" click.trigger="checkRecipes()">Search Recipes</button>
         <p></p>
       </div>
       <div class=span6>
-          <div class="logo"><h2>Add Ingredient</h2></div>
+        <div class="logo"><h2>Add Template</h2></div>
         <form submit.trigger="addIngredient()">
             <input type="text" required="required" maxlength="30" value.bind="ingredientsDescription" >
-            <button type="submit">Add Ingredient</button>
-            <p></p>
-            <button click.trigger="removeAll()">Remove All</button>
-            <button click.trigger="removeSelected()">Remove Selected</button>
+            <div class="dropdown">
+                <button class="btn btn-success" type="submit" disabled="true">Add Ingredient</button>
+                <div class="dropdown-content">
+                  <button class="btn" click.trigger="removeAll()">Remove All</button>
+                  <button class="btn" click.trigger="removeSelected()">Remove Selected</button>
+                  <button class="btn" id="openRecipeModal" click.trigger="openModal()">Add Template</button>
+                </div>
+            </div>
         </form>
-
       </div>
     </div>
-    
-
     
     <!-- Add Multiple selection option pre made ingredients -->
     <ul>
