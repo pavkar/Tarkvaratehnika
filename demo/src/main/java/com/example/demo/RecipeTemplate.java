@@ -1,12 +1,12 @@
-package allrecipes;
+package com.example.demo;
 
-import java.util.List;
+import java.io.IOException;
 
 public interface RecipeTemplate {
 
-    String getTitle() throws Exception;
-    String getServings() throws Exception;
-    String getPrepTime() throws Exception;
-    String getIngredients() throws Exception;
-    String getInstructions() throws Exception;
+    String getTitle() throws IOException;
+    String getServings() throws IOException;
+    String getPrepTime() throws IOException;
+    String getIngredients() throws IOException;
+    String getInstructions() throws IOException;
 }

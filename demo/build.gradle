@@ -24,8 +24,6 @@ repositories {
 }
 
 
-
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-social-facebook')
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -33,6 +31,7 @@ dependencies {
  	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile('org.springframework.boot:spring-boot-starter-web-services')
 	compile('org.mariadb.jdbc:mariadb-java-client:2.2.2')
+	compile('org.springframework.boot:spring-boot-starter-test')
 	compile group: 'org.json', name: 'json', version: '20140107'
 	compile 'org.jsoup:jsoup:1.11.2'
 	runtime('mysql:mysql-connector-java')
