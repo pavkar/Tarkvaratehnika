@@ -42,7 +42,8 @@ public class RecipeService {
 		return getRecipe(id).size;
 	}
 	
-	List<Long> getRecipeIdsByName(String name) {
+	// get all ids that match searched name
+	private List<Long> getAllIdsByName(String name) {
 		List<Long> ids = new ArrayList<Long>();
 		
 		recipeRepository.findAll().forEach(r -> {
@@ -52,15 +53,47 @@ public class RecipeService {
 		return ids;
 	}
 	
-	String getRecipesByName(String name) {
-		List<Long> ids = getRecipeIdsByName(name);
+	private String getAllRecipeInfoByIds(List<Long> ids) {
 		JSONObject infoJSON = new JSONObject();
 		
-		for (long l : ids) {
-			infoJSON.put(String.valueOf(l), getRecipe(l).toString());	
+		for (long id : ids) {
+			infoJSON.put(String.valueOf(id), getRecipe(id).toString());
+		}
+		
+		return infoJSON.toString();
+	}
+	
+	/*
+	 * Input is name.
+	 * Output is a json of the info of all recipes matching the name where the key is id and value is recipe info.
+	 */
+	String searchByName(String name) {
+		List<Long> ids = getAllIdsByName(name);
+		JSONObject infoJSON = new JSONObject();
+		
+		for (long id : ids) {
+			infoJSON.put(String.valueOf(id), getRecipe(id).toString());	
 		}
 		return infoJSON.toString();
 	}
+	
+	/* Argumendi formaat: {ingredient1:{size:*number*, unit:*unit*}, ingredient2:{jne}}
+	 * Kui kogust pole m2rgitud, siis peab size 0 olema.
+	 * Output is a json of the info of all recipes matching the name where the key is id and value is recipe info.
+	 */
+	
+	public String searchByIngredients(String ingredients) {
+		JSONObject json = new JSONObject(ingredients);
+		List<Long> ids = new ArrayList<>();
+		recipeRepository.findAll().forEach(recipe -> {
+			if (recipe.checkIfMatchesIngredients(json)) {
+				ids.add(recipe.id);
+			}
+		});
+
+		return this.getAllRecipeInfoByIds(ids);
+	}
+	
 	
 	
 	
