@@ -4,11 +4,11 @@
     <div class="">
         <hr class="omb_hrOr">
         <span class="omb_spanOr"></span>
-    </div>
+    </div>  
     <!-- Search, Highest rating, recipes, filter by rating-->
     <p class = mainpage>Welcome to main page. Here you can...</p>
     <form submit.trigger="searchRecipes()">
-        <textarea style="height: 40%; width: 94%" required="required" value.bind="ingredients" type="search" placeholder="separate ingredients with space put ammount in ()..."></textarea>
+        <textarea style="height: 40%; width: 90%" required="required" value.bind="ingredients" type="search" placeholder="separate ingredients with space put ammount in ()..."></textarea>
         <button class="btn btn-success" type="submit" disabled="true">Search</button>
     </form>
 
@@ -29,12 +29,19 @@
                         <div class="col-md-6 product_content">
                             <h3>Author: xxx</h3>
                             <div class="rating">
-                                <large class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</large>
-                                (10 reviews)
+                                <large><span class="stars">
+                                    (10 reviews)
+                                    <i class="glyphicon glyphicon-star"></i>
+                                    <i class="glyphicon glyphicon-star" ></i>
+                                    <i class="glyphicon glyphicon-star" ></i>
+                                    <i class="glyphicon glyphicon-star"  style="color: gold" ></i>
+                                    <i class="glyphicon glyphicon-star"  style="color: gold" ></i>                                   
+                                </span></large>                              
                             </div>
+
                             <div class="row">
-                                <div class=span5><h4>Cooking Time: 3:00</h4></div>
-                                <div class=span5><h4>Preparation Time: 3:00</h4></div>
+                                <div class=span6><h4>Cooking Time: 3:00</h4></div>
+                                <div class=span6><h4>Dish Size: 12 people</h4></div>
                             </div>
                             <div class="row">
                                 <div class=span5>
@@ -88,22 +95,35 @@
         
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="well">
-            <a href="#"><img class="img-circle img-responsive img-center" src="http://placehold.it/350x250" alt=""></a>
+            <a><img class="img-circle img-responsive img-center" src="http://placehold.it/350x250" click.trigger="openModal()" alt=""></a>
             <div class="">  
               <h4 style="text-align: center">Author: xxx</h4>
               <h4 class="">
                   <!-- Trigger/Open The Modal -->
                   <!-- Replace with recipe name -->
-                  <button class="btn btn-success btn-block" id="openRecipeModal" click.trigger="openModal()">Recipe name ${i}</button>
+                  <div style="border-top: 1px solid #eee; font-size: 120%">
+                    <br>
+                  </div>
+                  <a id="openRecipeModal" click.trigger="openModal()">Recipe name ${i}</a>
               </h4>
               <!-- Lorep ipsum must be replaced with description -->
               <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
             </div>
             <div class="">
-              <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+              <small class="text-muted">                            
+                <div class="rating">
+                  <span class="stars">
+                      (10 reviews)
+                      <i class="glyphicon glyphicon-star"></i>
+                      <i class="glyphicon glyphicon-star" ></i>
+                      <i class="glyphicon glyphicon-star" ></i>
+                      <i class="glyphicon glyphicon-star"  style="color: gold" ></i>
+                      <i class="glyphicon glyphicon-star"  style="color: gold" ></i>                                   
+                  </span>                                
+              </div>
+            </small>
             </div>
           </div>
         </div>
     </div>
-
 </template>

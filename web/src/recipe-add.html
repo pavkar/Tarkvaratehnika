@@ -7,7 +7,7 @@
     </div>
 
     <div class = alignleft>
-        <form submit.trigger="recipeInfoCheck()">    
+        <form submit.trigger="openModal()">    
             <div class="row-fluid">
               <div class="span4">
                 
@@ -15,7 +15,7 @@
                 <label><h4>Picture (Optional)</h4></label>
                 <div class="input-group image-preview">
                         <div class="btn btn-default image-preview-input"> 
-                            <input type="file" accept="image/png, image/jpeg" name="input-file-preview" id="recipe-pic">
+                            <input type="file" accept="image/*" name="input-file-preview" id="recipe-pic" file.bind="pictureInput">
                         </div>
                     </span>
                 </div>
@@ -51,12 +51,65 @@
                   <textarea class="form-control" rows="5" id="recipeInstr" style="min-width: 80%" placeholder="preparation description..." required="required" maxlength="554" value.bind="instructions"></textarea> <br>
                   <div class="raw-fluid">
                       <div class="span4">
-                          <button class="btn btn-lg btn-success btn-block" type="submit">Add Recipe</button>
+                          <button class="btn btn-lg btn-success btn-block" type="submit">Show Review</button>
                       </div>
                   </div>
-                  
               </div>
             </div>
         </form>
+    </div>
+
+    <div id="myModal" class="modals-custom">     
+      <div class="modal-content">
+        <div class="modal-header">
+            <a href="#/recipe-add" class="close"><span class="glyphicon glyphicon-remove"></span></a>
+            <h3 class="modal-title">${name}</h3>
+        </div>
+        <!-- Can use style="background-color: #252525; color:white" -->
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-md-6 product_img">
+                    <img src=http://placehold.it/600x500 style="background:url(http://placehold.it/600x500)" class="img-responsive">
+                </div>
+                <div class="col-md-6 product_content">
+                    <h3>Author: xxx</h3>
+
+                    <div class="row">
+                        <div class=span6><h4>Cooking Time: ${timeHourCook}:${timeMinCook}</h4></div>
+                        <div class=span6><h4>Dish Size: ${size} people</h4></div>
+                    </div>
+                    <div class="row">
+                        <div class=span5>
+                          <h4>Ingredients:</h4>
+                          <div repeat.for="ingr of ingredientsReview">
+                            Ingredient ${ingr} <br> <br>
+                          </div>
+                        </div>
+                        <div class=span5>
+                            <h4>Amount:</h4>
+                            <div repeat.for="amount of ingredinetsCheckedAmounts">
+                              ${amount} <input type="text" style="height: 10%; width: 20%" required="required"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!--Preperation guide-->
+                    <!-- TODO change if world is too long then text goues out of the box -->
+                    <h3>Instructions</h3>
+                    <div class="row">
+                      <div class="span6">
+                        <div style="border-top: 1px solid #eee; font-size: 120%">
+                            <p>${instructions}</p> 
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="space-ten"></div>
+                    <!--Add route to make recipe -->
+                    <div class="btn-ground" style="margin-left: 70%">
+                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-arrow-up"></span> Add Recipe</button>
+                    </div>
+            </div>
+        </div>
     </div>
 </template>

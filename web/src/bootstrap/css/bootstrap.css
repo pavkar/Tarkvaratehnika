@@ -7,7 +7,16 @@
  *
  * Designed and built with all the love in the world by @mdo and @fat.
  */
-
+ .stars {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 10px;
+}
+.stars > i:hover:before,
+.stars > i:hover ~ i:before {
+  color: gold;
+  cursor: pointer;
+}
  /* The Modal (background) */
 
 /* Style The Dropdown Button */

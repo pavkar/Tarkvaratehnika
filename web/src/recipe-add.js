@@ -15,20 +15,56 @@ export class RecipeAdd {
         this.ingredientsAmount = "";
         this.instructions = "";
 
+        this.pictureInput = "";
+
     }
 
     myPostData = {
 
     }
     
-   
+    //Splits string in every \n
+    //Checks if amount have something except for digits and replaces them with ""
+    manageReview() {
+      this.ingredientsReview = this.ingredients.split("\n");
+      this.ingredinetsCheckedAmounts = [];
+      var ingredientsAmountReview = this.ingredientsAmount.split("\n");
+
+      for (var ingrIndx = 0; ingrIndx < ingredientsAmountReview.length; ingrIndx++) {
+        var newAmount = "";
+        for (var amount = 0; amount < ingredientsAmountReview[ingrIndx].length; amount++) {
+          if (ingredientsAmountReview[ingrIndx].charCodeAt(amount) > 47 && ingredientsAmountReview[ingrIndx].charCodeAt(amount) < 58) {
+            newAmount += "" + ingredientsAmountReview[ingrIndx].charAt(amount)
+          }
+        }
+        if (newAmount == "") {
+          newAmount = "0";
+        }
+        this.ingredinetsCheckedAmounts.push(newAmount);
+      }
+      this.checkIngredientAmountSize();
+    }
+
+    //Checks amount list be same size as ingredients replaces empty places with 0 and if too much delets
+    checkIngredientAmountSize() {
+      if (this.ingredientsReview.length > this.ingredinetsCheckedAmounts.length) {
+        var needToAdd = this.ingredientsReview.length - this.ingredinetsCheckedAmounts.length;
+        for (var i = 0; i < needToAdd; i++) {
+          this.ingredinetsCheckedAmounts.push("0");
+        }
+      } else if (this.ingredientsReview.length < this.ingredinetsCheckedAmounts.length) {
+        this.ingredinetsCheckedAmounts.length = this.ingredientsReview.length;
+      }
+    }
+    
+    //Prepares data for sending
     recipeInfoCheck() {
         var ingrString = this.ingredients.replace("\n", ",");
         var ingrAmountString = this.ingredientsAmount.replace("\n", ",");
 
-        var inputElement = document.getElementById("recipe-pic").files[0];;
+        var pictureInput = document.getElementById("recipe-pic").files[0];
 
-        console.log(inputElement);
+        console.log(pictureInput);
 
         this.myPostData = {
           "ingredients":ingrString,
@@ -70,6 +106,34 @@ export class RecipeAdd {
       });
    }
 
-   
+  attached() {
+    this.setUpModal();
+  }
+
+  setUpModal() {
+    // Get the modal
+    var modal = document.getElementById('myModal');
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+  }
+
+  openModal() {
+    this.manageReview();
+    var modal = document.getElementById('myModal');
+    modal.style.display = "block";
+  }
     
 }
