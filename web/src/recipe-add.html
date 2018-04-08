@@ -10,14 +10,12 @@
         <form submit.trigger="openModal()">    
             <div class="row-fluid">
               <div class="span4">
-                
                 <!--Picture adding later added preview -->
                 <label><h4>Picture (Optional)</h4></label>
                 <div class="input-group image-preview">
-                        <div class="btn btn-default image-preview-input"> 
-                            <input type="file" accept="image/*" name="input-file-preview" id="recipe-pic" file.bind="pictureInput">
-                        </div>
-                    </span>
+                  <div class="btn btn-default image-preview-input"> 
+                      <input type="file" accept="image/*" name="input-file-preview" id="recipe-pic" file.bind="pictureInput">
+                  </div>
                 </div>
 
                 <label><h4>Dish size</h4></label>
@@ -67,6 +65,7 @@
         </div>
         <!-- Can use style="background-color: #252525; color:white" -->
         <div class="modal-content">
+          <form submit.trigger="manageUnits()">
             <div class="row">
                 <div class="col-md-6 product_img">
                     <img src=http://placehold.it/600x500 style="background:url(http://placehold.it/600x500)" class="img-responsive">
@@ -78,19 +77,28 @@
                         <div class=span6><h4>Cooking Time: ${timeHourCook}:${timeMinCook}</h4></div>
                         <div class=span6><h4>Dish Size: ${size} people</h4></div>
                     </div>
-                    <div class="row">
-                        <div class=span5>
-                          <h4>Ingredients:</h4>
-                          <div repeat.for="ingr of ingredientsReview">
-                            Ingredient ${ingr} <br> <br>
-                          </div>
+                    <div class="row" style="border-top: 2px solid #eee;">
+                      <h4>Ingredients and Amount</h4>
+                      <div repeat.for="ingrNumb of ingredientAmountSize">
+                        <div class="span6">
+                            ${ingredientsReview[ingrNumb]}
                         </div>
-                        <div class=span5>
-                            <h4>Amount:</h4>
-                            <div repeat.for="amount of ingredinetsCheckedAmounts">
-                              ${amount} <input type="text" style="height: 10%; width: 20%" required="required"></input>
+                          <div class="row">
+                            <div class="span6">
+                              ${ingredinetsCheckedAmounts[ingrNumb]}
+                            <div class="span6"> 
+                              <select class="selectpicker" style="height: 10%; width: 85%" required="required" id="ingr-numb${ingrNumb}">
+                                  <option value="kg">Kilogramm</option>
+                                  <option value="g">Gramm</option>
+                                  <option value="l">Lieter</option>
+                                  <option value="dl">Deciliter</option>
+                                  <option value="cups">Cups</option>
+                                  <option value="pieces">Pieces</option>
+                              </select>
+                            </div> 
                             </div>
-                        </div>
+                          </div>
+                      </div>
                     </div>
                     <br>
                     <!--Preperation guide-->
@@ -98,7 +106,7 @@
                     <h3>Instructions</h3>
                     <div class="row">
                       <div class="span6">
-                        <div style="border-top: 1px solid #eee; font-size: 120%">
+                        <div style="border-top: 2px solid #eee; font-size: 120%">
                             <p>${instructions}</p> 
                         </div>
                       </div>
@@ -107,9 +115,10 @@
                     <div class="space-ten"></div>
                     <!--Add route to make recipe -->
                     <div class="btn-ground" style="margin-left: 70%">
-                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-arrow-up"></span> Add Recipe</button>
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-arrow-up"></span> Add Recipe</button>
                     </div>
             </div>
         </div>
+      </form>
     </div>
 </template>

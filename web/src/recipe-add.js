@@ -22,11 +22,27 @@ export class RecipeAdd {
     myPostData = {
 
     }
+
+    manageUnits() {
+      this.ingredientsUnits = [];
+      for (var i = 0; i < this.ingredientAmountSize; i++) {
+        //this.ingredientsUnits += document.getElementById("ingr-numb"+i).value + ",";
+        this.ingredientsUnits.push(document.getElementById("ingr-numb"+i).value);
+      }
+      this.recipeInfoCheck();
+    }
     
     //Splits string in every \n
+    //Checks if ingredients list have any "" empty ingredients
     //Checks if amount have something except for digits and replaces them with ""
     manageReview() {
-      this.ingredientsReview = this.ingredients.split("\n");
+      var ingredientsReviewToCheck = this.ingredients.split("\n");
+      this.ingredientsReview = [];
+      for (var ingrIndx = 0; ingrIndx < ingredientsReviewToCheck.length; ingrIndx++) {
+        if(ingredientsReviewToCheck[ingrIndx] != "") {
+          this.ingredientsReview.push(ingredientsReviewToCheck[ingrIndx]);
+        }
+      }
       this.ingredinetsCheckedAmounts = [];
       var ingredientsAmountReview = this.ingredientsAmount.split("\n");
 
@@ -55,28 +71,39 @@ export class RecipeAdd {
       } else if (this.ingredientsReview.length < this.ingredinetsCheckedAmounts.length) {
         this.ingredinetsCheckedAmounts.length = this.ingredientsReview.length;
       }
+      this.ingredientAmountSize = this.ingredinetsCheckedAmounts.length;
     }
     
     //Prepares data for sending
     recipeInfoCheck() {
-        var ingrString = this.ingredients.replace("\n", ",");
-        var ingrAmountString = this.ingredientsAmount.replace("\n", ",");
+      var ingrString = "";
+      var ingrAmountString = "";
+      var ingrUnitString = "";
+      for (var ingrIndx = 0; ingrIndx < this.ingredientAmountSize; ingrIndx++) {
+        ingrString += this.ingredientsReview[ingrIndx] + ",";
+        ingrAmountString += this.ingredinetsCheckedAmounts[ingrIndx] + ",";
+        ingrUnitString += this.ingredientsUnits[ingrIndx] + ",";
+      }
 
-        var pictureInput = document.getElementById("recipe-pic").files[0];
+      ingrString = ingrString.substring(0, ingrString.length - 1);
+      ingrAmountString = ingrAmountString.substring(0, ingrAmountString.length - 1);
+      ingrUnitString = ingrUnitString.substring(0, ingrUnitString.length - 1);
+      
+      //var pictureInput = document.getElementById("recipe-pic").files[0];
+      //console.log(pictureInput);
 
-        console.log(pictureInput);
-
-        this.myPostData = {
-          "ingredients":ingrString,
-          "amount":ingrAmountString,
-          "name":this.name,
-          "description":this.description,
-          "instructions":this.instructions,
-          "size":parseInt(this.size),
-          "time":this.timeHourCook + ":" + this.timeMinCook
-        }
-        console.log(this.myPostData)
-        //this.postRecipe(this.myPostData)
+      this.myPostData = {
+        "ingredients":ingrString,
+        "amount":ingrAmountString,
+        "unit":ingrUnitString,
+        "name":this.name,
+        "description":this.description,
+        "instructions":this.instructions,
+        "size":parseInt(this.size),
+        "time":this.timeHourCook + ":" + this.timeMinCook
+      }
+      console.log(this.myPostData)
+      //this.postRecipe(this.myPostData)
     }
 	
    postRecipe(myPostData) {
