@@ -26,7 +26,7 @@ class RecipeTests {
 	@Test
 	void testCheckIfIngredientsMatchIncompleteIngredientName() {
 		JSONObject searchedIngredients = new JSONObject("{ingredie:{amount:20.0, unit:cups}, ingredient2:{amount:1, unit:pieces}}");
-		assertFalse(recipe.checkIfMatchesIngredients(searchedIngredients));
+		assertTrue(recipe.checkIfMatchesIngredientsPartly(searchedIngredients));
 	}
 	
 	@Test

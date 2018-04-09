@@ -32,41 +32,6 @@ public class RecipeController {
 		return recipeService.addRecipe(new ExternalRecipe(url));
 	}
 	
-	@RequestMapping(value = "/recipes/object/{id}", method=RequestMethod.GET)
-	public String getRecipe(@PathVariable("id") long id) {
-		return recipeService.getRecipe(id).toString();
-	}
-	
-	// wat
-	@RequestMapping(value = "/recipes/ingredients/{id}", method=RequestMethod.GET)
-	public String getIngredients(@PathVariable("id") long id) {
-		return recipeService.getRecipeIngredients(id);
-	}
-	
-	// wat
-	@RequestMapping(value = "/recipes/instructions/{id}", method=RequestMethod.GET)
-	public String getInstructions(@PathVariable("id") long id) {
-		return recipeService.getRecipeInstructions(id);
-	}
-	
-	// wat
-	@RequestMapping(value = "/recipes/name/{id}", method=RequestMethod.GET)
-	public String getName(@PathVariable("id") long id) {
-		return recipeService.getRecipeName(id);
-	}
-	
-	// wat
-	@RequestMapping(value = "/recipes/time/{id}", method=RequestMethod.GET)
-	public String getTime(@PathVariable("id") long id) {
-		return recipeService.getRecipeTime(id);
-	}
-	
-	// wat
-	@RequestMapping(value = "/recipes/size/{id}", method=RequestMethod.GET)
-	public int getSize(@PathVariable("id") long id) {
-		return recipeService.getRecipeSize(id);
-	}
-	
 	/*
 	 * Tagastab kujul {id number:{instructions:*juhised*, size:*suurus*, name:*nimi*, ingredients:*koostisosad*,
 	 * time:*aeg*}, id number:{jne}}
