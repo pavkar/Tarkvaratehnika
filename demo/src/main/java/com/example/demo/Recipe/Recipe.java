@@ -2,12 +2,17 @@ package com.example.demo.Recipe;
 
 import java.awt.RenderingHints.Key;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.json.JSONObject;
 
@@ -22,23 +27,36 @@ public class Recipe {
 	@GeneratedValue
 	long id;
 	String name;
-
 	String ingredients;
 	String instructions;
+	String descrption;
 	String time;
 	int size;
+	String image;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	Date date;
 
 	private static final double LITRES_IN_CUPS = 20;
 	private static final double DETSILITRES_IN_CUPS = 2;
 	private static final double GRAMS_IN_CUPS = 1.5;
 	private static final double KILOGRAMS_IN_CUPS = 1500;
+	private static final double PINTS_IN_CUPS = 3;
+	private static final double POUNDS_IN_CUPS = 4;
+	private static final double OUNCES_IN_CUPS = 2;
 
 	@Override
 	public String toString() {
 		String recipeJSON = new JSONObject().put("name", name).put("ingredients", ingredients)
-				.put("instructions", instructions).put("time", time).put("size", size).toString();
+				.put("instructions", instructions).put("time", time).put("size", size).put("image", image).
+				put("description", descrption).toString();
 		return recipeJSON;
 	}
+	
+	@PrePersist
+    protected void onCreate() {
+		date = Calendar.getInstance().getTime();
+    }
 
 	private List<String> getAllIngredientsOnlyName() {
 		List<String> onlyNameIngredients = new ArrayList<>();
@@ -46,26 +64,6 @@ public class Recipe {
 			onlyNameIngredients.add(entireData.split(":")[0]);
 		}
 		return onlyNameIngredients;
-	}
-
-	public JSONObject getIngredientsAsJson() {
-		return new JSONObject(this.ingredients);
-	}
-
-	// output: [number, unit]
-	// returns null if does not exist
-	private List<String> getIngredientAmount(String ingredient) {
-		String[] splitAllData = ingredients.split(";");
-		List<String> result = new ArrayList<>();
-		for (String entireData : splitAllData) {
-			if (entireData.contains(ingredient)) {
-				String[] splitIngredientData = entireData.split(":");
-				result.add(splitIngredientData[1]);
-				result.add(splitIngredientData[2]);
-				return result;
-			}
-		}
-		return null;
 	}
 	
 	private static void replaceAmount(JSONObject object, Double newAmount, String newUnit) {
@@ -93,6 +91,12 @@ public class Recipe {
 				calculateAndReplaceAmountToCups(ingredients.getJSONObject(key), GRAMS_IN_CUPS);
 			} else if (ingredients.getJSONObject(key).getString("unit").equals("kg")) {
 				calculateAndReplaceAmountToCups(ingredients.getJSONObject(key), KILOGRAMS_IN_CUPS);
+			} else if (ingredients.getJSONObject(key).getString("unit").contains("pint")) {
+				calculateAndReplaceAmountToCups(ingredients.getJSONObject(key), PINTS_IN_CUPS);
+			} else if (ingredients.getJSONObject(key).getString("unit").contains("pound")) {
+				calculateAndReplaceAmountToCups(ingredients.getJSONObject(key), POUNDS_IN_CUPS);
+			} else if (ingredients.getJSONObject(key).getString("unit").contains("ounce")) {
+				calculateAndReplaceAmountToCups(ingredients.getJSONObject(key), OUNCES_IN_CUPS);
 			}
 		}
 		return ingredients;
@@ -103,16 +107,17 @@ public class Recipe {
 	 * less than or equal to the searched amount (or not specified, i.e. -1), returns true.
 	 * Else returns false; 
 	 */
-	private static boolean contains(JSONObject json, String pattern, double searchedAmount) {
-		for (Object object : json.keySet().toArray()) {
+	private static boolean recipeContains(JSONObject recipeJson, String pattern, double searchedAmount) {
+		JSONObject recipeIngredients = converterToCups(recipeJson);
+		for (Object object : recipeIngredients.keySet().toArray()) {
 			String key = String.valueOf(object);
 			if (key.contains(pattern)) {
-				if (json.getJSONObject(key).getDouble("amount") == -1 ||
-						json.getJSONObject(key).getDouble("amount") <= searchedAmount) {
+				if (recipeIngredients.getJSONObject(key).getDouble("amount") <= 0 ||
+						recipeIngredients.getJSONObject(key).getDouble("amount") <= searchedAmount ||
+						searchedAmount <= 0) {
 					return true;
 				}
 			}
-			
 		}
 		return false;
 	}
@@ -125,11 +130,11 @@ public class Recipe {
 	 */
 	public boolean checkIfMatchesIngredientsPartly(JSONObject ingredients) {
 		JSONObject searchedIngredients = converterToCups(ingredients);
-		JSONObject recipeIngredients = converterToCups(this.getIngredientsAsJson());
+		JSONObject recipeIngredients = new JSONObject(this.ingredients);
 		
 		for (Object object : searchedIngredients.keySet().toArray()) {
 			String key = String.valueOf(object);
-			if (!contains(searchedIngredients, key, 
+			if (!recipeContains(recipeIngredients, key, 
 					searchedIngredients.getJSONObject(key).getDouble("amount"))) {
 				return false;
 			}
@@ -175,6 +180,10 @@ public class Recipe {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+	
+	public void setDescription(String description) {
+		this.descrption = description;
 	}
 
 }
