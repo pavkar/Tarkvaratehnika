@@ -1,5 +1,6 @@
 package com.example.demo.Recipe;
 
+import java.awt.RenderingHints.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -96,29 +97,40 @@ public class Recipe {
 		}
 		return ingredients;
 	}
-
+	
+	/*
+	 * Searches for a key that includes the pattern. If found and the required amount is
+	 * less than or equal to the searched amount (or not specified, i.e. -1), returns true.
+	 * Else returns false; 
+	 */
+	private static boolean contains(JSONObject json, String pattern, double searchedAmount) {
+		for (Object object : json.keySet().toArray()) {
+			String key = String.valueOf(object);
+			if (key.contains(pattern)) {
+				if (json.getJSONObject(key).getDouble("amount") == -1 ||
+						json.getJSONObject(key).getDouble("amount") <= searchedAmount) {
+					return true;
+				}
+			}
+			
+		}
+		return false;
+	}
+	
 	/*
 	 * Argumendi formaat: {ingredient1:{amount:*number*, unit:*unit*},
 	 * ingredient2:{jne}} Kui kogust pole m2rgitud, siis peab amount -1 olema.
-	 * yhikute teisendust on vaja muuta, sest see ei arvesta sellega, kui yks asi on g ja teine on kg
-	 * 
+	 * yhikute teisendust on vaja muuta, sest see ei arvesta sellega, kui yks asi on g ja teine on kg.
+	 * TODO: testi, kas k6ik on ok, kui unit on tyhi.
 	 */
-	public boolean checkIfMatchesIngredients(JSONObject ingredients) {
+	public boolean checkIfMatchesIngredientsPartly(JSONObject ingredients) {
 		JSONObject searchedIngredients = converterToCups(ingredients);
 		JSONObject recipeIngredients = converterToCups(this.getIngredientsAsJson());
 		
-		/*
-		 * for each ingredient if not in recipe return false 
-		 * else if searched ingredient amount is -1 (i.e. not specified) continue;
-		 * else if searched amount < needed amount return false 
-		 * after loop return true
-		 */
 		for (Object object : searchedIngredients.keySet().toArray()) {
 			String key = String.valueOf(object);
-			if (!recipeIngredients.keySet().contains(key)) return false;
-			else if (searchedIngredients.getJSONObject(key).getDouble("amount") == -1) continue;
-			else if (searchedIngredients.getJSONObject(key).getDouble("amount") < 
-					recipeIngredients.getJSONObject(key).getDouble("amount")){
+			if (!contains(searchedIngredients, key, 
+					searchedIngredients.getJSONObject(key).getDouble("amount"))) {
 				return false;
 			}
 		}

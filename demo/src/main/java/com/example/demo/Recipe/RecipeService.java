@@ -86,7 +86,7 @@ public class RecipeService {
 		JSONObject json = new JSONObject(ingredients);
 		List<Long> ids = new ArrayList<>();
 		recipeRepository.findAll().forEach(recipe -> {
-			if (recipe.checkIfMatchesIngredients(json)) {
+			if (recipe.checkIfMatchesIngredientsPartly(json)) {
 				ids.add(recipe.id);
 			}
 		});
