@@ -6,10 +6,17 @@
         <span class="omb_spanOr"></span>
     </div>  
     <!-- Search, Highest rating, recipes, filter by rating-->
-    <p class = mainpage>Welcome to main page. Here you can...</p>
+    <p class = mainpage><h3>Search bar</h3></p>
     <form submit.trigger="searchRecipes()">
-        <textarea style="height: 40%; width: 90%" required="required" value.bind="ingredients" type="search" placeholder="separate ingredients with space put ammount in ()..."></textarea>
-        <button class="btn btn-success" type="submit" disabled="true">Search</button>
+        <textarea style="height: 40%; width: 90%" required="required" value.bind="ingredients" type="search" placeholder="separate ingredients with space put amount in ()..."></textarea>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="dropdown">
+            <button class="btn btn-success">Searc by</button>
+              <div class="dropdown-content">
+                <button class="btn" type="submit">Name</button>
+                <button class="btn" type="submit">Ingredient</button>
+              </div>
+        </div>
     </form>
 
       <!-- The Modal -->
@@ -41,7 +48,7 @@
 
                             <div class="row">
                                 <div class=span6><h4>Cooking Time: 3:00</h4></div>
-                                <div class=span6><h4>Dish Size: 12 people</h4></div>
+                                <div class=span6><h4>Amount of Dishes: 12</h4></div>
                             </div>
                             <div class="row">
                                 <div class=span5>
@@ -53,7 +60,7 @@
                                 <div class=span5>
                                     <h4>Amount:</h4>
                                     <div repeat.for="i of 10">
-                                      ${i}${i}
+                                      ${i}${i} Kg
                                     </div>
                                 </div>
                             </div>
