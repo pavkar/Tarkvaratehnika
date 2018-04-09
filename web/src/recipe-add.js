@@ -76,26 +76,20 @@ export class RecipeAdd {
     
     //Prepares data for sending
     recipeInfoCheck() {
-      var ingrString = "";
-      var ingrAmountString = "";
-      var ingrUnitString = "";
+      var ingredientsJson = {};
       for (var ingrIndx = 0; ingrIndx < this.ingredientAmountSize; ingrIndx++) {
-        ingrString += this.ingredientsReview[ingrIndx] + ",";
-        ingrAmountString += this.ingredinetsCheckedAmounts[ingrIndx] + ",";
-        ingrUnitString += this.ingredientsUnits[ingrIndx] + ",";
+        var ingrDescr = {};
+        ingrDescr["amount"] = this.ingredinetsCheckedAmounts[ingrIndx];
+        ingrDescr["unit"] = this.ingredientsUnits[ingrIndx];
+        ingredientsJson[this.ingredientsReview[ingrIndx]] = ingrDescr;
       }
-
-      ingrString = ingrString.substring(0, ingrString.length - 1);
-      ingrAmountString = ingrAmountString.substring(0, ingrAmountString.length - 1);
-      ingrUnitString = ingrUnitString.substring(0, ingrUnitString.length - 1);
       
+      console.log(ingredientsJson);
       //var pictureInput = document.getElementById("recipe-pic").files[0];
       //console.log(pictureInput);
 
       this.myPostData = {
-        "ingredients":ingrString,
-        "amount":ingrAmountString,
-        "unit":ingrUnitString,
+        "ingredients":ingredientsJson,
         "name":this.name,
         "description":this.description,
         "instructions":this.instructions,
@@ -107,7 +101,7 @@ export class RecipeAdd {
     }
 	
    postRecipe(myPostData) {
-      httpClient.fetch('http://localhost:9000/', {
+      httpClient.fetch('http://localhost:9000/recipes/add ', {
          method: "POST",
          body: JSON.stringify(myPostData)
       })

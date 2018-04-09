@@ -14,7 +14,7 @@
         <button class="btn btn-danger btn-circle">Googel+</button>
         <button class="btn btn-primary btn-circle">Facebook</button>
         <button class="btn btn-info btn-circle">Twitter</button>
-        <div class="dropdown" style="margin-left:75%">
+        <div class="dropdown" style="position: absolute; left:85%;">
             <button class="btn btn-success">Manage Profile</button>
               <div class="dropdown-content">
                 <button class="btn" click.trigger="logOut()">Log Out</button>
@@ -42,7 +42,8 @@
               </div>
       <!--Sidebar ends -->
       <div class="span1">
-          <button class="btn btn-lg" id="sideBarButton" style="display: none" click.trigger="manageSideBar()">☰</button>
+        <!-- Button manages sidebar (visible or not) style="display: none; position: fixed; Use this to fix position -->
+          <button class="btn btn-lg" id="sideBarButton" style="display: none;" click.trigger="manageSideBar()">☰</button>
       </div>
       <div class="span10 well">
         <router-view></router-view>

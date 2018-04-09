@@ -42,7 +42,7 @@
                     </div>
                     <div class="span5">
                         <label><h4>Ingredients amount</h4></label>
-                        <textarea class="form-control" rows="5" id="recipeIngr" style="min-width: 80%" placeholder="place amount on same line with ingredients" required="required" maxlength="554" value.bind="ingredientsAmount"></textarea> <br>
+                        <textarea class="form-control" rows="5" id="recipeIngrAm" style="min-width: 80%" placeholder="place amount on same line with ingredients" required="required" maxlength="554" value.bind="ingredientsAmount"></textarea> <br>
                     </div>
                   </div>
                   <label><h4>Preparation Description</h4></label>
@@ -88,7 +88,7 @@
                               ${ingredinetsCheckedAmounts[ingrNumb]}
                             <div class="span6"> 
                               <select class="selectpicker" style="height: 10%; width: 85%" required="required" id="ingr-numb${ingrNumb}">
-                                  <option value="kg">Kilogramm</option>
+                                  <option value="kg">Kilogram</option>
                                   <option value="g">Gramm</option>
                                   <option value="l">Lieter</option>
                                   <option value="dl">Deciliter</option>
@@ -114,7 +114,7 @@
 
                     <div class="space-ten"></div>
                     <!--Add route to make recipe -->
-                    <div class="btn-ground" style="margin-left: 70%">
+                    <div class="btn-ground" style="position: absolute; left: 65%">
                         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-arrow-up"></span> Add Recipe</button>
                     </div>
             </div>

@@ -8,13 +8,12 @@
     <!-- Search, Highest rating, recipes, filter by rating-->
     <p class = mainpage><h3>Search bar</h3></p>
     <form submit.trigger="searchRecipes()">
-        <textarea style="height: 40%; width: 90%" required="required" value.bind="ingredients" type="search" placeholder="separate ingredients with space put amount in ()..."></textarea>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <div class="dropdown">
-            <button class="btn btn-success">Searc by</button>
+        <textarea style="height: 40%; width: 90%; right:84%;" required="required" value.bind="ingredients" type="search" placeholder="separate ingredients with space put amount in ()..."></textarea>
+        <div class="dropdown" style="position: absolute; left:84%;">
+            <button class="btn btn-success">Search by</button>
               <div class="dropdown-content">
-                <button class="btn" type="submit">Name</button>
-                <button class="btn" type="submit">Ingredient</button>
+                <button class="btn btn-lg" type="submit">Name</button>
+                <button class="btn btn-lg" type="submit">Ingredient</button>
               </div>
         </div>
     </form>
