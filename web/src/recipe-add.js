@@ -19,14 +19,24 @@ export class RecipeAdd {
 
     }
 
-    myPostData = {
-
+    //Manage uplodaed picture fix preview
+    managePicture() {
+      var preview = document.querySelector('img');
+      var file    = document.getElementById("recipe-pic").files[0];
+      var reader  = new FileReader();
+    
+      reader.addEventListener("load", function () {
+        preview.src = reader.result;
+      }, false);
+    
+      if (file) {
+        reader.readAsDataURL(file);
+      }
     }
 
     manageUnits() {
       this.ingredientsUnits = [];
       for (var i = 0; i < this.ingredientAmountSize; i++) {
-        //this.ingredientsUnits += document.getElementById("ingr-numb"+i).value + ",";
         this.ingredientsUnits.push(document.getElementById("ingr-numb"+i).value);
       }
       this.recipeInfoCheck();
@@ -36,6 +46,7 @@ export class RecipeAdd {
     //Checks if ingredients list have any "" empty ingredients
     //Checks if amount have something except for digits and replaces them with ""
     manageReview() {
+      this.managePicture();
       var ingredientsReviewToCheck = this.ingredients.split("\n");
       this.ingredientsReview = [];
       for (var ingrIndx = 0; ingrIndx < ingredientsReviewToCheck.length; ingrIndx++) {
@@ -84,7 +95,7 @@ export class RecipeAdd {
         ingredientsJson[this.ingredientsReview[ingrIndx]] = ingrDescr;
       }
       
-      console.log(ingredientsJson);
+      //console.log(ingredientsJson);
       //var pictureInput = document.getElementById("recipe-pic").files[0];
       //console.log(pictureInput);
 

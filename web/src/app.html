@@ -11,11 +11,12 @@
   <div class="fixed-top row-fluid">
     <div class="panel" style="background-color: white;">
       <div class="panel-heading">
-        <button class="btn btn-danger btn-circle">Googel+</button>
         <button class="btn btn-primary btn-circle">Facebook</button>
         <button class="btn btn-info btn-circle">Twitter</button>
+        <button class="btn btn-danger btn-circle">Googel+</button>
         <div class="dropdown" style="position: absolute; left:85%;">
-            <button class="btn btn-success">Manage Profile</button>
+            <h3 hidden="${loggedIn}">Logged in as: ${userName}</h3>
+            <button class="btn btn-success" click.trigger=" getStatus()">Manage Profile</button>
               <div class="dropdown-content">
                 <button class="btn" click.trigger="logOut()">Log Out</button>
                 <button class="btn" click.trigger="profileInfo()">Profile Info</button>

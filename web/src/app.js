@@ -10,7 +10,38 @@ export class App {
     this.header = 'Navigation';
     this.content = 'Page info';
     this.clicked = false;
+    this.loggedIn = true;
     console.log(Dependency);
+  }
+
+  getToken() {
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        this.loggedIn = false;
+        this.accessToken = response.authResponse.accessToken;
+      }
+      this.getName();
+    } );
+  }
+
+  getStatus() {
+    this.getName();
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+            console.log("We are logged in");
+        } else if (response.status === 'not_authorized') {
+            console.log("Not logged in");
+        } else {
+            console.log("You are not logged into Facebook");
+        }
+    });
+  }
+
+  getName() {
+    FB.api('/me', function(response) {
+      console.log(JSON.stringify(response));
+      this.userName = response["name"];
+    });
   }
 
   updateContent() {
@@ -71,14 +102,15 @@ export class App {
   }
 
   attached() {
-      this.manageSideBar();
-      window.onscroll = function() {
-        if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
-        document.getElementById("scrollBtn").style.display = "block";
+    this.manageSideBar();
+    window.onscroll = function() {
+      if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+      document.getElementById("scrollBtn").style.display = "block";
         
     } else {
         document.getElementById("scrollBtn").style.display = "none";
     }};
+    this.getToken()
   }
 
   detached(argument) {
