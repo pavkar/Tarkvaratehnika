@@ -100,12 +100,13 @@ export class RecipeAdd {
       //console.log(pictureInput);
 
       this.myPostData = {
-        "ingredients":ingredientsJson,
+        "ingredients":JSON.stringify(ingredientsJson),
         "name":this.name,
         "description":this.description,
         "instructions":this.instructions,
         "size":parseInt(this.size),
-        "time":this.timeHourCook + ":" + this.timeMinCook
+        "time":this.timeHourCook + ":" + this.timeMinCook,
+        "image":"polje"
       }
       console.log(this.myPostData)
       //this.postRecipe(this.myPostData)

@@ -67,6 +67,33 @@ export class Home {
       var modal = document.getElementById('myModal');
       modal.style.display = "block";
     }
+
+    /* Search for all recipies*/
+    getRecipiesAll() {     
+      httpClient.fetch('localhost:8080/recipies/all')
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+      });
+    }
+
+    /* Variable this.filterName is name of recipe */
+    getRecipesByName() {     
+      httpClient.fetch('localhost:8080/search/name/' + this.filterName)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+      });
+    }
+
+    /* Variable this.filterIngredients is json of ingredients {ingredient1:{amount:number, unit:unit}, ingredient2:{jne}}*/
+    getRecipesByIngredients() {
+      httpClient.fetch('localhost:8080/search/ingredients/' + this.filterIngredients)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      });
+  }
     
 }
 
