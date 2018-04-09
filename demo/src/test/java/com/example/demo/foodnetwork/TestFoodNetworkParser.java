@@ -1,6 +1,6 @@
 package com.example.demo.foodnetwork;
 
-import com.example.demo.allrecipes.AllRecipesParser;
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,7 +49,7 @@ public class TestFoodNetworkParser {
     }
 
     @Test
-    public void testFoodNetworkIngredients() {
+    public void testFoodNetworkIngredients() throws JSONException {
         String ingredients = "good olive oil:2:tablespoons; good bacon or pancetta, diced:4:ounces; (3 to 4-pound) " +
                 "chicken, cut in 8ths:1; Kosher salt and freshly ground black pepper; carrots, cut diagonally in " +
                 "1-inch pieces:1/2:pound; yellow onion, sliced:1; chopped garlic:1:teaspoon; Cognac or good " +

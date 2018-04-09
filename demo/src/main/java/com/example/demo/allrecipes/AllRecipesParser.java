@@ -1,13 +1,17 @@
 package com.example.demo.allrecipes;
 
 import com.example.demo.parsers.GeneralIngredientsParser;
+import com.example.demo.parsers.RecipeTemplate;
+import org.json.JSONException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.example.demo.parsers.RecipeTemplate;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +118,7 @@ public class AllRecipesParser implements RecipeTemplate {
     }
 
     @Override
-    public String getIngredients() {
+    public String getIngredients() throws JSONException {
         return ingredientParser.getIngredients(getUnParsedIngreds());
     }
 }

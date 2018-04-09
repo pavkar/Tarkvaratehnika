@@ -2,7 +2,7 @@ package com.example.demo.foodnetwork;
 
 import com.example.demo.parsers.GeneralIngredientsParser;
 import com.example.demo.parsers.RecipeTemplate;
-
+import org.json.JSONException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -83,7 +82,7 @@ public class FoodNetworkParser implements RecipeTemplate {
     }
 
     @Override
-    public String getIngredients() {
+    public String getIngredients() throws JSONException {
         return ingredientsParser.getIngredients(getUnParsedIngreds());
     }
 

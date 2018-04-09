@@ -1,20 +1,16 @@
 package com.example.demo.allrecipes;
 
-import org.jsoup.nodes.Document;
+import org.json.JSONException;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class TestAllRecipesParser {
@@ -51,15 +47,6 @@ public class TestAllRecipesParser {
     @Test
     public void testAllRecipesGetOriginalAuthor() {
         assertEquals("suzette", parser.getOriginalAuthor());
-    }
-
-    @Test
-    public void testAllRecipesIngredients() {
-        String ingredients = "olive oil:3:tablespoons; pork loin chops:4; seasoning salt to taste; " +
-                "black pepper to taste; garlic powder to taste; poultry seasoning:1/2:teaspoon; " +
-                "Worcestershire sauce:3:tablespoons; (8 ounce) container frozen apple cider concentrate, undiluted:1; " +
-                "dry sherry:1/4:cup";
-        assertEquals(ingredients, parser.getIngredients());
     }
 
     @Test

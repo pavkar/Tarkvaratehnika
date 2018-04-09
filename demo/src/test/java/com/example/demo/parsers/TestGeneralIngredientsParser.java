@@ -1,96 +1,92 @@
 package com.example.demo.parsers;
 
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TestGeneralIngredientsParser {
 
     GeneralIngredientsParser parser;
     private List<String> ingredient;
-    private StringBuilder builder;
+    private List<String> units;
 
     @Before
     public void createGeneralParserObject() {
-        builder = new StringBuilder();
         parser = new GeneralIngredientsParser();
-    }
-
-
-    @Test
-    public void testValidateIngredientsExistsInList() {
-        List<String> units = Arrays.asList("cup", "teaspoon");
-        assertTrue(parser.validateIngredients("teaspoon", units));
+        units = new MeasurementUnits().getMeasurementUnits();
     }
 
     @Test
-    public void testValidateIngredientUnitNotExists() {
-        List<String> units = Arrays.asList("cup", "teaspoon");
-        assertFalse(parser.validateIngredients("big", units));
+    public void testUnitInList() {
+        ingredient = Arrays.asList("1", "cup", "of sugar");
+        assertEquals(Arrays.asList("1", "cups", "of sugar"), parser.validateInMeasurementUnitList(ingredient, units));
     }
 
     @Test
-    public void testValidateIngredientUnitNoUnits() {
-        List<String> units = new ArrayList<>();
-        assertFalse(parser.validateIngredients("cup", units));
+    public void testUnitNotInList() {
+        ingredient = Arrays.asList("1", "big", "apple");
+        assertEquals(Arrays.asList("1", "NU", "big apple"), parser.validateInMeasurementUnitList(ingredient, units));
     }
 
     @Test
-    public void testSecondElementIsMeasurementUnit() {
-        ingredient = Arrays.asList("1", "cup", "white sugar");
-        parser.secondElementMeasureUnit(builder, ingredient);
-        assertEquals("white sugar:1:cup", builder.toString());
+    public void testNameContainsUnit() {
+        ingredient = Arrays.asList("1", "big", "and nice bottle of wine");
+        assertEquals(Arrays.asList("1", "bottles", "big and nice bottle of wine"), parser
+                .validateInMeasurementUnitList(ingredient, units));
     }
 
     @Test
-    public void testTwoElementsInIngredient() {
-        ingredient = Arrays.asList("1", "apple");
-        parser.secondElementMeasureUnit(builder, ingredient);
-        assertEquals("apple:1", builder.toString());
+    public void testSecondElementNotToOrOr() {
+        ingredient = Arrays.asList("1", "cup", "of sugar");
+        assertEquals(ingredient, parser.secondElementIsToOr(ingredient));
     }
 
     @Test
-    public void testSecondElementNotMeasurementUnit() {
-        ingredient = Arrays.asList("1", "big", "onion");
-        parser.secondElementMeasureUnit(builder, ingredient);
-        assertEquals("big onion:1", builder.toString());
+    public void testIngredientOnlyTwoElements() {
+        ingredient = Arrays.asList("1", "paprika");
+        assertEquals(Arrays.asList("1", "NU", "paprika"), parser.validateInMeasurementUnitList(ingredient, units));
+    }
+
+    @Test
+    public void testJsonConversion() throws JSONException {
+        ingredient = Arrays.asList("1", "cup", "of sugar");
+        assertEquals("{\"of sugar\":{\"amount\":1,\"unit\":\"cup\"}}", parser.getIngredientsAsJson(ingredient));
     }
 
     @Test
     public void testSecondElementIsTo() {
         ingredient = Arrays.asList("1", "to", "2 tablespoons of sugar");
-        assertEquals(Arrays.asList("1 to 2", "tablespoons", "of sugar"), parser.secondElementIsToOr(ingredient));
+        assertEquals(Arrays.asList("1", "tablespoons", "of sugar"), parser.secondElementIsToOr(ingredient));
     }
 
     @Test
     public void testSecondElementOr() {
         ingredient = Arrays.asList("1", "or", "2 teaspoons of coffee");
-        assertEquals(Arrays.asList("1 or 2", "teaspoons", "of coffee"), parser.secondElementIsToOr(ingredient));
+        assertEquals(Arrays.asList("1", "teaspoons", "of coffee"), parser.secondElementIsToOr(ingredient));
     }
 
     @Test
-    public void testSecondElementIsDigit() {
-        ingredient = Arrays.asList("1", "1/4", "cups of milk");
-        assertEquals(Arrays.asList("1 1/4", "cups", "of milk"), parser.secondElementDigit(ingredient));
+    public void testFractionConversion() {
+        assertEquals("0.25", parser.fractionToDouble("1/4"));
     }
 
     @Test
-    public void testAddSemicolonAndSpaceBetweenIngredsAndExtractAmounts() {
-        assertEquals("of milk:1:cup; of coffee:2 to 3:teaspoons",
-                parser.getIngredients(Arrays.asList("1 cup of milk", "2 to 3 teaspoons of coffee")));
+    public void testTotalFractionConversion() {
+        ingredient = Arrays.asList("1", "0.5", "cups of sugar");
+        assertEquals(Arrays.asList("1.5", "cups", "of sugar"), parser.getTotalFraction(ingredient));
     }
 
     @Test
-    public void testAddSemicolonEndOfIngredNoExtraction() {
-        assertEquals("Kosher salt; cinnamon to taste;",
-                parser.getIngredients(Arrays.asList("Kosher salt", "cinnamon to taste")));
+    public void testTotalFractionConversionBothFractions() {
+        ingredient = Arrays.asList("0.5", "0.5", "cups of sugar");
+        assertEquals(Arrays.asList("1.0", "cups", "of sugar"), parser.getTotalFraction(ingredient));
     }
 
     @Test
@@ -98,5 +94,29 @@ public class TestGeneralIngredientsParser {
         MeasurementUnits units = new MeasurementUnits();
         units.addUnit("pinch");
         assertEquals("pinch", units.getMeasurementUnits().get(units.getMeasurementUnits().size() - 1));
+    }
+
+    @Test
+    public void testNormalIngredGetter() throws JSONException {
+        ingredient = Collections.singletonList("1 cup of sugar");
+        assertEquals("{\"of sugar\":{\"amount\":1,\"unit\":\"cups\"}}", parser.getIngredients(ingredient));
+    }
+
+    @Test
+    public void testFirstElFractionGetter() throws JSONException {
+        ingredient = Collections.singletonList("1/2 cups of sugar");
+        assertEquals("{\"of sugar\":{\"amount\":0.5,\"unit\":\"cups\"}}", parser.getIngredients(ingredient));
+    }
+
+    @Test
+    public void testSecondElFractionGetter() throws JSONException {
+        ingredient = Collections.singletonList("1 1/2 cups of sugar");
+        assertEquals("{\"of sugar\":{\"amount\":1.5,\"unit\":\"cups\"}}", parser.getIngredients(ingredient));
+    }
+
+    @Test
+    public void testNoUnitNoAmountGetter() throws JSONException {
+        ingredient = Collections.singletonList("Kosher salt");
+        assertEquals("{\"Kosher salt\":{\"amount\":1,\"unit\":\"NU\"}}", parser.getIngredients(ingredient));
     }
 }
