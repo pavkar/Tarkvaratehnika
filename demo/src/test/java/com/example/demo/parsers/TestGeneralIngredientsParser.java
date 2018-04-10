@@ -108,4 +108,11 @@ public class TestGeneralIngredientsParser {
         assertEquals("{\"of sugar\":{\"amount\":1.5,\"unit\":\"cups\"}}", parser.getIngredients(ingredient));
     }
 
+    @Test
+    public void testMultipleIngredients() throws JSONException {
+        ingredient = Arrays.asList("1 cup of sugar", "2 bottles of beer");
+        assertEquals("{\"of sugar\":{\"amount\":1,\"unit\":\"cups\"},\"of beer\":{\"amount\":2,\"unit\":\"bottles\"}}",
+                parser.getIngredients(ingredient));
+    }
+
 }
