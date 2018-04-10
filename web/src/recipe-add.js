@@ -1,6 +1,6 @@
 import {HttpClient, json} from 'aurelia-fetch-client';
-
 let httpClient = new HttpClient();
+
 export class RecipeAdd {
     constructor() {
         this.header = "Add Recipes";
@@ -106,21 +106,22 @@ export class RecipeAdd {
         "instructions":this.instructions,
         "size":parseInt(this.size),
         "time":this.timeHourCook + ":" + this.timeMinCook,
-        "image":"polje"
+        "image":"notaimage.jpg"
       }
       console.log(this.myPostData)
-      //this.postRecipe(this.myPostData)
+      this.postRecipe(this.myPostData)
     }
 	
    postRecipe(myPostData) {
-      httpClient.fetch('http://localhost:9000/recipes/add ', {
-         method: "POST",
-         body: JSON.stringify(myPostData)
-      })
-      .then(response => response.json())
-      .then(data => {
-         console.log(data);
-      });
+    httpClient.fetch('http://localhost:8080/recipes/add', {
+        method: "POST",
+        body: JSON.stringify(myPostData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        this.notifyUserAboutSuccessfulUpload();
+    });
    }
 
    myUpdateData = {
@@ -128,7 +129,7 @@ export class RecipeAdd {
    }
 	
    updateData(myUpdateData) {
-      httpClient.fetch('http://jsonplaceholder.typicode.com/posts/1', {
+      httpClient.fetch('', {
          method: "PUT",
          body: JSON.stringify(myUpdateData)
       })
@@ -167,6 +168,24 @@ export class RecipeAdd {
     this.manageReview();
     var modal = document.getElementById('myModal');
     modal.style.display = "block";
+  }
+
+  notifyUserAboutSuccessfulUpload() {
+    this.timeHourCook = "";
+    this.timeMinCook = "";
+    this.size = 0;
+
+    this.name = "";
+    this.description = "";
+    this.ingredients = "";
+    this.ingredientsAmount = "";
+    this.instructions = "";
+
+    document.getElementById("recipe-pic").value = "";
+    var modal = document.getElementById('myModal');
+    modal.style.display = "none";
+
+    alert("Upload Successful");
   }
     
 }

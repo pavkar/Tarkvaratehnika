@@ -20,28 +20,7 @@ export class App {
         this.loggedIn = false;
         this.accessToken = response.authResponse.accessToken;
       }
-      this.getName();
     } );
-  }
-
-  getStatus() {
-    this.getName();
-    FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-            console.log("We are logged in");
-        } else if (response.status === 'not_authorized') {
-            console.log("Not logged in");
-        } else {
-            console.log("You are not logged into Facebook");
-        }
-    });
-  }
-
-  getName() {
-    FB.api('/me', function(response) {
-      console.log(JSON.stringify(response));
-      this.userName = response["name"];
-    });
   }
 
   updateContent() {
@@ -110,7 +89,7 @@ export class App {
     } else {
         document.getElementById("scrollBtn").style.display = "none";
     }};
-    this.getToken()
+    //this.getToken()
   }
 
   detached(argument) {

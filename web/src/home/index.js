@@ -1,3 +1,5 @@
+import {HttpClient, json} from 'aurelia-fetch-client';
+let httpClient = new HttpClient();
 
 export class Home {
     constructor() {
@@ -32,10 +34,12 @@ export class Home {
 
     attached() {
       this.setUpModal();
+      getRecipiesAll()
     }
 
     setUpModal() {
       console.log("created");
+      
       // Get the modal
       var modal = document.getElementById('myModal');
 
@@ -70,28 +74,31 @@ export class Home {
 
     /* Search for all recipies*/
     getRecipiesAll() {     
-      httpClient.fetch('localhost:8080/recipies/all')
+      httpClient.fetch('http://localhost:8080/recipies/all')
       .then(response => response.json())
       .then(data => {
-          console.log(data);
+        console.log(data);
+        this.dataToShow = data;
       });
     }
 
     /* Variable this.filterName is name of recipe */
     getRecipesByName() {     
-      httpClient.fetch('localhost:8080/search/name/' + this.filterName)
+      httpClient.fetch('http://localhost:8080/search/name/' + this.filterName)
       .then(response => response.json())
       .then(data => {
-          console.log(data);
+        console.log(data);
+        this.dataToShow = data;
       });
     }
 
     /* Variable this.filterIngredients is json of ingredients {ingredient1:{amount:number, unit:unit}, ingredient2:{jne}}*/
     getRecipesByIngredients() {
-      httpClient.fetch('localhost:8080/search/ingredients/' + this.filterIngredients)
+      httpClient.fetch('http://localhost:8080/search/ingredients/' + this.filterIngredients)
       .then(response => response.json())
       .then(data => {
         console.log(data);
+        this.dataToShow = data;
       });
   }
     
