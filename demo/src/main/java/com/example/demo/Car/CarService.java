@@ -1,4 +1,4 @@
-package com.example.demo.Car;
+package com.example.demo.car;
 
 import java.util.List;
 
