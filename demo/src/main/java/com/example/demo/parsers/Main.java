@@ -15,18 +15,18 @@ public class Main {
 
         List<String> words = new ArrayList<>();
         //words.addAll(Arrays.asList("2", "small", "tablespoon of good sugar"));
-        words.addAll(Arrays.asList("1", "to", "2 cups of sugar"));
-        GeneralIngredientsParser parser = new GeneralIngredientsParser();
-        //System.out.println(words);
-        //System.out.println(parser.getIngredientsAsJson(words));
-        List<String> listOfWords = new ArrayList<>();
-        //listOfWords.add("2 small tablespoons of good sugar");
-        //listOfWords.add("1 to 2 cups of sugar");
-        //listOfWords.add("Kosher salt");
-        listOfWords.add("1 apple");
-        System.out.println(parser.getIngredients(listOfWords));
-        System.out.println(allRecipesParser.getIngredients());
-        System.out.println(foodParser.getIngredients());
+//        words.addAll(Arrays.asList("1", "to", "2 cups of sugar"));
+//        GeneralIngredientsParser parser = new GeneralIngredientsParser();
+//        //System.out.println(words);
+//        //System.out.println(parser.getIngredientsAsJson(words));
+//        List<String> listOfWords = new ArrayList<>();
+//        //listOfWords.add("2 small tablespoons of good sugar");
+//        //listOfWords.add("1 to 2 cups of sugar");
+//        //listOfWords.add("Kosher salt");
+//        listOfWords.add("1 apple");
+//        System.out.println(parser.getIngredients(listOfWords));
+//        System.out.println(allRecipesParser.getIngredients());
+//        System.out.println(foodParser.getIngredients());
 //        System.out.println(foodParser.getDocument());
 //        System.out.println(foodParser.getTitle());
 //        System.out.println(foodParser.getOriginalSource());
@@ -42,7 +42,7 @@ public class Main {
 //        System.out.println(allRecipesParser.getOriginalAuthor());
 //        System.out.println(allRecipesParser.getPrepTime());
 //        System.out.println(allRecipesParser.getServings());
-//        System.out.println(allRecipesParser.getIngredients());
+        System.out.println(allRecipesParser.getIngredients());
 //        System.out.println(allRecipesParser.getInstructions());
 
 //        GeneralIngredientsParser parser = new GeneralIngredientsParser();

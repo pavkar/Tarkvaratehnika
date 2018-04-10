@@ -102,9 +102,6 @@ public class GeneralIngredientsParser {
             }
             allIngredients.add(ingredData);
         }
-        System.out.println(ingredData);
-        System.out.println(allIngredients);
-
         return getIngredientsAsJson(allIngredients);
     }
 

@@ -58,6 +58,19 @@ public class TestAllRecipesParser {
         assertEquals(ingreds, parser.getUnParsedIngreds());
     }
 
+
+    @Test
+    public void testGetIngredientsAsJson() throws JSONException {
+        String ingred = "{" +
+                "\"garlic powder to taste\":{\"amount\":1,\"unit\":\"NU\"}," +
+                "\"Worcestershire sauce\":{\"amount\":3,\"unit\":\"tablespoons\"}," +
+                "\"olive oil\":{\"amount\":3,\"unit\":\"tablespoons\"}," +
+                "\"dry sherry\":{\"amount\":0.25,\"unit\":\"cups\"}," +
+                "\"poultry seasoning\":{\"amount\":0.5,\"unit\":\"teaspoons\"}," +
+                "\"(8 ounce) container frozen apple cider concentrate, undiluted\":{\"amount\":1,\"unit\":\"ounces\"}}";
+        assertEquals(ingred, parser.getIngredients());
+    }
+
     @Test
     public void testAllRecipesInstructions() {
         String instructions = "Preheat oven to 375 degrees F (190 degrees C).\nHeat olive oil in a large oven-safe " +
