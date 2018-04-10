@@ -12,15 +12,15 @@ public class GeneralIngredientsParser {
         units = new MeasurementUnits();
     }
 
-    boolean validateIngredients(String ingredientUnit, List<String> units) {
-        for (String unit : units) {
-            if (unit.contains(ingredientUnit)) { return true; }
+    private boolean validateIngredients(String ingredient) {
+        for (String unit : units.getMeasurementUnits()) {
+            if (unit.contains(ingredient)) { return true; }
         }
         return false;
     }
 
-    void secondElementMeasureUnit(StringBuilder allIngredients, List<String> words) {
-        if (validateIngredients(words.get(1), units.getMeasurementUnits())) {
+    private void secondElementMeasureUnit(StringBuilder allIngredients, List<String> words) {
+        if (validateIngredients(words.get(1))) {
             allIngredients.append(words.get(2)).append(":").append(words.get(0)).append(":").append(words.get(1));
         } else if (words.size() == 2){
             allIngredients.append(words.get(1)).append(":").append(words.get(0));
@@ -29,32 +29,28 @@ public class GeneralIngredientsParser {
         }
     }
 
-    List<String> secondElementIsToOr(List<String> words) {
+    private void secondElementIsToOr(List<String> words) {
         if (words.get(1).equals("to") | words.get(1).equals("or")) {
             List<String> newWords = new ArrayList<>();
             newWords.add(words.get(0));
             newWords.add(words.get(1));
-            newWords.addAll(Arrays.asList(words.get(2).split(" ", 3)));
-            //System.out.println(newWords);
+            newWords.addAll(Arrays.asList(words.get(2).split(" ")));
             String quantity = newWords.get(0) + " " + newWords.get(1) + " " + newWords.get(2);
-            List<String> newList = Arrays.asList(quantity, newWords.get(3), newWords.get(4));
-            //System.out.println(newList);
-            words = newList;
-            //System.out.println(words);
+            words.clear();
+            words.add(quantity);
+            words.add(newWords.get(3));
+            words.add(newWords.get(4));
         }
-        return words;
     }
 
-    List<String> secondElementDigit(List<String> words) {
+    private void secondElementDigit(List<String> words) {
         if (Character.isDigit(words.get(1).substring(0, 1).toCharArray()[0])) {
             String quantity = words.get(0) + " " + words.get(1);
             List<String> unitAndName = Arrays.asList(words.get(2).split(" ", 2));
-            List<String> newWords = new ArrayList<>();
-            newWords.add(quantity);
-            newWords.addAll(unitAndName);
-            words = newWords;
+            words.clear();
+            words.add(quantity);
+            words.addAll(unitAndName);
         }
-        return words;
     }
 
     public String getIngredients(List<String> getUnParsedIngreds) {
@@ -68,10 +64,10 @@ public class GeneralIngredientsParser {
                 List<String> words = new ArrayList<>(Arrays.asList(ingredient.split(" ", 3)));
 
                 // If the second elements starts with a digit
-                words = secondElementDigit(words);
+                secondElementDigit(words);
 
                 // If the second element is "to"
-                words = secondElementIsToOr(words);
+                secondElementIsToOr(words);
 //
                 // If the second element is in the list of measurement units
                 secondElementMeasureUnit(allIngredients, words);
@@ -84,7 +80,7 @@ public class GeneralIngredientsParser {
                 allIngredients.append(ingredient).append("; ");
             }
         }
-        return allIngredients.toString().trim();
+        return allIngredients.toString();
     }
 
 }
