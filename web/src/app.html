@@ -3,19 +3,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <require from = "./components/custom-component.html"></require>
   <require from = "./bootstrap/css/bootstrap.css"></require>
-  <require from = "./bootstrap/css/bootstrap.min.css"></require>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <require from = "navigation.html"></require> <!--My .html file -->
   
   <!--Top page -->
   <div class="fixed-top row-fluid">
-    <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-      
+    <div class="panel" style="background-color: white;">
+      <div class="panel-heading">
+        <button class="btn btn-primary btn-circle">Facebook</button>
+        <button class="btn btn-info btn-circle">Twitter</button>
+        <button class="btn btn-danger btn-circle">Googel+</button>
+        <div class="dropdown" style="position: absolute; left:85%;">
+            <h3 hidden="${loggedIn}">Logged in as: ${userName}</h3>
+            <button class="btn btn-success" click.trigger=" getStatus()">Manage Profile</button>
+              <div class="dropdown-content">
+                <button class="btn" click.trigger="logOut()">Log Out</button>
+                <button class="btn" click.trigger="profileInfo()">Profile Info</button>
+                <button class="btn" click.trigger="managePreferences()">Manage Preferences</button>
+              </div>
+        </div>
+        </div>
+      </div>
     </div>
   </div>
   <!--Page Info -->
   <div class="container-fluid" id="page-content-wrapper">
-    <div class="row-fluid page-content inset" >
+    <div class="row-fluid page-content inset">
       <div id="wrapper" class="active">  
           <!-- Sidebar -->
               <div id="sidebar-wrapper">
@@ -27,13 +41,18 @@
                       <navigation router.bind="router" id="navigation" ></navigation>
                   </ul>
               </div>
+      <!--Sidebar ends -->
+      <div class="span1">
+        <!-- Button manages sidebar (visible or not) style="display: none; position: fixed; Use this to fix position -->
+          <button class="btn btn-lg" id="sideBarButton" style="display: none;" click.trigger="manageSideBar()">☰</button>
       </div>
-      <div class="span2">
-          <button class="btn btn-lg" id="sideBarButton" style="display: none" click.trigger="manageSideBar()">☰</button>
-      </div>
-      <div class="span9 well well-lg">
+      <div class="span10 well">
         <router-view></router-view>
+        
       </div>
     </div>
+    </div>
   </div>
+
+  <button class="btn btn-success" click.trigger="topFunction()" id="scrollBtn"><span class="glyphicon glyphicon-arrow-up"></span></button>
 </template>

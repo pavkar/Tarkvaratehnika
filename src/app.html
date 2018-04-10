@@ -1,49 +1,33 @@
+
 <template>
-    <ul repeat.for="nav of router.navigation">
-        <li class="${nav.isActive ? 'active' : ''}"><a href.bind="nav.href">${nav.title}</a></li>
-    </ul>
-    <router-view></router-view>
-  <!-- <h1>${message}</h1> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <require from = "./components/custom-component.html"></require>
+  <require from = "./bootstrap/css/bootstrap.css"></require>
+  <require from = "./bootstrap/css/bootstrap.min.css"></require>
+  <require from = "navigation.html"></require> <!--My .html file -->
 
-    <!-- <script>
-      console.log("Hehehehehehehkaswjkdef");
-      document.getElementById('status').innerHTML = "Mamamamamama"
-      // document.getElementById('status').innerHTML = "Mamama";
-      // window.fbAsyncInit = function() {
-      //   FB.init({
-      //     appId            : '1555636977846703',
-      //     autoLogAppEvents : true,
-      //     xfbml            : true,
-      //     version          : 'v2.12'
-      //   });
+  <!--Top page -->
+  <div class="fixed-top row-fluid">
+    <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+      
+    </div>
+  </div>
 
-      //   FB.getLoginStatus(function(response)) {
-      //     if (response.status === 'connected') {
-      //       console.log("Hahahah");
-      //       document.getElementById('status').innerHTML = 'We are connected!';
-      //     } else if (response.status === 'not_authorized') {
-      //       document.getElementById('status').innerHTML = 'Not connected'
-      //     }
-      //   }
-      // };
-    
-      // (function(d, s, id){
-      //    var js, fjs = d.getElementsByTagName(s)[0];
-      //    if (d.getElementById(id)) {return;}
-      //    js = d.createElement(s); js.id = id;
-      //    js.src = "https://connect.facebook.net/en_US/sdk.js";
-      //    fjs.parentNode.insertBefore(js, fjs);
-      //  }(document, 'script', 'facebook-jssdk'));
-    </script> -->
-<!-- 
-    <div>
-      <p id='status'>Hellooooo</p>
-      <a route-href="route: login">Login</a> <br>
+  <!--Page Info -->
+  <div class="container-fluid">
+    <div class="row-fluid" >
+      <div class="well">
+        <div class="span2">
+            <div class="btn btn-lg" click.trigger="manage_sideBar()">☰</div>
+            <navigation router.bind="router" id="navigation" style="display:none;z-index:2;width:40%;min-width:300px"></navigation>
+        </div>
       </div>
+      <div class="span1">
+      </div>
+      <div class="span9 well">
+        <router-view></router-view>
+      </div>
+    </div>
+  </div>
 
-      <a route-href="route: login">Here you can click!</a>
-       -->
-  
-
-  </body>
 </template>

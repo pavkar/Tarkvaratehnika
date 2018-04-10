@@ -1,20 +1,81 @@
+import {inject} from 'aurelia-framework';
+import {Dependency} from './dependecy';
+import {Redirect} from 'aurelia-router';
+
+@inject(Dependency)
+
 export class App {
+
   constructor() {
-    this.message = 'Hello World!';
+    this.header = 'Navigation';
+    this.content = 'Page info';
+    console.log(Dependency);
   }
 
-
+  updateContent() {
+    this.header = 'New Cool Name'
+    this.content = 'New Content'
+  }
 
   configureRouter(config, router) {
     this.router = router;
-    config.title = 'My Aurelia';
+    config.title = 'Aurelia Recipe App';
     config.map([
-      { route: ['', 'home'],       name: 'home',       moduleId: 'home/index' },
-      { route: 'login',            name: 'login',      moduleId: 'login', nav: true, title: 'login' },
-      { route: 'test1',            name: 'test1',      moduleId: 'test1', nav: true, title: 'test1' },
-      { route: 'app',            name: 'app',      moduleId: 'app', title: 'login' },
-    
+      { route: ['', 'home'],       name: 'home',       moduleId: 'home/index', title: 'Main Page', nav: true },
+      { route: 'login', name: 'login', moduleId: 'login', title: 'Log In', nav: true },
+      { route: 'registration', name: 'registration', moduleId: 'registration', title: 'Registration', nav: true },
+      { route: 'fridge', name: 'fridge', moduleId: 'fridge', title: 'Fridge', nav: true, settings: { roles: ['admin']} },
+      { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', title: 'Add Recipe', nav: true },
+
     ]);
+  }
+  manage_sideBar() {
+    if (document.getElementById("navigation").style.display == "block") {
+      this.close_sideBar();
+    } else {
+      this.open_sideBar();
+    }
+  }
+
+  open_sideBar() {
+    document.getElementById("navigation").style.display = "block";
+  }
+  
+  close_sideBar() {
+      document.getElementById("navigation").style.display = "none";
+  }
+  
+
+  created(owningView, myView) {
+    // Invoked once the component is created...
+  }
+
+  bind(bindingContext, overrideContext) {
+      // Invoked once the databinding is activated...
+  }
+
+  attached(argument) {
+      // Invoked once the component is attached to the DOM...
+  }
+
+  detached(argument) {
+      // Invoked when component is detached from the dom
+  }
+
+  unbind(argument) {
+      // Invoked when component is unbound...
   }
 }
 
+  class AuthorizeStep {
+    run(navigationInstruction, next) {
+      if (navigationInstruction.getAllInstructions().some(i => i.config.settings.auth)) {
+        var isLoggedIn = false; // insert magic here;
+        if (!isLoggedIn) {
+          return next.cancel(new Redirect('login'));
+        }
+      }
+
+      return next();
+    }
+}

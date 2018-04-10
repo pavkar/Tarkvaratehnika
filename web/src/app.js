@@ -10,10 +10,18 @@ export class App {
     this.header = 'Navigation';
     this.content = 'Page info';
     this.clicked = false;
+    this.loggedIn = true;
     console.log(Dependency);
   }
 
-  
+  getToken() {
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        this.loggedIn = false;
+        this.accessToken = response.authResponse.accessToken;
+      }
+    } );
+  }
 
   updateContent() {
     this.header = 'New Cool Name'
@@ -29,7 +37,7 @@ export class App {
       { route: 'registration', name: 'registration', moduleId: 'registration', title: 'Registration', nav: true },
       { route: 'fridge', name: 'fridge', moduleId: 'fridge', title: 'Fridge', nav: false, settings: { roles: ['admin']} },
       { route: 'recipe-add', name: 'recipe-add', moduleId: 'recipe-add', title: 'Add Recipe', nav: false, },
-
+      { route: 'recipe-view/:id', name: 'recipe-view', moduleId: 'recipe-view', title: 'recipe view', nav: false, },
     ]);
   }
 
@@ -58,7 +66,12 @@ export class App {
   hide_sideBarButton() {
     document.getElementById("sideBarButton").style.display = "none";
   }
-  
+
+  // When the user clicks on the button, scroll to the top of the document
+  topFunction() {
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
   created(owningView, myView) {
     // Invoked once the component is created...
   }
@@ -67,8 +80,16 @@ export class App {
       // Invoked once the databinding is activated...
   }
 
-  attached(argument) {
-      // Invoked once the component is attached to the DOM...
+  attached() {
+    this.manageSideBar();
+    window.onscroll = function() {
+      if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+      document.getElementById("scrollBtn").style.display = "block";
+        
+    } else {
+        document.getElementById("scrollBtn").style.display = "none";
+    }};
+    //this.getToken()
   }
 
   detached(argument) {
@@ -78,6 +99,7 @@ export class App {
   unbind(argument) {
       // Invoked when component is unbound...
   }
+  
 
 }
 
@@ -94,5 +116,7 @@ export class App {
 
       return next();
     }
+
+    
 }
 

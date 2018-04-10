@@ -1,42 +1,162 @@
 
 <template>
     <div class="logo"><h1>${header}</h1></div>
+    <!-- Testig place for image
+    <button click.trigger="managePicture()">BTN</button>
+    <div class="btn btn-default image-preview-input"> 
+        <input type="file" accept="image/*" name="inputtest" id="test" file.bind="pictureInput">
+    </div>
+
+    <a href="${pictureInput}" download> link</a>
+  -->
     <div class="" >
         <hr class="omb_hrOr">
         <span class="omb_spanOr"></span>
     </div>
 
     <div class = alignleft>
-        <form submit.trigger="recipeInfoCheck()">    
+        <form submit.trigger="openReviewModal()">    
             <div class="row-fluid">
               <div class="span4">
-                <label><h4>Input Recipe Name</h4></label>
-                <input type="text" style="min-width: 20%" required="required" maxlength="25" value.bind="name"> <br>
-                <label><h4>Select Ingredients</h4></label>
-                <select multiple class="form-control" id="ingredientOptions" style="height: 100%" required="required" value.bind="ingredientsSelected">
-                    <option repeat.for="ingredient of ingredientsList"
-                            value.bind="ingredient">
-                        ${ingredient}
-                    </option>
-                </select>
-                <label><h4>Input people number</h4></label>
+                <!--Picture adding later added preview -->
+                <label><h4>Picture (Optional)</h4></label>
+                <div class="input-group image-preview">
+                  <div class="btn btn-default image-preview-input"> 
+                      <input type="file" accept="image/*" name="input-file-preview" id="recipe-pic" file.bind="pictureInput">
+                  </div>
+                </div>
+
+                <label><h4>Dish size</h4></label>
                 <!-- ^[1-9][0-9]* Cannot start with 0. Numbers only-->
-                <input type="text" style="width: 45%" required="required" min="1" maxlength="20" pattern="^[1-9][0-9]*" value.bind="size"> <br>
-
-                <label><h4>Input preparation time</h4></label>
-                <!-- [0-9]{1,2} Numbers only 1 or 2 numbers in field-->
-                <h5>Hours: <input type="text" pattern="[0-9]{1,2}" maxlength="2" class="numberInput"  required="required" value.bind="timeHour"> 
-                Minutes: <input type="text" pattern="[0-9]{1,2}" maxlength="2"class="numberInput" required="required" value.bind="timeMin"> </h5> <br>
+                <p><input type="text" style="width: 45%; height: 20%;" required="required" min="1" maxlength="20" pattern="^[1-9][0-9]*" value.bind="size"></p>
                 
-
+                <label><h4>Cooking time</h4></label>
+                <!-- [0-9]{1,2} Numbers only 1 or 2 numbers in field-->
+                <h5>Hours: <input type="text" pattern="[0-9]{1,2}" maxlength="2" style="height: 20%; width: 20%" required="required" value.bind="timeHourCook"> 
+                Minutes: <input type="text" pattern="[0-9]{1,2}" maxlength="2" style="height: 20%; width: 20%" required="required" value.bind="timeMinCook"> </h5> <br>
               </div>
               <div class="span1"></div>
               <div class="span7">
-                  <label><h4>Input Description</h4></label>
-                  <textarea class="form-control" rows="15" id="recipeDescription" style="min-width: 80%" required="required" maxlength="254" value.bind="instructions"></textarea> <br>
-                  <button type="submit">Add Recipe</button>
+                  <label><h4>Recipe Name</h4></label>
+                  <p><input type="text" style="height: 20%; width: 80%" required="required" maxlength="25" value.bind="name"></p>
+                  
+                  <label><h4>Description</h4></label>
+                  <textarea class="form-control" rows="3" id="recipeDescr" style="min-width: 80%" placeholder="recipe description..." required="required" maxlength="254" value.bind="description"></textarea> <br>
+                  
+                  <div class=row-fluid>
+                    <div class="span7">
+                      <label><h4>Ingredients</h4></label>
+                      <textarea class="form-control" rows="5" id="recipeIngr" style="min-width: 80%" placeholder="place ingredients on new line" required="required" maxlength="554" value.bind="ingredients"></textarea> <br>
+                    </div>
+                    <div class="span5">
+                        <label><h4>Ingredients amount</h4></label>
+                        <textarea class="form-control" rows="5" id="recipeIngrAm" style="min-width: 80%" placeholder="place amount on same line with ingredients" required="required" maxlength="554" value.bind="ingredientsAmount"></textarea> <br>
+                    </div>
+                  </div>
+                  <label><h4>Preparation description</h4></label>
+                  <textarea class="form-control" rows="5" id="recipeInstr" style="min-width: 80%" placeholder="preparation description..." required="required" maxlength="554" value.bind="instructions"></textarea> <br>
+                  <div class="raw-fluid">
+                      <div class="span4">
+                          <button class="btn btn-lg btn-success btn-block" type="submit">Show Review</button>
+                      </div>
+                  </div>
               </div>
             </div>
         </form>
     </div>
+
+    <div class="logo"><h1>Add through URL</h1></div>
+    <div class="" >
+        <hr class="omb_hrOr">
+        <span class="omb_spanOr"></span>
+    </div>
+    <form submit.trigger="addUrl()">        
+      <input type="text" style="width: 80%; height: 80%;" required="required" value.bind="urlToSend">
+      <button class="btn btn-lg btn-success" type="submit">Add Url</button>
+    </form>
+
+
+    <!-- Modal for review -->
+    <div id="modalReview" class="modals-custom">     
+      <div class="modal-content">
+        <div class="modal-header">
+            <a href="#/recipe-add" class="close"><span class="glyphicon glyphicon-remove"></span></a>
+            <h3 class="modal-title">${name}</h3>
+        </div>
+        <!-- Can use style="background-color: #252525; color:white" -->
+        <div class="modal-content">
+          <form submit.trigger="manageUnits()">
+            <div class="row">
+                <div class="col-md-6 product_img">
+                    <h2><img src="" height="600" width="350" alt="Image is not selected"> </h2>
+                </div>
+                <div class="col-md-6 product_content">
+                    <h3>Author: xxx</h3>
+
+                    <div class="row">
+                        <div class=span6><h4>Cooking Time: ${timeHourCook}:${timeMinCook}</h4></div>
+                        <div class=span6><h4>Amount of dishes: ${size}</h4></div>
+                    </div>
+                    <div class="row" style="border-top: 2px solid #eee;">
+                      <h4>Ingredients and Amount</h4>
+                      <div repeat.for="ingrNumb of ingredientAmountSize">
+                        <div class="span6">
+                            ${ingredientsReview[ingrNumb]}
+                        </div>
+                          <div class="row">
+                            <div class="span6">
+                              ${ingredinetsCheckedAmounts[ingrNumb]}
+                            <div class="span6"> 
+                              <select class="selectpicker" style="height: 10%; width: 85%" required="required" id="ingr-numb${ingrNumb}">
+                                  <option value="kg">Kilogram</option>
+                                  <option value="g">Gram</option>
+                                  <option value="l">Liter</option>
+                                  <option value="dl">Deciliter</option>
+                                  <option value="cups">Cups</option>
+                                  <option value="pieces">Pieces</option>
+                              </select>
+                            </div> 
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <br>
+                    <!--Preperation guide-->
+                    <!-- TODO change if world is too long then text goues out of the box -->
+                    <h3>Instructions</h3>
+                    <div class="row">
+                      <div class="span6">
+                        <div style="border-top: 2px solid #eee; font-size: 120%">
+                            <p>${instructions}</p> 
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="space-ten"></div>
+                    <!--Add route to make recipe -->
+                    <div class="btn-ground" style="position: absolute; left: 65%">
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-arrow-up"></span> Add Recipe</button>
+                    </div>
+            </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal to add URL -->
+    <div id="modalUrl" class="modals-custom">     
+        <div class="modal-content">
+          <div class="modal-header">
+              <a href="#/recipe-add" class="closeUrlModal"><span class="glyphicon glyphicon-remove"></span></a>
+              <h3 class="modal-title">Add Url from another webpage</h3>
+          </div>
+          <!-- Can use style="background-color: #252525; color:white" -->
+          <div class="modal-content">
+            <form submit.trigger="addUrl()">
+                <input id="myURL" name="myURL" type="text"
+                value="http://www.example.com">
+            </form>
+          </div>
+        </div>
+    </div>
+    
 </template>
