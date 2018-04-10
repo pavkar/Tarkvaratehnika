@@ -85,6 +85,7 @@ export class Home {
       .then(data => {
         console.log(data);
         this.dataToShow = data;
+        this.manageDataToShow();
       });
     }
 
@@ -104,6 +105,7 @@ export class Home {
       .then(data => {
         console.log(data);
         this.dataToShow = data;
+        this.manageDataToShow();
       });
     }
 
@@ -121,17 +123,17 @@ export class Home {
       });
     }
 
-  /*        "id1": 
-      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"milk and donut","ingredients":"{egg:{amount:2, unit:pieces}, milk:{amount:1.5, unit:l}}","description":"idk","time":"02:22"}, 
-        "id2": 
-      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"milk and donut","ingredients":"{egg:{amount:2, unit:pieces}, milk:{amount:1.5, unit:l}}","description":"idk","time":"00:10"}
-      } */
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  //TODO make as one object (additional class)
   manageDataToShow() {
     var keys = Object.keys(this.dataToShow);
 
     this.avaibleRecipiesNumb = keys.length;
     this.recipeName = [];
-    this.description = [];
+    this.descriptions = [];
     this.instructions = [];
     this.dishSize = [];
     this.ingredients = [];
@@ -139,38 +141,19 @@ export class Home {
 
     console.log(keys);
     keys.forEach(recipeKey => {
-      this.recipeName.push(this.dataToShow[recipeKey]["name"]);
-      this.description.push(this.dataToShow[recipeKey]["description"]);
-      this.instructions.push(this.dataToShow[recipeKey]["instructions"]);
+      this.recipeName.push(this.capitalizeFirstLetter(this.dataToShow[recipeKey]["name"]));
+      this.descriptions.push(this.capitalizeFirstLetter(this.dataToShow[recipeKey]["description"]));
+      this.instructions.push(this.capitalizeFirstLetter(this.dataToShow[recipeKey]["instructions"]));
       this.dishSize.push(this.dataToShow[recipeKey]["size"]);
       this.ingredients.push(this.dataToShow[recipeKey]["ingredients"]);
       this.timeToPrepare.push(this.dataToShow[recipeKey]["time"]);
     });
 
-    console.log(this.recipeName);
-    console.log(this.avaibleRecipiesNumb);
-    console.log( this.description );
-    console.log( this.instructions );
-    console.log( this.dishSize );
-    console.log( this.ingredients );
-    console.log( this.timeToPrepare );
-
     this.manageIngredientsJson();
   }
 
   manageIngredientsJson() {
-    this.ingredients.forEach(ingredient => {
-      var ingredientFixed = ingredient.split("}, ")
-      ingredientFixed.forEach(ingredientSplit0 => {
-        var ingrFix1 = ingredientSplit0.split(":{");
-        ingrFix1.forEach(ingredientSplit1 => {
-          ingredientSplit1 = ingredientSplit1.replace(/}/g, "");
-          ingredientSplit1 = ingredientSplit1.replace(/{/g, "");
-          console.log(ingredientSplit1);
-        });
-      });
-      //console.log(ingredientFixed);
-    });
+    
   }
     
 }

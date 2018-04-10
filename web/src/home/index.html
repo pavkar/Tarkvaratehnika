@@ -64,7 +64,8 @@
                             </div>
                             <!--Preperation guide-->
                             <br>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <h2 style="border-bottom: 2px solid #eee;" >Instructions</h2>
+                            <p>${instructions[openedModalIndex]}</p>
                             <div class="space-ten"></div>
                             <!--Add route to make recipe -->
                             <div class="btn-ground">
@@ -112,7 +113,7 @@
                   <a id=${i} click.trigger="openModal($event.target)" onmouseover="" style="cursor: pointer;" >${recipeName[i]}</a>
               </h4>
               <!-- Lorep ipsum must be replaced with description -->
-              <p class="">${description[i]}</p>
+              <p class="">${descriptions[i]}</p>
             </div>
             <div class="">
               <small class="text-muted">                            
