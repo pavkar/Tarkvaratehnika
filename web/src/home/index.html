@@ -6,9 +6,10 @@
         <span class="omb_spanOr"></span>
     </div>  
     <!-- Search, Highest rating, recipes, filter by rating-->
-    <p class = mainpage><h3>Search bar</h3></p>
+    <p ><h3 style="text-align: center">Search bar...</h3></p>
     <form>
-        <textarea style="height: 40%; width: 90%; right:84%;" required="required" value.bind="searchRecipies" type="search" placeholder="separate ingredients with space put amount in ()..."></textarea>
+        <input style="height: 80%; width: 90%; right:84%;" required="required" value.bind="searchRecipies" type="search"
+        placeholder="separate ingredients with space put amount in () several ingredients separete with coma (,). For Example: bread (2 kg), milk (1 l)..."></textarea>
         <div class="dropdown" style="position: absolute; left:84%;">
             <button class="btn btn-success">Search by</button>
               <div class="dropdown-content">
@@ -51,7 +52,7 @@
                             <div class="row">
                                 <div class=span5>
                                   <h4>Ingredients:</h4>
-                                  <div repeat.for="ingrName of ${ingredientNames[openedModalIndex]}">
+                                  <div repeat.for="ingrName of ingredientNames[openedModalIndex]">
                                     ${ingrName}
                                   </div>
                                 </div>

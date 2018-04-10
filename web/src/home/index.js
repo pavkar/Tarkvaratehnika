@@ -6,25 +6,16 @@ export class Home {
       this.author = "";
       this.date = "";
       this.searchRecipies = "";
+
       this.commentText = "";
       this.comments = [];
-      this.dataToShow = {
-        "id1": 
-      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"milk and milk","ingredients":"{egg:{amount:92, unit:pieces}, milk:{amount:8.5, unit:l}, water:{amount:8.5, unit:l}}","description":"Lahe description","time":"02:22"}, 
-        "id2": 
-      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"donut and donut","ingredients":"{egg:{amount:12, unit:pieces}, milk:{amount:6.5, unit:l}}","description":"Cool description","time":"00:52"},
-      "id3": 
-      {"instructions":"ylo","image":"egg.jpg","size":5,"name":"donut and ","ingredients":"{egg:{amount:25, unit:pieces}, milk:{amount:0.5, unit:l}}","description":"Cool description","time":"00:02"}
-    }
-    this.manageIngredientsJson();
-      //this.manageDataToShow();
-      //this.getRecipiesAll();
-      //setInterval(() => this.setUpModal(), 1000);
+
+      this.dataToShow = {};
+      this.getRecipiesAll();
     }
 
     addComment() {
       this.authorNoName = "Anon";
-      //this.setDate();
       this.comments.push(this.commentText);
     }
 
@@ -42,14 +33,9 @@ export class Home {
 
     attached() {
       this.setUpModal();
-      //this.manageDataToShow();
-      //console.log(this.dataToShow)
-      //this.getRecipiesAll();
-      //console.log(this.dataToShow[0]);
     }
 
     setUpModal() {
-      console.log("created");
 
       // Get the modal
       var modal = document.getElementById('myModal');
@@ -90,12 +76,11 @@ export class Home {
       });
     }
 
-    searchRecipies() {
-      console.log(this.searchRecipies)
-    }
     /* Should modify if needed more advanced search for example several names */
     searchByName() {
-      this.getRecipesByName(this.searchRecipies.replace(" ", ""));
+      if (this.searchRecipies != "") {
+        this.getRecipesByNe(this.searchRecipies.replace(" ", ""));
+      }
     }
 
     /* Variable recipeName is name of recipe */
@@ -111,8 +96,39 @@ export class Home {
     }
 
     searchByIngredients() {
+      if (this.searchRecipies != "") {
+        if (this.searchRecipies.charAt(this.searchRecipies.length - 1) == " ") {
+          this.searchRecipies = this.searchRecipies.slice(0, this.searchRecipies.length - 1);
+        }
+        let jsonToSend = {}
+        console.log(this.searchRecipies);
+        this.searchRecipies.split(",").forEach(searchparameter => {
+          if (searchparameter.charAt(0) == " ") {
+            searchparameter = searchparameter.slice(1);
+          }
 
+          var jsonAmountAndUnit = {};
+
+          searchparameter = searchparameter.replace(" (", "|");
+          searchparameter = searchparameter.replace(")", "");
+          searchparameter = searchparameter.split("|");
+
+          jsonAmountAndUnit["amount"] = searchparameter[1].split(" ")[0];
+          jsonAmountAndUnit["unit"] = searchparameter[1].split(" ")[1];
+
+          jsonToSend[searchparameter[0]] = jsonAmountAndUnit;
+        });
+
+        let stringToSend = "{";
+        let keys = Object.keys(jsonToSend);
+        keys.forEach(key => {
+          stringToSend += key + ":{amount:" + jsonToSend[key]["amount"] + ", unit:" + jsonToSend[key]["unit"] + "}, "
+        });
+        stringToSend = stringToSend.slice(0, stringToSend.length - 2) + "}";
+        this.getRecipesByIngredients(stringToSend);
+      } 
     }
+
     /* Variable ingredientsToSearch is json of ingredients {ingredient1:{amount:number, unit:unit}, ingredient2:{jne}}*/
     getRecipesByIngredients(ingredientsToSearch) {
       httpClient.fetch('http://localhost:8080/search/ingredients/' + ingredientsToSearch)
@@ -150,8 +166,8 @@ export class Home {
       this.ingredients.push(parsedRecipe["ingredients"]);
       this.timeToPrepare.push(parsedRecipe["time"]);
     });
-
     this.manageIngredientsJson();
+
   }
 
   manageIngredientsJson() {
