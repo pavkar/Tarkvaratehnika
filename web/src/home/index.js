@@ -10,10 +10,12 @@ export class Home {
       this.comments = [];
       this.dataToShow = {
         "id1": 
-      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"milk and milk","ingredients":"{egg:{amount:2, unit:pieces}, milk:{amount:1.5, unit:l}}","description":"Lahe description","time":"02:22"}, 
+      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"milk and milk","ingredients":"{egg:{amount:92, unit:pieces}, milk:{amount:8.5, unit:l}, water:{amount:8.5, unit:l}}","description":"Lahe description","time":"02:22"}, 
         "id2": 
-      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"donut and donut","ingredients":"{egg:{amount:2, unit:pieces}, milk:{amount:1.5, unit:l}}","description":"Cool description","time":"00:52"}
-      }
+      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"donut and donut","ingredients":"{egg:{amount:12, unit:pieces}, milk:{amount:6.5, unit:l}}","description":"Cool description","time":"00:52"},
+      "id3": 
+      {"instructions":"ylo","image":"egg.jpg","size":5,"name":"donut and ","ingredients":"{egg:{amount:25, unit:pieces}, milk:{amount:0.5, unit:l}}","description":"Cool description","time":"00:02"}
+    }
       this.manageDataToShow();
       //this.getRecipiesAll();
       //setInterval(() => this.setUpModal(), 1000);
@@ -136,13 +138,13 @@ export class Home {
     this.timeToPrepare = [];
 
     console.log(keys);
-    keys.forEach(element => {
-      this.recipeName.push(this.dataToShow[element]["name"]);
-      this.description.push(this.dataToShow[element]["description"]);
-      this.instructions.push(this.dataToShow[element]["instructions"]);
-      this.dishSize.push(this.dataToShow[element]["size"]);
-      this.ingredients.push(this.dataToShow[element]["ingredients"]);
-      this.timeToPrepare.push(this.dataToShow[element]["time"]);
+    keys.forEach(recipeKey => {
+      this.recipeName.push(this.dataToShow[recipeKey]["name"]);
+      this.description.push(this.dataToShow[recipeKey]["description"]);
+      this.instructions.push(this.dataToShow[recipeKey]["instructions"]);
+      this.dishSize.push(this.dataToShow[recipeKey]["size"]);
+      this.ingredients.push(this.dataToShow[recipeKey]["ingredients"]);
+      this.timeToPrepare.push(this.dataToShow[recipeKey]["time"]);
     });
 
     console.log(this.recipeName);
@@ -153,6 +155,22 @@ export class Home {
     console.log( this.ingredients );
     console.log( this.timeToPrepare );
 
+    this.manageIngredientsJson();
+  }
+
+  manageIngredientsJson() {
+    this.ingredients.forEach(ingredient => {
+      var ingredientFixed = ingredient.split("}, ")
+      ingredientFixed.forEach(ingredientSplit0 => {
+        var ingrFix1 = ingredientSplit0.split(":{");
+        ingrFix1.forEach(ingredientSplit1 => {
+          ingredientSplit1 = ingredientSplit1.replace(/}/g, "");
+          ingredientSplit1 = ingredientSplit1.replace(/{/g, "");
+          console.log(ingredientSplit1);
+        });
+      });
+      //console.log(ingredientFixed);
+    });
   }
     
 }
