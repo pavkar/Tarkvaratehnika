@@ -25,6 +25,8 @@ public class Main {
         //listOfWords.add("Kosher salt");
         listOfWords.add("1 apple");
         System.out.println(parser.getIngredients(listOfWords));
+        System.out.println(allRecipesParser.getIngredients());
+        System.out.println(foodParser.getIngredients());
 //        System.out.println(foodParser.getDocument());
 //        System.out.println(foodParser.getTitle());
 //        System.out.println(foodParser.getOriginalSource());

@@ -50,14 +50,23 @@ public class TestFoodNetworkParser {
 
     @Test
     public void testFoodNetworkIngredients() throws JSONException {
-        String ingredients = "good olive oil:2:tablespoons; good bacon or pancetta, diced:4:ounces; (3 to 4-pound) " +
-                "chicken, cut in 8ths:1; Kosher salt and freshly ground black pepper; carrots, cut diagonally in " +
-                "1-inch pieces:1/2:pound; yellow onion, sliced:1; chopped garlic:1:teaspoon; Cognac or good " +
-                "brandy:1/4:cup; (375 ml) good dry red wine such as Burgundy:1/2:bottle; good chicken stock, " +
-                "preferably homemade:1:cup; fresh thyme sprigs:10; unsalted butter, at room temperature, " +
-                "divided:2:tablespoons; all-purpose flour:1 1/2:tablespoons; frozen small whole onions:1/2:pound; " +
-                "cremini mushrooms, stems removed and thickly sliced:1/2:pound";
-        assertEquals(ingredients, parser.getIngredients());
+        String ingr = "" +
+                "{\"good olive oil\":{\"amount\":2,\"unit\":\"tablespoons\"}," +
+                "\"chopped garlic\":{\"amount\":1,\"unit\":\"teaspoons\"}," +
+                "\"good chicken stock, preferably homemade\":{\"amount\":1,\"unit\":\"cups\"}," +
+                "\"cremini mushrooms, stems removed and thickly sliced\":{\"amount\":0.5,\"unit\":\"pounds\"}," +
+                "\"carrots, cut diagonally in 1-inch pieces\":{\"amount\":0.5,\"unit\":\"pounds\"}," +
+                "\"fresh thyme sprigs\":{\"amount\":10,\"unit\":\"NU\"}," +
+                "\"unsalted butter, at room temperature, divided\":{\"amount\":2,\"unit\":\"tablespoons\"}," +
+                "\"yellow onion, sliced\":{\"amount\":1,\"unit\":\"NU\"}," +
+                "\"Cognac or good brandy\":{\"amount\":0.25,\"unit\":\"cups\"}," +
+                "\"good bacon or pancetta, diced\":{\"amount\":4,\"unit\":\"ounces\"}," +
+                "\"frozen small whole onions\":{\"amount\":0.5,\"unit\":\"pounds\"}," +
+                "\"(375 ml) good dry red wine such as Burgundy\":{\"amount\":0.5,\"unit\":\"bottles\"}," +
+                "\"all-purpose flour\":{\"amount\":1.5,\"unit\":\"tablespoons\"}," +
+                "\"Kosher salt and freshly ground black pepper\":{\"amount\":1,\"unit\":\"NU\"}" +
+                "}";
+        assertEquals(ingr, parser.getIngredients());
     }
 
     @Test
