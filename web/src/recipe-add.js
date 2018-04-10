@@ -111,7 +111,8 @@ export class RecipeAdd {
       console.log(this.myPostData)
       this.postRecipe(this.myPostData)
     }
-	
+  
+  //TODO write normal error handling
    postRecipe(myPostData) {
     httpClient.fetch('http://localhost:8080/recipes/add', {
         method: "POST",
@@ -121,6 +122,9 @@ export class RecipeAdd {
     .then(data => {
         console.log(data);
         this.notifyUserAboutSuccessfulUpload();
+    })
+    .catch(err => {
+      alert("Upload failed");
     });
    }
 
@@ -129,15 +133,15 @@ export class RecipeAdd {
    }
 	
    updateData(myUpdateData) {
-      httpClient.fetch('', {
-         method: "PUT",
-         body: JSON.stringify(myUpdateData)
-      })
-		
-      .then(response => response.json())
-      .then(data => {
-         console.log(data);
-      });
+    httpClient.fetch('', {
+        method: "PUT",
+        body: JSON.stringify(myUpdateData)
+    })
+  
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    });
    }
 
   attached() {
@@ -146,7 +150,7 @@ export class RecipeAdd {
 
   setUpModal() {
     // Get the modal
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('modalReview');
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -164,9 +168,9 @@ export class RecipeAdd {
     }
   }
 
-  openModal() {
+  openReviewModal() {
     this.manageReview();
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('modalReview');
     modal.style.display = "block";
   }
 
@@ -182,7 +186,7 @@ export class RecipeAdd {
     this.instructions = "";
 
     document.getElementById("recipe-pic").value = "";
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('modalReview');
     modal.style.display = "none";
 
     alert("Upload Successful");
