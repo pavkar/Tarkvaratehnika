@@ -34,12 +34,12 @@ export class Home {
 
     attached() {
       this.setUpModal();
-      getRecipiesAll()
+      this.getRecipiesAll()
     }
 
     setUpModal() {
       console.log("created");
-      
+
       // Get the modal
       var modal = document.getElementById('myModal');
 

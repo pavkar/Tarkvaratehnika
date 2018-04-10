@@ -87,20 +87,24 @@ export class RecipeAdd {
     
     //Prepares data for sending
     recipeInfoCheck() {
-      var ingredientsJson = {};
+      var ingredientsJson = "{";
       for (var ingrIndx = 0; ingrIndx < this.ingredientAmountSize; ingrIndx++) {
-        var ingrDescr = {};
-        ingrDescr["amount"] = this.ingredinetsCheckedAmounts[ingrIndx];
-        ingrDescr["unit"] = this.ingredientsUnits[ingrIndx];
-        ingredientsJson[this.ingredientsReview[ingrIndx]] = ingrDescr;
+        var ingrDescr = this.ingredientsReview[ingrIndx] + ":{";
+        ingrDescr += "amount:" + this.ingredinetsCheckedAmounts[ingrIndx] + ", ";
+        ingrDescr += "unit:" + this.ingredientsUnits[ingrIndx]  + "}";
+        ingredientsJson += ingrDescr + ", ";
       }
-      
+      ingredientsJson = ingredientsJson.substring(0, ingredientsJson.length - 2);
+      ingredientsJson += "}";
+
+      console.log(ingredientsJson);
+      alert(ingredientsJson);
       //console.log(ingredientsJson);
       //var pictureInput = document.getElementById("recipe-pic").files[0];
       //console.log(pictureInput);
 
       this.myPostData = {
-        "ingredients":JSON.stringify(ingredientsJson),
+        "ingredients":ingredientsJson,
         "name":this.name,
         "description":this.description,
         "instructions":this.instructions,
