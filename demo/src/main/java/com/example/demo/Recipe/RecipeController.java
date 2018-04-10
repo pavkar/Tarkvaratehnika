@@ -41,12 +41,20 @@ public class RecipeController {
 		return recipeService.searchByName(name);	
 	}
 	
-	/* Argumendi formaat: {ingredient1:{size:*number*, unit:*unit*}, ingredient2:{jne}}
-	 * Kui kogust pole m2rgitud, siis peab size 0 olema.
+	/* Argumendi formaat: {ingredient1:{amount:*number*, unit:*unit*}, ingredient2:{jne}}
+	 * Kui kogust pole m2rgitud, siis peab amount -1 olema.
 	 * EELDAB et ingredientsis pole jutum2rke.
 	 */
 	@RequestMapping(value = "/search/ingredients/{ingredients}", method=RequestMethod.GET)
 	public String searchByIngredients(String ingredients) {
 		return recipeService.searchByIngredients(ingredients);
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/recipes/all", method=RequestMethod.GET)
+	public String getAll() {
+		return recipeService.getAll();	
+	}
+	
+	
 }

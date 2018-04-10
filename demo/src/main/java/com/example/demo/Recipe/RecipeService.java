@@ -95,6 +95,15 @@ public class RecipeService {
 	}
 	
 	
+	public String getAll() {
+		JSONObject jsonObject = new JSONObject();
+		recipeRepository.findAll().forEach(recipe -> {
+			jsonObject.put(String.valueOf(recipe.id), recipe.toString());
+		});
+		return jsonObject.toString();
+	}
+	
+	
 	
 	
 	

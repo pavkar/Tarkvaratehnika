@@ -47,7 +47,7 @@ public class Recipe {
 
 	@Override
 	public String toString() {
-		String recipeJSON = new JSONObject().put("name", name).put("ingredients", ingredients)
+		String recipeJSON = new JSONObject().put("name", name).put("ingredients", new JSONObject(ingredients))
 				.put("instructions", instructions).put("time", time).put("size", size).put("image", image).
 				put("description", descrption).toString();
 		return recipeJSON;
