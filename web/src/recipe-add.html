@@ -53,7 +53,7 @@
                         <textarea class="form-control" rows="5" id="recipeIngrAm" style="min-width: 80%" placeholder="place amount on same line with ingredients" required="required" maxlength="554" value.bind="ingredientsAmount"></textarea> <br>
                     </div>
                   </div>
-                  <label><h4>Preparation Description</h4></label>
+                  <label><h4>Preparation description</h4></label>
                   <textarea class="form-control" rows="5" id="recipeInstr" style="min-width: 80%" placeholder="preparation description..." required="required" maxlength="554" value.bind="instructions"></textarea> <br>
                   <div class="raw-fluid">
                       <div class="span4">
@@ -65,6 +65,18 @@
         </form>
     </div>
 
+    <div class="logo"><h1>Add through URL</h1></div>
+    <div class="" >
+        <hr class="omb_hrOr">
+        <span class="omb_spanOr"></span>
+    </div>
+    <form submit.trigger="addUrl()">        
+      <input type="text" style="width: 80%; height: 80%;" required="required" value.bind="urlToSend">
+      <button class="btn btn-lg btn-success" type="submit">Add Url</button>
+    </form>
+
+
+    <!-- Modal for review -->
     <div id="modalReview" class="modals-custom">     
       <div class="modal-content">
         <div class="modal-header">
@@ -128,6 +140,23 @@
             </div>
         </div>
       </form>
+    </div>
+
+    <!-- Modal to add URL -->
+    <div id="modalUrl" class="modals-custom">     
+        <div class="modal-content">
+          <div class="modal-header">
+              <a href="#/recipe-add" class="closeUrlModal"><span class="glyphicon glyphicon-remove"></span></a>
+              <h3 class="modal-title">Add Url from another webpage</h3>
+          </div>
+          <!-- Can use style="background-color: #252525; color:white" -->
+          <div class="modal-content">
+            <form submit.trigger="addUrl()">
+                <input id="myURL" name="myURL" type="text"
+                value="http://www.example.com">
+            </form>
+          </div>
+        </div>
     </div>
     
 </template>

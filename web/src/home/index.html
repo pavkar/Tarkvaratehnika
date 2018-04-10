@@ -7,13 +7,13 @@
     </div>  
     <!-- Search, Highest rating, recipes, filter by rating-->
     <p class = mainpage><h3>Search bar</h3></p>
-    <form submit.trigger="searchRecipes()">
-        <textarea style="height: 40%; width: 90%; right:84%;" required="required" value.bind="ingredients" type="search" placeholder="separate ingredients with space put amount in ()..."></textarea>
+    <form>
+        <textarea style="height: 40%; width: 90%; right:84%;" required="required" value.bind="searchRecipies" type="search" placeholder="separate ingredients with space put amount in ()..."></textarea>
         <div class="dropdown" style="position: absolute; left:84%;">
-            <button class="btn btn-success disabled">Search by</button>
+            <button class="btn btn-success">Search by</button>
               <div class="dropdown-content">
-                <button class="btn" type="submit">Name</button>
-                <button class="btn" type="submit">Ingredient</button>
+                <p><button class="btn" click.trigger="searchByName()">Name</button></p>
+                <button class="btn" click.trigger="searchByIngredients()">Ingredient</button>
               </div>
         </div>
     </form>
@@ -23,13 +23,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <a href="#" class="close"><span class="glyphicon glyphicon-remove"></span></a>
-                    <h3 class="modal-title">Recipe Name</h3>
+                    <h3 class="modal-title">${recipeName[openedModalIndex]}</h3>
                 </div>
                 <!-- Can use style="background-color: #252525; color:white" -->
                 <div class="modal-content">
                     <div class="row">
                         <div class="col-md-6 product_img">
-                            <img src="http://placehold.it/600x500" class="img-responsive">
+                            <img src="https://nerdist.com/wp-content/uploads/2016/11/pokemon-cookbook-feature-11282016.jpg" class="img-responsive">
                         </div>
                         <div class="col-md-6 product_content">
                             <h3>Author: xxx</h3>
@@ -45,8 +45,8 @@
                             </div>
 
                             <div class="row">
-                                <div class=span6><h4>Cooking Time: 3:00</h4></div>
-                                <div class=span6><h4>Amount of Dishes: 12</h4></div>
+                                <div class=span6><h4>Cooking Time: ${timeToPrepare[openedModalIndex]}</h4></div>
+                                <div class=span6><h4>Amount of Dishes: ${dishSize[openedModalIndex]}</h4></div>
                             </div>
                             <div class="row">
                                 <div class=span5>
@@ -96,11 +96,11 @@
     </div>
 
       <!-- Replace with item from items. Must loop items from db-->
-      <div repeat.for="i of 10">
+      <div repeat.for="i of avaibleRecipiesNumb">
         
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="well">
-            <a><img class="img-circle img-responsive img-center" src="http://placehold.it/350x250" click.trigger="openModal()" alt=""></a>
+            <a><img id=${i} class="img-circle img-responsive img-center" src="https://nerdist.com/wp-content/uploads/2016/11/pokemon-cookbook-feature-11282016.jpg" click.trigger="openModal($event.target)" alt=""></a>
             <div class="">  
               <h4 style="text-align: center">Author: xxx</h4>
               <h4 class="">
@@ -109,10 +109,10 @@
                   <div style="border-top: 1px solid #eee; font-size: 120%">
                     <br>
                   </div>
-                  <a id="openRecipeModal" click.trigger="openModal()">Recipe name ${i}</a>
+                  <a id=${i} click.trigger="openModal($event.target)" onmouseover="" style="cursor: pointer;" >${recipeName[i]}</a>
               </h4>
               <!-- Lorep ipsum must be replaced with description -->
-              <p class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+              <p class="">${description[i]}</p>
             </div>
             <div class="">
               <small class="text-muted">                            

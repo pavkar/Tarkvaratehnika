@@ -5,14 +5,18 @@ export class Home {
     constructor() {
       this.author = "";
       this.date = "";
-      this.ingredients = "";
+      this.searchRecipies = "";
       this.commentText = "";
       this.comments = [];
+      this.dataToShow = {
+        "id1": 
+      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"milk and milk","ingredients":"{egg:{amount:2, unit:pieces}, milk:{amount:1.5, unit:l}}","description":"Lahe description","time":"02:22"}, 
+        "id2": 
+      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"donut and donut","ingredients":"{egg:{amount:2, unit:pieces}, milk:{amount:1.5, unit:l}}","description":"Cool description","time":"00:52"}
+      }
+      this.manageDataToShow();
+      //this.getRecipiesAll();
       //setInterval(() => this.setUpModal(), 1000);
-    }
-
-    searchRecipies() {
-      console.log(this.ingredients);
     }
 
     addComment() {
@@ -30,11 +34,15 @@ export class Home {
       var hours = newDate.getHours();
       var min = newDate.getMinutes();
       this.date =  hours + ":" + min + " " + day + "/" + mounth + "/" + year
+
     }
 
     attached() {
       this.setUpModal();
-      this.getRecipiesAll()
+      //this.manageDataToShow();
+      //console.log(this.dataToShow)
+      //this.getRecipiesAll();
+      //console.log(this.dataToShow[0]);
     }
 
     setUpModal() {
@@ -49,11 +57,6 @@ export class Home {
       // Get the <span> element that closes the modal
       var span = document.getElementsByClassName("close")[0];
 
-      // When the user clicks on the button, open the modal 
-      btn.onclick = function() {
-          modal.style.display = "block";
-      }
-
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
           modal.style.display = "none";
@@ -67,7 +70,8 @@ export class Home {
       }
     }
 
-    openModal() {
+    openModal(index) {
+      this.openedModalIndex = index.id;
       var modal = document.getElementById('myModal');
       modal.style.display = "block";
     }
@@ -82,9 +86,18 @@ export class Home {
       });
     }
 
-    /* Variable this.filterName is name of recipe */
-    getRecipesByName() {     
-      httpClient.fetch('http://localhost:8080/search/name/' + this.filterName)
+    searchRecipies() {
+      console.log(this.searchRecipies)
+    }
+    /* Should modify if needed more advanced search for example several names */
+    searchByName() {
+      this.getRecipesByName(this.searchRecipies.replace(" ", ""));
+    }
+
+    /* Variable recipeName is name of recipe */
+    getRecipesByName(recipeName) {
+      console.log(recipeName);     
+      httpClient.fetch('http://localhost:8080/search/name/' + recipeName)
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -92,14 +105,54 @@ export class Home {
       });
     }
 
-    /* Variable this.filterIngredients is json of ingredients {ingredient1:{amount:number, unit:unit}, ingredient2:{jne}}*/
-    getRecipesByIngredients() {
-      httpClient.fetch('http://localhost:8080/search/ingredients/' + this.filterIngredients)
+    searchByIngredients() {
+
+    }
+    /* Variable ingredientsToSearch is json of ingredients {ingredient1:{amount:number, unit:unit}, ingredient2:{jne}}*/
+    getRecipesByIngredients(ingredientsToSearch) {
+      httpClient.fetch('http://localhost:8080/search/ingredients/' + ingredientsToSearch)
       .then(response => response.json())
       .then(data => {
         console.log(data);
         this.dataToShow = data;
+        this.manageDataToShow();
       });
+    }
+
+  /*        "id1": 
+      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"milk and donut","ingredients":"{egg:{amount:2, unit:pieces}, milk:{amount:1.5, unit:l}}","description":"idk","time":"02:22"}, 
+        "id2": 
+      {"instructions":"yolo","image":"egg.jpg","size":2,"name":"milk and donut","ingredients":"{egg:{amount:2, unit:pieces}, milk:{amount:1.5, unit:l}}","description":"idk","time":"00:10"}
+      } */
+  manageDataToShow() {
+    var keys = Object.keys(this.dataToShow);
+
+    this.avaibleRecipiesNumb = keys.length;
+    this.recipeName = [];
+    this.description = [];
+    this.instructions = [];
+    this.dishSize = [];
+    this.ingredients = [];
+    this.timeToPrepare = [];
+
+    console.log(keys);
+    keys.forEach(element => {
+      this.recipeName.push(this.dataToShow[element]["name"]);
+      this.description.push(this.dataToShow[element]["description"]);
+      this.instructions.push(this.dataToShow[element]["instructions"]);
+      this.dishSize.push(this.dataToShow[element]["size"]);
+      this.ingredients.push(this.dataToShow[element]["ingredients"]);
+      this.timeToPrepare.push(this.dataToShow[element]["time"]);
+    });
+
+    console.log(this.recipeName);
+    console.log(this.avaibleRecipiesNumb);
+    console.log( this.description );
+    console.log( this.instructions );
+    console.log( this.dishSize );
+    console.log( this.ingredients );
+    console.log( this.timeToPrepare );
+
   }
     
 }

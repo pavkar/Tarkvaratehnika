@@ -17,6 +17,8 @@ export class RecipeAdd {
 
         this.pictureInput = "";
 
+        this.urlToSend = "";
+
     }
 
     //Manage uplodaed picture fix preview
@@ -87,12 +89,21 @@ export class RecipeAdd {
     
     //Prepares data for sending
     recipeInfoCheck() {
+      var alreadyInList = [];
       var ingredientsJson = "{";
       for (var ingrIndx = 0; ingrIndx < this.ingredientAmountSize; ingrIndx++) {
-        var ingrDescr = this.ingredientsReview[ingrIndx] + ":{";
-        ingrDescr += "amount:" + this.ingredinetsCheckedAmounts[ingrIndx] + ", ";
-        ingrDescr += "unit:" + this.ingredientsUnits[ingrIndx]  + "}";
-        ingredientsJson += ingrDescr + ", ";
+        var inList = false;
+        for (var inListIndx = 0; inListIndx < alreadyInList.length; inListIndx++) {
+          if (alreadyInList[inListIndx] == this.ingredientsReview[ingrIndx]) {
+            inList = true;
+          }
+        }
+        if (!inList) {
+          var ingrDescr = this.ingredientsReview[ingrIndx] + ":{";
+          ingrDescr += "amount:" + this.ingredinetsCheckedAmounts[ingrIndx] + ", ";
+          ingrDescr += "unit:" + this.ingredientsUnits[ingrIndx]  + "}";
+          ingredientsJson += ingrDescr + ", ";
+        }
       }
       ingredientsJson = ingredientsJson.substring(0, ingredientsJson.length - 2);
       ingredientsJson += "}";
@@ -141,7 +152,6 @@ export class RecipeAdd {
         method: "PUT",
         body: JSON.stringify(myUpdateData)
     })
-  
     .then(response => response.json())
     .then(data => {
         console.log(data);
@@ -155,13 +165,16 @@ export class RecipeAdd {
   setUpModal() {
     // Get the modal
     var modal = document.getElementById('modalReview');
+    var modalUrl = document.getElementById('modalUrl');
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
+    var spanUrl = document.getElementsByClassName("closeUrlModal")[0];
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
+        modalUrl.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
@@ -169,6 +182,9 @@ export class RecipeAdd {
         if (event.target == modal) {
             modal.style.display = "none";
         }
+        if (event.target == modalUrl) {
+            modalUrl.style.display = "none";
+      }
     }
   }
 
@@ -176,6 +192,16 @@ export class RecipeAdd {
     this.manageReview();
     var modal = document.getElementById('modalReview');
     modal.style.display = "block";
+  }
+
+  openAddUrlModal() {
+    var modalUrl = document.getElementById('modalUrl');
+    modalUrl.style.display = "block";
+  }
+
+  addUrl() {
+    console.log(this.urlToSend);
+    this.postRecipe(this.urlToSend);
   }
 
   notifyUserAboutSuccessfulUpload() {
@@ -188,6 +214,8 @@ export class RecipeAdd {
     this.ingredients = "";
     this.ingredientsAmount = "";
     this.instructions = "";
+
+    this.urlToSend = "";
 
     document.getElementById("recipe-pic").value = "";
     var modal = document.getElementById('modalReview');
