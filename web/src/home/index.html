@@ -51,14 +51,20 @@
                             <div class="row">
                                 <div class=span5>
                                   <h4>Ingredients:</h4>
-                                  <div repeat.for="i of 10">
-                                    Ingredient ${i}
+                                  <div repeat.for="ingrName of ${ingredientNames[openedModalIndex]}">
+                                    ${ingrName}
                                   </div>
                                 </div>
-                                <div class=span5>
+                                <div class=span2>
                                     <h4>Amount:</h4>
-                                    <div repeat.for="i of 10">
-                                      ${i}${i} Kg
+                                    <div repeat.for="amount of ingredientAmounts[openedModalIndex]">
+                                      ${amount}
+                                    </div>
+                                </div>
+                                <div class=span2>
+                                    <h4>Amount:</h4>
+                                    <div repeat.for="unit of ingredientUnits[openedModalIndex]">
+                                      ${unit}
                                     </div>
                                 </div>
                             </div>

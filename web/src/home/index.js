@@ -16,7 +16,8 @@ export class Home {
       "id3": 
       {"instructions":"ylo","image":"egg.jpg","size":5,"name":"donut and ","ingredients":"{egg:{amount:25, unit:pieces}, milk:{amount:0.5, unit:l}}","description":"Cool description","time":"00:02"}
     }
-      this.manageDataToShow();
+    this.manageIngredientsJson();
+      //this.manageDataToShow();
       //this.getRecipiesAll();
       //setInterval(() => this.setUpModal(), 1000);
     }
@@ -130,7 +131,6 @@ export class Home {
   //TODO make as one object (additional class)
   manageDataToShow() {
     var keys = Object.keys(this.dataToShow);
-
     this.avaibleRecipiesNumb = keys.length;
     this.recipeName = [];
     this.descriptions = [];
@@ -141,19 +141,36 @@ export class Home {
 
     console.log(keys);
     keys.forEach(recipeKey => {
-      this.recipeName.push(this.capitalizeFirstLetter(this.dataToShow[recipeKey]["name"]));
-      this.descriptions.push(this.capitalizeFirstLetter(this.dataToShow[recipeKey]["description"]));
-      this.instructions.push(this.capitalizeFirstLetter(this.dataToShow[recipeKey]["instructions"]));
-      this.dishSize.push(this.dataToShow[recipeKey]["size"]);
-      this.ingredients.push(this.dataToShow[recipeKey]["ingredients"]);
-      this.timeToPrepare.push(this.dataToShow[recipeKey]["time"]);
+      let parsedRecipe = JSON.parse(this.dataToShow[recipeKey]);
+
+      this.recipeName.push(this.capitalizeFirstLetter(parsedRecipe["name"]));
+      this.descriptions.push(this.capitalizeFirstLetter(parsedRecipe["description"]));
+      this.instructions.push(this.capitalizeFirstLetter(parsedRecipe["instructions"]));
+      this.dishSize.push(parsedRecipe["size"]);
+      this.ingredients.push(parsedRecipe["ingredients"]);
+      this.timeToPrepare.push(parsedRecipe["time"]);
     });
 
     this.manageIngredientsJson();
   }
 
   manageIngredientsJson() {
-    
+    this.ingredientNames = [];
+    this.ingredietAmounts = [];
+    this.ingredientUnits = [];
+
+    this.ingredients.forEach(ingred => {
+      let keys = Object.keys(ingred);
+      this.ingredientNames.push(keys);
+      let amountsList = [];
+      let unitsList = [];
+      keys.forEach(key => {
+        amountsList.push(ingred[key]["amount"]);
+        unitsList.push(ingred[key]["unit"]);
+      });
+      this.ingredietAmounts.push(amountsList);
+      this.ingredientUnits.push(unitsList);
+    });
   }
     
 }
