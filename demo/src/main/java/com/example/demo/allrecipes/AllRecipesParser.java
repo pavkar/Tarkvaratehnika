@@ -1,16 +1,12 @@
 package com.example.demo.allrecipes;
 
 import com.example.demo.parsers.GeneralIngredientsParser;
-import com.example.demo.parsers.RecipeTemplate;
-import org.json.JSONException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import com.example.demo.parsers.RecipeTemplate;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,76 +15,41 @@ public class AllRecipesParser implements RecipeTemplate {
 
     private String url;
     private GeneralIngredientsParser ingredientParser;
-    private Document document;
 
 
     public AllRecipesParser(String url) {
         this.url = url;
         ingredientParser = new GeneralIngredientsParser();
-        getDocument();
     }
 
     @Override
-    public Document getDocument() {
-        document = new Document("");
-        try {
-            if (url.isEmpty()) {
-                System.out.println("Please provide an URL");
-            } else {
-                this.document = Jsoup.connect(url).get();
-            }
-        } catch (IOException e) {
-            System.out.println("Please provide correct URL");
-        }
-        return document;
-    }
-
-    public void setDocument(String path) {
-        if (path != null && !path.isEmpty()) {
-            try {
-                StringBuilder sb = new StringBuilder();
-                BufferedReader br = new BufferedReader(new FileReader(path));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
-                }
-                this.document = Jsoup.parse(sb.toString());
-            } catch (FileNotFoundException e) {
-                System.out.println("Could not find a file to read!");
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public Document getDocument() throws IOException {
+        return Jsoup.connect(url).get();
     }
 
 
-    List<String> getUnParsedIngreds() {
+    private List<String> getUnParsedIngreds() throws IOException {
         List<String> ingredients = new ArrayList<>();
-        for (Element ingredient : document.select("ul.checklist.dropdownwrapper.list-ingredients-1 li")) {
+        for (Element ingredient : getDocument().select("ul.checklist.dropdownwrapper.list-ingredients-1 li")) {
             ingredients.add(ingredient.text().replace(" ADVERTISEMENT", ""));
         }
-        for (Element ingredient : document.select("ul.checklist.dropdownwrapper.list-ingredients-2 li")) {
-            ingredients.add(ingredient.text().replace(" ADVERTISEMENT", ""));
-        }
-        ingredients.remove(ingredients.size() - 1);
         return ingredients;
     }
 
     @Override
-    public String getTitle() {
-        return document.select("h1.recipe-summary__h1").text();
+    public String getTitle() throws IOException {
+        return getDocument().select("h1.recipe-summary__h1").text();
     }
 
     @Override
-    public String getPrepTime() {
-        return document.select("span.ready-in-time").text();
+    public String getPrepTime() throws IOException {
+        return getDocument().select("span.ready-in-time").text();
     }
 
     @Override
-    public String getInstructions() {
+    public String getInstructions() throws IOException {
         StringBuilder instructions = new StringBuilder();
-        for (Element el : document.select("ol.list-numbers.recipe-directions__list li")) {
+       for (Element el : getDocument().select("ol.list-numbers.recipe-directions__list li")) {
             instructions.append(el.text());
             instructions.append("\n");
         }
@@ -101,14 +62,14 @@ public class AllRecipesParser implements RecipeTemplate {
     }
 
     @Override
-    public String getOriginalAuthor() {
-        return document.select("span.submitter__name").text();
+    public String getOriginalAuthor() throws IOException {
+        return getDocument().select("span.submitter__name").text();
     }
 
     @Override
-    public int getServings() {
+    public int getServings() throws IOException {
         String servings = "1";
-        Elements metaTags = document.getElementsByTag("meta");
+        Elements metaTags = getDocument().getElementsByTag("meta");
         for (Element metaTag : metaTags) {
             if (metaTag.attr("id").equals("metaRecipeServings")) {
                 servings = metaTag.attr("content");
@@ -118,7 +79,7 @@ public class AllRecipesParser implements RecipeTemplate {
     }
 
     @Override
-    public String getIngredients() throws JSONException {
+    public String getIngredients() throws IOException {
         return ingredientParser.getIngredients(getUnParsedIngreds());
     }
 }
